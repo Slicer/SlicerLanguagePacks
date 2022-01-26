@@ -4,13 +4,13 @@ project(LanguagePacks)
 
 #-----------------------------------------------------------------------------
 # Extension meta-information
-set(EXTENSION_HOMEPAGE "https://www.slicer.org/wiki/Documentation/Nightly/Extensions/LanguagePacks")
+set(EXTENSION_HOMEPAGE "https://github.com/Slicer/SlicerLanguagePacks")
 set(EXTENSION_CATEGORY "Utilities")
 set(EXTENSION_CONTRIBUTORS "Andras Lasso (PerkLab)")
 set(EXTENSION_DESCRIPTION "Extension for deploying language packs and editing translations.")
 # Icon source: https://freesvg.org/united-globe. License: Public Domain.
-set(EXTENSION_ICONURL "http://www.example.com/Slicer/Extensions/LanguagePacks.png")
-set(EXTENSION_SCREENSHOTURLS "http://www.example.com/Slicer/Extensions/LanguagePacks/Screenshots/1.png")
+set(EXTENSION_ICONURL "https://raw.githubusercontent.com/Slicer/SlicerLanguagePacks/main/LanguagePacks.png")
+set(EXTENSION_SCREENSHOTURLS "https://raw.githubusercontent.com/Slicer/SlicerLanguagePacks/main/Docs/LanguageSelector.png https://raw.githubusercontent.com/Slicer/SlicerLanguagePacks/main/Docs/ExampleTranslations.png https://raw.githubusercontent.com/Slicer/SlicerLanguagePacks/main/Docs/LanguageTools.png")
 set(EXTENSION_DEPENDS "NA") # Specified as a list or "NA" if no dependencies
 
 #-----------------------------------------------------------------------------
