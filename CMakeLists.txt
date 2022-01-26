@@ -8,6 +8,7 @@ set(EXTENSION_HOMEPAGE "https://www.slicer.org/wiki/Documentation/Nightly/Extens
 set(EXTENSION_CATEGORY "Utilities")
 set(EXTENSION_CONTRIBUTORS "Andras Lasso (PerkLab)")
 set(EXTENSION_DESCRIPTION "Extension for deploying language packs and editing translations.")
+# Icon source: https://freesvg.org/united-globe. License: Public Domain.
 set(EXTENSION_ICONURL "http://www.example.com/Slicer/Extensions/LanguagePacks.png")
 set(EXTENSION_SCREENSHOTURLS "http://www.example.com/Slicer/Extensions/LanguagePacks/Screenshots/1.png")
 set(EXTENSION_DEPENDS "NA") # Specified as a list or "NA" if no dependencies
