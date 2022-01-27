@@ -88,6 +88,11 @@
         <property name="settingKey">
          <string>Internationalization/LanguageTools/CrowdinZipFilePathHistory</string>
         </property>
+        <property name="nameFilters">
+         <stringlist>
+          <string>*.zip</string>
+         </stringlist>
+        </property>
        </widget>
       </item>
       <item row="2" column="0">

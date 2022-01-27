@@ -87,21 +87,19 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     """
     Called when the application closes and the module widget is destroyed.
     """
-    self.removeObservers()
+    pass
 
   def enter(self):
     """
     Called each time the user opens this module.
     """
-    # Make sure parameter node exists and observed
-    self.initializeParameterNode()
+    pass
 
   def exit(self):
     """
     Called each time the user opens a different module.
     """
-    # Do not react to parameter node changes (GUI wlil be updated when the user enters into the module)
-    self.removeObserver(self._parameterNode, vtk.vtkCommand.ModifiedEvent, self.updateGUIFromParameterNode)
+    pass
 
   def setTranslationSource(self, translationSource, toggled=True):
     if not toggled:
@@ -251,7 +249,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     if not self.translationFilesFolder:
       raise ValueError("Translation files folder is not specified.")
 
-    if not os.path.exists(self.lreleasePath):
+    if (not self.lreleasePath) or (not os.path.exists(self.lreleasePath)):
       raise ValueError("lrelease tool path is not specified.")
 
     from pathlib import Path
@@ -317,34 +315,19 @@ class LanguageToolsTest(ScriptedLoadableModuleTest):
 
     self.delayDisplay("Starting the test")
 
-    # Get/create input data
-
-    import SampleData
-    registerSampleData()
-    inputVolume = SampleData.downloadSample('LanguageTools1')
-    self.delayDisplay('Loaded test data set')
-
-    inputScalarRange = inputVolume.GetImageData().GetScalarRange()
-    self.assertEqual(inputScalarRange[0], 0)
-    self.assertEqual(inputScalarRange[1], 695)
-
-    outputVolume = slicer.mrmlScene.AddNewNodeByClass("vtkMRMLScalarVolumeNode")
-    threshold = 100
-
-    # Test the module logic
-
     logic = LanguageToolsLogic()
 
-    # Test algorithm with non-inverted threshold
-    logic.process(inputVolume, outputVolume, threshold, True)
-    outputScalarRange = outputVolume.GetImageData().GetScalarRange()
-    self.assertEqual(outputScalarRange[0], inputScalarRange[0])
-    self.assertEqual(outputScalarRange[1], threshold)
+    import shutil
+    logic.lreleasePath = shutil.which('lrelease')
 
-    # Test algorithm with inverted threshold
-    logic.process(inputVolume, outputVolume, threshold, False)
-    outputScalarRange = outputVolume.GetImageData().GetScalarRange()
-    self.assertEqual(outputScalarRange[0], inputScalarRange[0])
-    self.assertEqual(outputScalarRange[1], inputScalarRange[1])
+    # Fallback for local testing on Windows in the install tree
+    if not logic.lreleasePath:
+      logic.lreleasePath = "c:/Qt/5.15.0/msvc2019_64/bin/lrelease.exe"
+
+    logic.downloadTsFilesFromGithub("https://github.com/Slicer/SlicerLanguageTranslations")
+    logic.convertTsFilesToQmFiles()
+    logic.installQmFiles()
+
+    logic.removeTemporaryFolder()
 
     self.delayDisplay('Test passed')
