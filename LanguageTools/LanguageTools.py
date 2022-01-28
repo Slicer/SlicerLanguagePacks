@@ -268,6 +268,9 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
 
     applicationTranslationFolder = slicer.app.translationFolders()[0]
 
+    # Make sure the translations folder exists
+    os.makedirs(applicationTranslationFolder, exist_ok=True)
+
     numberOfInstalledFiles = 0
     for file in tsFiles:
       logging.debug(f"Installing translation file: {file} in {applicationTranslationFolder}")
@@ -277,7 +280,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     if numberOfInstalledFiles == 0:
       raise ValueError(f"No translation (qm) files were found at {self.translationFilesFolder}")
     
-    self.log(f"Installed {numberOfInstalledFiles} translation files in {applicationTranslationFolder}")
+    self.log(f"Update successfully completed.\nInstalled {numberOfInstalledFiles} translation files in {applicationTranslationFolder}.")
 
 #
 # LanguageToolsTest
