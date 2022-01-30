@@ -34,6 +34,6 @@
 
 ### Set application language
 
-Language can be selected in menu: Edit -> Application Settings, General section -> Language. The application has to be restarted after changing language.
+Language can be selected in menu: Edit -> Application Settings, General section -> Language. If the language selector does not appear then go to "Internationalization" section and toggle the checkbox. The application has to be restarted after changing language.
 
 ![](Docs/LanguageSelector.png)
