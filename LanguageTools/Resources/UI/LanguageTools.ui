@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>353</width>
+    <width>375</width>
     <height>427</height>
    </rect>
   </property>
@@ -54,6 +54,23 @@
         </property>
        </widget>
       </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="slicerVersionLabel">
+        <property name="text">
+         <string>Slicer version:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="slicerVersionEdit">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;master, 4.13, 4.14, ...&lt;/p&gt;&lt;p&gt;Only used for GitHub and Crowdin multi-language.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string>master</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </widget>
    </item>
@@ -62,25 +79,18 @@
      <property name="text">
       <string>Input translations</string>
      </property>
-     <layout class="QFormLayout" name="formLayout">
-      <item row="0" column="0" colspan="2">
-       <widget class="QRadioButton" name="crowdinSourceRadioButton">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="6" column="0">
+       <widget class="QLabel" name="gitRepositoryLabel">
         <property name="text">
-         <string>Crowdin (manual download)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="crowdinZipFilePathLabel">
-        <property name="text">
-         <string>Input zip file:</string>
+         <string>Repository:</string>
         </property>
         <property name="indent">
          <number>20</number>
         </property>
        </widget>
       </item>
-      <item row="1" column="1">
+      <item row="4" column="1">
        <widget class="ctkPathLineEdit" name="crowdinZipFilePathLineEdit">
         <property name="toolTip">
          <string>Zip file downloaded from https://crowdin.com/project/slicer using 'Build and Download'.</string>
@@ -95,24 +105,24 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
-       <widget class="QRadioButton" name="githubSourceRadioButton">
+      <item row="0" column="0" colspan="2">
+       <widget class="QRadioButton" name="crowdinTsFolderRadioButton">
         <property name="text">
-         <string>GitHub (auto download)</string>
+         <string>Crowdin .ts files folder (manual download)</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0">
-       <widget class="QLabel" name="gitRepositoryLabel">
+      <item row="4" column="0">
+       <widget class="QLabel" name="crowdinZipFileLabel">
         <property name="text">
-         <string>Repository:</string>
+         <string>Input zip file:</string>
         </property>
         <property name="indent">
          <number>20</number>
         </property>
        </widget>
       </item>
-      <item row="3" column="1">
+      <item row="6" column="1">
        <widget class="QLineEdit" name="githubRepositoryEdit">
         <property name="toolTip">
          <string>Github repository that stores the translated strings.</string>
@@ -122,20 +132,68 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="slicerVersionLabel">
+      <item row="1" column="0">
+       <widget class="QLabel" name="crowdinTsFolderLabel">
         <property name="text">
-         <string>Slicer version:</string>
+         <string>Input folder:</string>
+        </property>
+        <property name="indent">
+         <number>20</number>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="slicerVersionEdit">
+      <item row="3" column="0" colspan="2">
+       <widget class="QRadioButton" name="crowdinZipFileRadioButton">
+        <property name="text">
+         <string>Crowdin multi-language (manual download, administrators only)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0" colspan="2">
+       <widget class="QRadioButton" name="githubSourceRadioButton">
+        <property name="text">
+         <string>GitHub (auto download)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="ctkPathLineEdit" name="crowdinTsFolderPathLineEdit">
         <property name="toolTip">
-         <string>master, 4.13, 4.14, ...</string>
+         <string>Zip file downloaded from https://crowdin.com/project/slicer using 'Build and Download'.</string>
+        </property>
+        <property name="filters">
+         <set>ctkPathLineEdit::Dirs|ctkPathLineEdit::Drives|ctkPathLineEdit::Executable|ctkPathLineEdit::NoDot|ctkPathLineEdit::NoDotDot|ctkPathLineEdit::Readable</set>
+        </property>
+        <property name="settingKey">
+         <string>Internationalization/LanguageTools/CrowdinSingleLanguageFolderPathHistory</string>
+        </property>
+        <property name="nameFilters">
+         <stringlist>
+          <string>*</string>
+         </stringlist>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="latestTsFileOnlyLabel">
+        <property name="text">
+         <string>Latest file only:</string>
+        </property>
+        <property name="indent">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QCheckBox" name="latestTsFileOnlyCheckBox">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this option is checked then only the latest .ts file in the folder will be used. Enable this option to ignore previous files downloaded from crowdin that are saved in the same folder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
-         <string>master</string>
+         <string> </string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>

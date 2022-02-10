@@ -74,7 +74,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     # These connections ensure that whenever user changes some settings on the GUI, that is saved in the MRML scene
     # (in the selected parameter node).
     self.ui.githubSourceRadioButton.connect("toggled(bool)", lambda toggled, source="github": self.setTranslationSource(source, toggled))
-    self.ui.crowdinSourceRadioButton.connect("toggled(bool)", lambda toggled, source="crowdin": self.setTranslationSource(source, toggled))
+    self.ui.crowdinTsFolderRadioButton.connect("toggled(bool)", lambda toggled, source="crowdinTsFolder": self.setTranslationSource(source, toggled))
+    self.ui.crowdinZipFileRadioButton.connect("toggled(bool)", lambda toggled, source="crowdinZipFile": self.setTranslationSource(source, toggled))
 
     # Buttons
     self.ui.updateButton.connect('clicked(bool)', self.onUpdateButton)
@@ -107,19 +108,28 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       return
     self.ui.gitRepositoryLabel.enabled = (translationSource == "github")
     self.ui.githubRepositoryEdit.enabled = (translationSource == "github")
-    self.ui.crowdinZipFilePathLabel.enabled = (translationSource == "crowdin")
-    self.ui.crowdinZipFilePathLineEdit.enabled = (translationSource == "crowdin")
+    self.ui.crowdinTsFolderLabel.enabled = (translationSource == "crowdinTsFolder")
+    self.ui.crowdinTsFolderPathLineEdit.enabled = (translationSource == "crowdinTsFolder")
+    self.ui.latestTsFileOnlyLabel.enabled = (translationSource == "crowdinTsFolder")
+    self.ui.latestTsFileOnlyCheckBox.enabled = (translationSource == "crowdinTsFolder")
+    self.ui.crowdinZipFileLabel.enabled = (translationSource == "crowdinZipFile")
+    self.ui.crowdinZipFilePathLineEdit.enabled = (translationSource == "crowdinZipFile")
+
 
   def updateGUIFromSettings(self):
     settings = slicer.app.userSettings()
     try:
       settings.beginGroup("Internationalization/LanguageTools")
-      translationSource = settings.value("TranslationSource", "crowdin")
-      self.ui.crowdinSourceRadioButton.checked = (translationSource == "crowdin")
+      translationSource = settings.value("TranslationSource", "crowdinTsFolder")
+      self.ui.crowdinTsFolderRadioButton.checked = (translationSource == "crowdinTsFolder")
+      self.ui.crowdinTsFolderPathLineEdit.enabled = (translationSource == "crowdinTsFolder")
+      self.ui.crowdinZipFileRadioButton.checked = (translationSource == "crowdinZipFile")
       self.ui.githubSourceRadioButton.checked = (translationSource == "github")
       self.setTranslationSource(translationSource)
       self.ui.githubRepositoryEdit.text = settings.value("GitRepository", "https://github.com/Slicer/SlicerLanguageTranslations")
       self.ui.slicerVersionEdit.text = settings.value("SlicerVersion", "master")
+      self.ui.crowdinTsFolderPathLineEdit.currentPath = settings.value("CrowdinTsFolderPath", "")
+      self.ui.latestTsFileOnlyCheckBox.checked = settings.value("UseLatestTsFile", True)
       self.ui.crowdinZipFilePathLineEdit.currentPath = settings.value("CrowdinZipFilePath", "")
       self.ui.lreleasePathLineEdit.currentPath = settings.value("LreleaseFilePath", "")
     finally:
@@ -132,14 +142,23 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     settings = slicer.app.userSettings()
     try:
       settings.beginGroup("Internationalization/LanguageTools")
-      settings.setValue("TranslationSource", "crowdin" if self.ui.crowdinSourceRadioButton.checked else "github")
+      if self.ui.crowdinTsFolderRadioButton:
+        source = "crowdinTsFolder"
+      elif self.ui.crowdinZipFileRadioButton:
+        source = "crowdinZipFile"
+      else:
+        source = "github"
+      settings.setValue("TranslationSource", source)
       settings.setValue("GithubRepository", self.ui.githubRepositoryEdit.text)
       settings.setValue("SlicerVersion", self.ui.slicerVersionEdit.text)
+      settings.setValue("CrowdinTsFolderPath", self.ui.crowdinTsFolderPathLineEdit.currentPath)
+      settings.setValue("UseLatestTsFile", self.ui.latestTsFileOnlyCheckBox.checked)
       settings.setValue("CrowdinZipFilePath", self.ui.crowdinZipFilePathLineEdit.currentPath)
       settings.setValue("LreleaseFilePath", self.ui.lreleasePathLineEdit.currentPath)
     finally:
       settings.endGroup()
 
+    self.ui.crowdinTsFolderPathLineEdit.addCurrentPathToHistory()
     self.ui.crowdinZipFilePathLineEdit.addCurrentPathToHistory()
 
   def onUpdateButton(self):
@@ -155,7 +174,9 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
       self.logic.removeTemporaryFolder()
 
-      if self.ui.crowdinSourceRadioButton.checked:
+      if self.ui.crowdinTsFolderRadioButton.checked:
+        self.logic.copyTsFilesFromFolder(self.ui.crowdinTsFolderPathLineEdit.currentPath, self.ui.latestTsFileOnlyCheckBox.checked)
+      elif self.ui.crowdinZipFileRadioButton.checked:
         self.logic.unpackTsFilesFromCrowdinZipFile(self.ui.crowdinZipFilePathLineEdit.currentPath)
       else:
         self.logic.downloadTsFilesFromGithub(self.ui.githubRepositoryEdit.text)
@@ -214,6 +235,29 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self._temporaryFolder = None
     self.translationFilesFolder = None
 
+  def copyTsFilesFromFolder(self, tsFolder, latestTsFileOnly):
+    """Extract .ts files from a zip file downloaded from Crowdin.
+    This method requires a temporary folder that does not contain previous downloaded or extracted files.
+    """
+
+    tempFolder = self.temporaryFolder()
+    self.translationFilesFolder = tempFolder
+
+    import glob
+    tsFiles = sorted(glob.glob(f"{tsFolder}/*.ts"), key=os.path.getmtime)
+
+    if latestTsFileOnly:
+      tsFiles = [tsFiles[-1]]
+      self.log(f"Use translation file: {tsFiles[0]}")
+
+    import shutil
+    import xml.etree.cElementTree as ET
+    for file in tsFiles:
+      tree = ET.ElementTree(file=file)
+      locale = tree.getroot().attrib['language']  # such as 'zh-CN'
+      baseName = os.path.basename(file).split('_')[0]
+      shutil.copy(file, f"{self.translationFilesFolder}/{baseName}_{locale}.ts")
+
   def unpackTsFilesFromCrowdinZipFile(self, crowdinZipFile):
     """Extract .ts files from a zip file downloaded from Crowdin.
     This method requires a temporary folder that does not contain previous downloaded or extracted files.
@@ -252,8 +296,10 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     if (not self.lreleasePath) or (not os.path.exists(self.lreleasePath)):
       raise ValueError("lrelease tool path is not specified.")
 
-    from pathlib import Path
-    tsFiles = Path(self.translationFilesFolder).glob('*.ts')
+    logging.info(f"Processing translation files in folder {self.translationFilesFolder}")
+    import glob
+    tsFiles = sorted(glob.glob(f"{self.translationFilesFolder}/*.ts"), key=os.path.getmtime)
+
     for file in tsFiles:
         lreleaseProcess = slicer.util.launchConsoleProcess([self.lreleasePath, str(file)])
         slicer.util.logProcessOutput(lreleaseProcess)

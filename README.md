@@ -22,10 +22,16 @@
 - Download latest translation
   - Option A: download automatically from [SlicerLanguageTranslations](https://github.com/Slicer/SlicerLanguageTranslations). This is the easiest way to get updated translation files, but these translations files are updated only once a day.
     - Select `Github` option in `Input translations` section.
-  - Option B: manual download from crowdin. The manual download requires more steps, but it allows getting the very latest translations from crowdin immediately.
+  - Option B: manual download a language from crowdin. The manual download requires more steps, but it allows getting the very latest translations from crowdin immediately.
+    - Open [Slicer project in crowdin.com](https://crowdin.com/project/slicer) and open translation page of a language (for example, [French](https://crowdin.com/translate/slicer/11/en-fr))
+    - Hit `Ctrl-S` button (or click the menu button then choose `Download`). It will download .ts translation file into the web browser's download folder.
+    - Select `Crowdin .ts files folder` option in `Input translations` section.
+    - Set the download folder path in `Input folder` in `Input translations` section.
+    - Note: It is recommended to keep `Latest file only` option checked to only use the latest downloaded .ts file in that folder because the web browser typically does not replace previously downloaded files but just keeps adding files. By enabling this option, all older .ts files are ignored.
+  - Option C: manual download of all languages from crowdin - only available for project adminstrators. The manual download requires more steps, but it allows getting the very latest translations from crowdin immediately.
     - Open [Slicer project in crowdin.com](https://crowdin.com/project/slicer)
     - Click `Build & Download` button. It downloads a zip file within about a minute.
-    - Select `Crowdin` option in `Input translations` section.
+    - Select `Crowdin multi-language` option in `Input translations` section.
     - Set the zip file path in `Input zip file` in `Input translations` section.
 - Compile the translation files and install them into the application by clicking `Update translation files` button.
 - Click `Restart the application` button to start using the new translation files.
