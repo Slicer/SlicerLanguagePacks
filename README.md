@@ -28,19 +28,8 @@ Help translate the project on [Hosted Weblate](https://hosted.weblate.org/engage
 ### Download and install latest translations
 
 - Download latest translation
-  - Option A: download automatically from [SlicerLanguageTranslations](https://github.com/Slicer/SlicerLanguageTranslations). This is the easiest way to get updated translation files, but these translations files are updated only once a day.
-    - Select `Github` option in `Input translations` section.
-  - Option B: manually download a language from Weblate. The manual download requires more steps, but it allows getting the most recent translations immediately.
-    - Open [Slicer project in Weblate](https://hosted.weblate.org/project/3d-slicer) and open translation page of a language (for example, [French](https://hosted.weblate.org/projects/3d-slicer/3d-slicer/fr/))
-    - From Files → Download translation you can downloadHit 3d-slicer-3d-slicer-fr-ts
-    - Select `Crowdin .ts files folder` option in `Input translations` section.
-    - Set the download folder path in `Input folder` in `Input translations` section.
-    - Note: It is recommended to keep `Latest file only` option checked to only use the latest downloaded .ts file in that folder because the web browser typically does not replace previously downloaded files but just keeps adding files. By enabling this option, all older .ts files are ignored.
-  - Option C: manual download of all languages from Hosted Weblate. The manual download requires more steps, but allows getting the most recent translations immediately.
-    - Open [Slicer project on Hosted Weblate](https://hosted.weblate.org/project/3d-slicer)
-    - Click Files → Download translation as ZIP file to download 3d-slicer-3d-slicer.zip.
-    - Select `Crowdin multi-language` option in `Input translations` section.
-    - Set the zip file path in `Input ZIP file` in `Input translations` section.
+  - Option A: `Weblate`. Download selected langauges directly from Weblate. This allows getting the most recent translations immediately, which is useful for translators wanting to test their translated application immediately.
+  - Option B: `GitHub`. Download all languages from [SlicerLanguageTranslations](https://github.com/Slicer/SlicerLanguageTranslations) repository. This is the fastest way to get updated translation files for all languages, but these translations files are updated only once a day.
 - Compile the translation files and install them into the application by clicking `Update translation files` button.
 - Click `Restart the application` button to start using the new translation files.
 
@@ -51,3 +40,17 @@ Help translate the project on [Hosted Weblate](https://hosted.weblate.org/engage
 Language can be selected in menu: Edit -> Application Settings, General section -> Language. If the language selector does not appear then go to "Internationalization" section and toggle the checkbox. The application has to be restarted after changing language.
 
 ![](Docs/LanguageSelector.png)
+
+## Advanced use
+
+### Install translation files offline
+
+Translation (.ts) files can be downloaded to a folder and installed from there later, without network access.
+
+Translation files can be downloaded from Weblate or GitHub. For example, open [Slicer project in Weblate](https://hosted.weblate.org/project/3d-slicer) select translation page of a language (such as [French](https://hosted.weblate.org/projects/3d-slicer/3d-slicer/fr/)), then in the menu choose `Files` -> `Download translation`.
+
+Install the translation files:
+- Select `Local folder` option
+- Set the folder containing .ts file(s) in `Input folder` in `Input translations` section.
+- Check `Latest file only` option to only use the latest downloaded .ts file. It is useful if local folder is set directly to the web browser's download folder.
+- Compile the translation files and install them into the application by clicking `Update translation files` button.

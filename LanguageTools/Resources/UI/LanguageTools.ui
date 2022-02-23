@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>375</width>
-    <height>427</height>
+    <width>380</width>
+    <height>489</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -64,10 +64,44 @@
       <item row="1" column="1">
        <widget class="QLineEdit" name="slicerVersionEdit">
         <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;master, 4.13, 4.14, ...&lt;/p&gt;&lt;p&gt;Only used for GitHub and Crowdin multi-language.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;master, 4.13, 4.14, ...&lt;/p&gt;&lt;p&gt;Only used for GitHub.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string>master</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="gitRepositoryLabel">
+        <property name="text">
+         <string>GitHub repository URL:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="githubRepositoryUrlEdit">
+        <property name="toolTip">
+         <string>Github repository that stores the translated strings.</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="weblateDownloadUrlLabel">
+        <property name="text">
+         <string>Weblate download URL:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="weblateDownloadUrlEdit">
+        <property name="toolTip">
+         <string>Github repository that stores the translated strings.</string>
+        </property>
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
@@ -80,92 +114,29 @@
       <string>Input translations</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="6" column="0">
-       <widget class="QLabel" name="gitRepositoryLabel">
-        <property name="text">
-         <string>Repository:</string>
-        </property>
-        <property name="indent">
-         <number>20</number>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="ctkPathLineEdit" name="crowdinZipFilePathLineEdit">
+      <item row="5" column="2">
+       <widget class="QCheckBox" name="latestTsFileOnlyCheckBox">
         <property name="toolTip">
-         <string>Zip file downloaded from https://crowdin.com/project/slicer using 'Build and Download'.</string>
-        </property>
-        <property name="settingKey">
-         <string>Internationalization/LanguageTools/CrowdinZipFilePathHistory</string>
-        </property>
-        <property name="nameFilters">
-         <stringlist>
-          <string>*.zip</string>
-         </stringlist>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="2">
-       <widget class="QRadioButton" name="crowdinTsFolderRadioButton">
-        <property name="text">
-         <string>Crowdin .ts files folder (manual download)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="crowdinZipFileLabel">
-        <property name="text">
-         <string>Input zip file:</string>
-        </property>
-        <property name="indent">
-         <number>20</number>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QLineEdit" name="githubRepositoryEdit">
-        <property name="toolTip">
-         <string>Github repository that stores the translated strings.</string>
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this option is checked then only the latest .ts file in the folder will be used. Enable this option to ignore previously downloaded .ts files are saved in the same folder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
          <string/>
         </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="crowdinTsFolderLabel">
-        <property name="text">
-         <string>Input folder:</string>
-        </property>
-        <property name="indent">
-         <number>20</number>
+        <property name="checked">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item row="3" column="0" colspan="2">
-       <widget class="QRadioButton" name="crowdinZipFileRadioButton">
-        <property name="text">
-         <string>Crowdin multi-language (manual download, administrators only)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0" colspan="2">
-       <widget class="QRadioButton" name="githubSourceRadioButton">
-        <property name="text">
-         <string>GitHub (auto download)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="ctkPathLineEdit" name="crowdinTsFolderPathLineEdit">
+      <item row="4" column="2">
+       <widget class="ctkPathLineEdit" name="localTsFolderPathLineEdit">
         <property name="toolTip">
-         <string>Zip file downloaded from https://crowdin.com/project/slicer using 'Build and Download'.</string>
+         <string>Folder containing translation (.ts) files.</string>
         </property>
         <property name="filters">
          <set>ctkPathLineEdit::Dirs|ctkPathLineEdit::Drives|ctkPathLineEdit::Executable|ctkPathLineEdit::NoDot|ctkPathLineEdit::NoDotDot|ctkPathLineEdit::Readable</set>
         </property>
         <property name="settingKey">
-         <string>Internationalization/LanguageTools/CrowdinSingleLanguageFolderPathHistory</string>
+         <string>Internationalization/LanguageTools/LocalTsFolderPathHistory</string>
         </property>
         <property name="nameFilters">
          <stringlist>
@@ -174,7 +145,24 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="0" column="0" colspan="3">
+       <widget class="QRadioButton" name="weblateSourceRadioButton">
+        <property name="text">
+         <string>Weblate (latest translations)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="localTsFolderLabel">
+        <property name="text">
+         <string>Input folder:</string>
+        </property>
+        <property name="indent">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
        <widget class="QLabel" name="latestTsFileOnlyLabel">
         <property name="text">
          <string>Latest file only:</string>
@@ -184,17 +172,185 @@
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
-       <widget class="QCheckBox" name="latestTsFileOnlyCheckBox">
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this option is checked then only the latest .ts file in the folder will be used. Enable this option to ignore previous files downloaded from crowdin that are saved in the same folder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
+      <item row="1" column="0">
+       <widget class="QLabel" name="languagesLabel">
         <property name="text">
-         <string> </string>
+         <string>Languages:</string>
         </property>
-        <property name="checked">
-         <bool>true</bool>
+        <property name="indent">
+         <number>20</number>
         </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="3">
+       <widget class="QRadioButton" name="localTsFolderRadioButton">
+        <property name="text">
+         <string>Local folder (for offline use)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="3">
+       <widget class="QRadioButton" name="githubSourceRadioButton">
+        <property name="text">
+         <string>GitHub (updated daily)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="2">
+       <widget class="ctkCheckableComboBox" name="languagesComboBox">
+        <property name="toolTip">
+         <string>Select one or few languages for much faster updates</string>
+        </property>
+        <item>
+         <property name="text">
+          <string>af-ZA</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ar-SA</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ca-ES</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>cs-CZ</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>da-DK</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>de-DE</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>el-GR</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>es-419</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>es-ES</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>fi-FI</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>fr-FR</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>he-IL</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>hu-HU</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>it-IT</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ja-JP</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ko-KR</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>nl-NL</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>no-NO</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>pl-PL</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>pt-BR</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>pt-PT</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ro-RO</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>ru-RU</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>sr-SP</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>sv-SE</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>tr-TR</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>uk-UA</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>vi-VN</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>zh-CN</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>zh-TW</string>
+         </property>
+        </item>
        </widget>
       </item>
      </layout>
@@ -226,6 +382,11 @@
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>ctkCheckableComboBox</class>
+   <extends>QComboBox</extends>
+   <header>ctkCheckableComboBox.h</header>
+  </customwidget>
   <customwidget>
    <class>ctkCollapsibleButton</class>
    <extends>QWidget</extends>

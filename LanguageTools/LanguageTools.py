@@ -73,9 +73,9 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
     # These connections ensure that whenever user changes some settings on the GUI, that is saved in the MRML scene
     # (in the selected parameter node).
+    self.ui.weblateSourceRadioButton.connect("toggled(bool)", lambda toggled, source="weblate": self.setTranslationSource(source, toggled))
     self.ui.githubSourceRadioButton.connect("toggled(bool)", lambda toggled, source="github": self.setTranslationSource(source, toggled))
-    self.ui.crowdinTsFolderRadioButton.connect("toggled(bool)", lambda toggled, source="crowdinTsFolder": self.setTranslationSource(source, toggled))
-    self.ui.crowdinZipFileRadioButton.connect("toggled(bool)", lambda toggled, source="crowdinZipFile": self.setTranslationSource(source, toggled))
+    self.ui.localTsFolderRadioButton.connect("toggled(bool)", lambda toggled, source="localTsFolder": self.setTranslationSource(source, toggled))
 
     # Buttons
     self.ui.updateButton.connect('clicked(bool)', self.onUpdateButton)
@@ -106,60 +106,75 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     if not toggled:
       # ignore when radiobutton is untoggled, we just process the toggled event
       return
-    self.ui.gitRepositoryLabel.enabled = (translationSource == "github")
-    self.ui.githubRepositoryEdit.enabled = (translationSource == "github")
-    self.ui.crowdinTsFolderLabel.enabled = (translationSource == "crowdinTsFolder")
-    self.ui.crowdinTsFolderPathLineEdit.enabled = (translationSource == "crowdinTsFolder")
-    self.ui.latestTsFileOnlyLabel.enabled = (translationSource == "crowdinTsFolder")
-    self.ui.latestTsFileOnlyCheckBox.enabled = (translationSource == "crowdinTsFolder")
-    self.ui.crowdinZipFileLabel.enabled = (translationSource == "crowdinZipFile")
-    self.ui.crowdinZipFilePathLineEdit.enabled = (translationSource == "crowdinZipFile")
-
+    self.ui.localTsFolderLabel.enabled = (translationSource == "localTsFolder")
+    self.ui.localTsFolderPathLineEdit.enabled = (translationSource == "localTsFolder")
+    self.ui.latestTsFileOnlyLabel.enabled = (translationSource == "localTsFolder")
+    self.ui.latestTsFileOnlyCheckBox.enabled = (translationSource == "localTsFolder")
+    self.ui.languagesLabel.enabled = (translationSource == "weblate")
+    self.ui.languagesComboBox.enabled = (translationSource == "weblate")
 
   def updateGUIFromSettings(self):
     settings = slicer.app.userSettings()
     try:
       settings.beginGroup("Internationalization/LanguageTools")
-      translationSource = settings.value("TranslationSource", "crowdinTsFolder")
-      self.ui.crowdinTsFolderRadioButton.checked = (translationSource == "crowdinTsFolder")
-      self.ui.crowdinTsFolderPathLineEdit.enabled = (translationSource == "crowdinTsFolder")
-      self.ui.crowdinZipFileRadioButton.checked = (translationSource == "crowdinZipFile")
+
+      translationSource = settings.value("TranslationSource", "localTsFolder")
+      self.ui.weblateSourceRadioButton.checked = (translationSource == "weblate")
       self.ui.githubSourceRadioButton.checked = (translationSource == "github")
+      self.ui.localTsFolderRadioButton.checked = (translationSource == "localTsFolder")
       self.setTranslationSource(translationSource)
-      self.ui.githubRepositoryEdit.text = settings.value("GitRepository", "https://github.com/Slicer/SlicerLanguageTranslations")
-      self.ui.slicerVersionEdit.text = settings.value("SlicerVersion", "master")
-      self.ui.crowdinTsFolderPathLineEdit.currentPath = settings.value("CrowdinTsFolderPath", "")
+
+      languages = settings.value("UpdateLanguages", "fr-FR").split(",")
+      for languageIndex in range(self.ui.languagesComboBox.count):
+        selected = self.ui.languagesComboBox.itemText(languageIndex) in languages
+        modelIndex = self.ui.languagesComboBox.model().index(languageIndex,0)
+        self.ui.languagesComboBox.setCheckState(modelIndex, qt.Qt.Checked if selected else qt.Qt.Unchecked)
+
+      self.ui.localTsFolderPathLineEdit.currentPath = settings.value("localTsFolderPath", "")
       self.ui.latestTsFileOnlyCheckBox.checked = settings.value("UseLatestTsFile", True)
-      self.ui.crowdinZipFilePathLineEdit.currentPath = settings.value("CrowdinZipFilePath", "")
+
       self.ui.lreleasePathLineEdit.currentPath = settings.value("LreleaseFilePath", "")
+      self.ui.slicerVersionEdit.text = settings.value("SlicerVersion", "master")
+      self.ui.weblateDownloadUrlEdit.text = settings.value("WeblateDownloadUrl", "https://hosted.weblate.org/download/3d-slicer")
+      self.ui.githubRepositoryUrlEdit.text = settings.value("GitRepository", "https://github.com/Slicer/SlicerLanguageTranslations")
+      
     finally:
       settings.endGroup()
 
     if not os.path.exists(self.ui.lreleasePathLineEdit.currentPath):
       self.ui.settingsCollapsibleButton.collapsed = False
 
+  def updatedLanguagesListFromGUI(self):
+    languages = []
+    for modelIndex in self.ui.languagesComboBox.checkedIndexes():
+      languages.append(self.ui.languagesComboBox.model().data(modelIndex))
+    return languages
+
   def updateSettingsFromGUI(self):
     settings = slicer.app.userSettings()
     try:
       settings.beginGroup("Internationalization/LanguageTools")
-      if self.ui.crowdinTsFolderRadioButton:
-        source = "crowdinTsFolder"
-      elif self.ui.crowdinZipFileRadioButton:
-        source = "crowdinZipFile"
+      if self.ui.localTsFolderRadioButton.checked:
+        source = "localTsFolder"
+      elif self.ui.weblateSourceRadioButton.checked:
+        source = "weblate"
       else:
         source = "github"
       settings.setValue("TranslationSource", source)
-      settings.setValue("GithubRepository", self.ui.githubRepositoryEdit.text)
+      settings.setValue("GithubRepository", self.ui.githubRepositoryUrlEdit.text)
       settings.setValue("SlicerVersion", self.ui.slicerVersionEdit.text)
-      settings.setValue("CrowdinTsFolderPath", self.ui.crowdinTsFolderPathLineEdit.currentPath)
+      settings.setValue("localTsFolderPath", self.ui.localTsFolderPathLineEdit.currentPath)
       settings.setValue("UseLatestTsFile", self.ui.latestTsFileOnlyCheckBox.checked)
-      settings.setValue("CrowdinZipFilePath", self.ui.crowdinZipFilePathLineEdit.currentPath)
+      settings.setValue("WeblateDownloadUrl", self.ui.weblateDownloadUrlEdit.text)
       settings.setValue("LreleaseFilePath", self.ui.lreleasePathLineEdit.currentPath)
+
+      languages = self.updatedLanguagesListFromGUI()
+      settings.setValue("UpdateLanguages", ','.join(languages))
+
     finally:
       settings.endGroup()
 
-    self.ui.crowdinTsFolderPathLineEdit.addCurrentPathToHistory()
-    self.ui.crowdinZipFilePathLineEdit.addCurrentPathToHistory()
+    self.ui.localTsFolderPathLineEdit.addCurrentPathToHistory()
 
   def onUpdateButton(self):
     """
@@ -174,12 +189,12 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
       self.logic.removeTemporaryFolder()
 
-      if self.ui.crowdinTsFolderRadioButton.checked:
-        self.logic.copyTsFilesFromFolder(self.ui.crowdinTsFolderPathLineEdit.currentPath, self.ui.latestTsFileOnlyCheckBox.checked)
-      elif self.ui.crowdinZipFileRadioButton.checked:
-        self.logic.unpackTsFilesFromCrowdinZipFile(self.ui.crowdinZipFilePathLineEdit.currentPath)
+      if self.ui.localTsFolderRadioButton.checked:
+        self.logic.copyTsFilesFromFolder(self.ui.localTsFolderPathLineEdit.currentPath, self.ui.latestTsFileOnlyCheckBox.checked)
+      elif self.ui.weblateSourceRadioButton.checked:
+        self.logic.downloadTsFilesFromWeblate(self.ui.weblateDownloadUrlEdit.text, self.updatedLanguagesListFromGUI())
       else:
-        self.logic.downloadTsFilesFromGithub(self.ui.githubRepositoryEdit.text)
+        self.logic.downloadTsFilesFromGithub(self.ui.githubRepositoryUrlEdit.text)
 
       self.logic.convertTsFilesToQmFiles()
       self.logic.installQmFiles()
@@ -189,6 +204,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
   def log(self, message):
     self.ui.statusTextEdit.append(message)
+    slicer.app.processEvents()
 
 #
 # LanguageToolsLogic
@@ -213,7 +229,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self.lreleasePath = None
     self._temporaryFolder = None
     self.translationFilesFolder = None
-    self.crowdinProjectName = "Slicer"
+    self.weblateComponents = [("3d-slicer", "Slicer")]
     self.gitRepositoryName = "SlicerLanguageTranslations"
     self.gitBranchName = "main"  # we store translations for all Slicer versions in the main branch
     self.logCallback = None
@@ -236,7 +252,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self.translationFilesFolder = None
 
   def copyTsFilesFromFolder(self, tsFolder, latestTsFileOnly):
-    """Extract .ts files from a zip file downloaded from Crowdin.
+    """Use .ts files in a local folder.
     This method requires a temporary folder that does not contain previous downloaded or extracted files.
     """
 
@@ -245,6 +261,9 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
 
     import glob
     tsFiles = sorted(glob.glob(f"{tsFolder}/*.ts"), key=os.path.getmtime)
+
+    if not tsFiles:
+      raise ValueError("No .ts files were found in the specified location.")
 
     if latestTsFileOnly:
       tsFiles = [tsFiles[-1]]
@@ -258,18 +277,22 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
       baseName = os.path.basename(file).split('_')[0]
       shutil.copy(file, f"{self.translationFilesFolder}/{baseName}_{locale}.ts")
 
-  def unpackTsFilesFromCrowdinZipFile(self, crowdinZipFile):
-    """Extract .ts files from a zip file downloaded from Crowdin.
+  def downloadTsFilesFromWeblate(self, downloadUrl, languages):
+    """Download .ts files from Weblate.
     This method requires a temporary folder that does not contain previous downloaded or extracted files.
     """
 
     tempFolder = self.temporaryFolder()
+    self.translationFilesFolder = tempFolder
 
-    # Unzip file
-    slicer.util.extractArchive(crowdinZipFile, tempFolder)
+    # Download file
+    import SampleData
+    dataLogic = SampleData.SampleDataLogic()
 
-    # /temp/[Slicer.SlicerLanguageTranslations] main/translated/[Slicer.SlicerLanguageTranslations] main/master"
-    self.translationFilesFolder = f'{tempFolder}/[{self.crowdinProjectName}.{self.gitRepositoryName}] {self.gitBranchName}/translated/[{self.crowdinProjectName}.{self.gitRepositoryName}] {self.gitBranchName}/{self.slicerVersion}'
+    for (component, filename) in self.weblateComponents:
+      for language in languages:
+        self.log(f'Download translations for {language}...')
+        tsFile = dataLogic.downloadFile(f'{downloadUrl}/{component}/{language}', self.temporaryFolder(), f'{filename}_{language}.ts')
 
   def downloadTsFilesFromGithub(self, githubRepositoryUrl):
     """Download .ts files from a Github repository.
@@ -281,7 +304,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     # Download file
     import SampleData
     dataLogic = SampleData.SampleDataLogic()
-    translationZipFilePath = dataLogic.downloadFile(f'{githubRepositoryUrl}/archive/refs/heads/{self.gitBranchName}.zip', self.temporaryFolder(), 'CrowdinTranslations.zip')
+    translationZipFilePath = dataLogic.downloadFile(f'{githubRepositoryUrl}/archive/refs/heads/{self.gitBranchName}.zip', self.temporaryFolder(), 'GitHubTranslations.zip')
 
     # Unzip file
     slicer.util.extractArchive(translationZipFilePath, tempFolder)
