@@ -16,8 +16,9 @@ Help translate the project on [Hosted Weblate](https://hosted.weblate.org/engage
 
 - Download and onstall Qt toolkit. It is free. Go to [Qt website](https://www.qt.io/download-open-source), scroll down, click `Download the Qt online installer` button, and follow the instructions. Any Qt version can be used.
   - Qt is required because it contains the `lrelease` tool, which can compile a human-readable translation file(.ts file, that are edited on [Hosted Weblate](https://hosted.weblate.org/project/3d-slicer)) to a binary file (.qm file, that the application can use).
-  - The Qt company added many misleading statements on its website to try to trick users into buying a commercial license of Qt with. \
+  - The Qt company added many misleading statements on its website to try to trick users into buying a commercial license of Qt.
   A commercial license is not needed, even for commercial uses of Qt. The free, open-source version is sufficient.
+  - On macOS: installer can be downloaded from [here](https://download.qt.io/official_releases/online_installers/qt-unified-mac-x64-online.dmg) or Qt can be installed using Homebrew. If Homebrew is used then `lrelease` is available by default at `/usr/local/Cellar/qt@5/5.15.2/bin/lrelease`.
 - [Download](https://download.slicer.org) and install a recent 3D Slicer Preview Release (released 2022-01-28 or later)
 - Install SlicerLanguagePacks extension.
   ![](Docs/ExtensionInstall.png)
