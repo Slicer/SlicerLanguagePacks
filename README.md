@@ -41,6 +41,26 @@ Language can be selected in menu: Edit -> Application Settings, General section 
 
 ![](Docs/LanguageSelector.png)
 
+## Tips and tricks
+
+### Find text tool
+
+`Find text` tool is added for quick extraction of text from the application and find occurrences of that text in the translation website:
+
+- Go to Language Tools module
+- Open `Find text` section
+- Set edited language: the extracted strings will be opened on the website, showing translations in this language
+- Check `Enable text finder` checkbox
+- Hit `Ctrl+6` shortcut anytime to show the widget selector
+- Click on the widget that contains translatable text (hit any key to cancel widget selection)
+- Click `OK` to open the found text on the translation website
+
+![](Docs/FindText.png)
+
+Known limitations:
+- The tool only extract widgets from Qt widgets (not from views rendered by VTK library).
+- Extraction text from floating and popup windows is not supported.
+
 ## Advanced use
 
 ### Install translation files offline
