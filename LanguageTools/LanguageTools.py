@@ -32,6 +32,124 @@ Developed of this module was partially funded by <a href="https://chanzuckerberg
 # LanguageToolsWidget
 #
 
+# Get widget at clicked position
+
+class TextFinder(qt.QWidget):
+
+  def __init__(self, parent=None):
+    super(TextFinder, self).__init__(parent)
+    self.setAttribute(qt.Qt.WA_StyledBackground)
+    self.setStyleSheet("QWidget { background-color: rgba(0, 255, 0, 50) }")
+    self.focusPolicy = qt.Qt.StrongFocus
+    self.LanguageToolsLogic = None
+    self.shortcutKeySequence = qt.QKeySequence("Ctrl+6")
+    self.shortcut = None
+    self.logic = None
+    self.cursorOverridden = False
+
+  def __del__(self):
+    self.showPointCursor(False)
+
+  def enableShortcut(self, enable):
+    if (self.shortcut is not None) == enable:
+      return
+    if self.shortcut:
+      self.shortcut.disconnect("activated()")
+      self.shortcut.setParent(None)
+      self.shortcut.deleteLater()
+      self.shortcut = None
+      self.hideOverlay()
+    else: 
+      self.shortcut = qt.QShortcut(self.parent())
+      self.shortcut.setKey(self.shortcutKeySequence)
+      self.shortcut.connect( "activated()", self.showFullSize)
+
+  def showPointCursor(self, enable):
+    if enable == self.cursorOverridden:
+      return
+    if enable:
+      slicer.app.setOverrideCursor(qt.Qt.PointingHandCursor)
+    else:
+      slicer.app.restoreOverrideCursor()
+    self.cursorOverridden = enable
+
+  def showFullSize(self):
+    self.pos = qt.QPoint()
+    self.setFixedSize(self.parent().size)
+    self.show()
+    self.setFocus(qt.Qt.ActiveWindowFocusReason)
+    self.showPointCursor(True)
+
+  def overlayOnWidget(self, widget):
+    pos = widget.mapToGlobal(qt.QPoint())
+    pos = self.parent().mapFromGlobal(pos)
+    self.pos = pos
+    self.setFixedSize(widget.size)
+
+  def hideOverlay(self):
+    self.hide()
+    self.showPointCursor(False)
+
+  def widgetAtPos(self, pos):
+    self.setAttribute(qt.Qt.WA_TransparentForMouseEvents)
+    widget = qt.QApplication.widgetAt(pos)
+    self.setAttribute(qt.Qt.WA_TransparentForMouseEvents, False)
+    return widget
+
+  def keyPressEvent(self, event):
+    self.hideOverlay()
+
+  def mousePressEvent(self, event):
+    # Get widget at mouse position
+    pos = qt.QCursor().pos()
+    widget = self.widgetAtPos(pos)
+    slicer.TextFinderLastWidget = widget  # useful for debugging
+    logging.info("Widget found: "+widget.objectName)
+    self.overlayOnWidget(widget)
+    self.showPointCursor(False)
+
+    # Extract text
+    try:
+      text = None
+      if hasattr(widget, 'text'):
+        text = widget.text
+      elif hasattr(widget, 'title'):
+        text = widget.title
+      elif hasattr(widget, 'windowTitle'):
+        text = widget.windowTitle
+      elif hasattr(widget, 'toolTip'):
+        text = widget.toolTip
+      if not text:
+        raise ValueError("Failed to extract text from widget")
+
+      result = slicer.util._messageDisplay(logging.INFO,
+        f"Edit translation of this text?\n\n[{text}]", qt.QMessageBox.Ok,
+        windowTitle="Translation lookup", icon=qt.QMessageBox.Question,
+        standardButtons=qt.QMessageBox.Ok | qt.QMessageBox.Retry | qt.QMessageBox.Close)
+      if result == qt.QMessageBox.Close:
+        # cancelled
+        self.hideOverlay()
+        return
+      if result == qt.QMessageBox.Ok:
+        # Open text of first widget in the browswer
+        self.logic.openTranslationGUI(text)
+
+    except Exception as e:
+      import traceback
+      traceback.print_exc()
+
+      # Text not found
+      objectInfo = widget.className()
+      if widget.objectName:
+        objectInfo += f" ({widget.objectName})"
+      if not slicer.util.confirmRetryCloseDisplay("Failed to extract widget name from object: " + objectInfo):
+        # cancelled
+        self.hideOverlay()
+        return
+
+    self.showFullSize()
+
+
 class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
   """Uses ScriptedLoadableModuleWidget base class, available at:
   https://github.com/Slicer/Slicer/blob/master/Base/Python/slicer/ScriptedLoadableModule.py
@@ -46,6 +164,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.logic = None
     self._parameterNode = None
     self._updatingGUIFromParameterNode = False
+    self.textFinder = TextFinder(slicer.util.mainWindow())
 
   def setup(self):
     """
@@ -68,6 +187,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     # in batch mode, without a graphical user interface.
     self.logic = LanguageToolsLogic()
     self.logic.logCallback = self.log
+    self.textFinder.logic = self.logic
 
     # Connections
 
@@ -76,6 +196,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.ui.weblateSourceRadioButton.connect("toggled(bool)", lambda toggled, source="weblate": self.setTranslationSource(source, toggled))
     self.ui.githubSourceRadioButton.connect("toggled(bool)", lambda toggled, source="github": self.setTranslationSource(source, toggled))
     self.ui.localTsFolderRadioButton.connect("toggled(bool)", lambda toggled, source="localTsFolder": self.setTranslationSource(source, toggled))
+
+    self.ui.enableTextFindercheckBox.connect("toggled(bool)", self.enableTextFinder)
 
     # Buttons
     self.ui.updateButton.connect('clicked(bool)', self.onUpdateButton)
@@ -88,7 +210,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     """
     Called when the application closes and the module widget is destroyed.
     """
-    pass
+    self.textFinder.enableShortcut(False)
 
   def enter(self):
     """
@@ -137,6 +259,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       self.ui.slicerVersionEdit.text = settings.value("SlicerVersion", "master")
       self.ui.weblateDownloadUrlEdit.text = settings.value("WeblateDownloadUrl", "https://hosted.weblate.org/download/3d-slicer")
       self.ui.githubRepositoryUrlEdit.text = settings.value("GitRepository", "https://github.com/Slicer/SlicerLanguageTranslations")
+
+      self.ui.textFinderLanguageEdit.text = settings.value("FindTextLanguage", "fr-FR")
       
     finally:
       settings.endGroup()
@@ -168,6 +292,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       settings.setValue("WeblateDownloadUrl", self.ui.weblateDownloadUrlEdit.text)
       settings.setValue("LreleaseFilePath", self.ui.lreleasePathLineEdit.currentPath)
 
+      settings.setValue("FindTextLanguage", self.ui.textFinderLanguageEdit.text)
+
       languages = self.updatedLanguagesListFromGUI()
       settings.setValue("UpdateLanguages", ','.join(languages))
 
@@ -194,13 +320,21 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       elif self.ui.weblateSourceRadioButton.checked:
         self.logic.downloadTsFilesFromWeblate(self.ui.weblateDownloadUrlEdit.text, self.updatedLanguagesListFromGUI())
       else:
-        self.logic.downloadTsFilesFromGithub(self.ui.githubRepositoryUrlEdit.text)
+        self.logic.downloadTsFilesFromGithub(self.ui.githubRepositoryUrlEdit.currentPath)
 
       self.logic.convertTsFilesToQmFiles()
       self.logic.installQmFiles()
 
   def onRestartButton(self):
     slicer.util.restart()
+
+  def enableTextFinder(self, enable):
+    if enable:
+      self.updateSettingsFromGUI()
+      self.logic.preferredLanguage = self.ui.textFinderLanguageEdit.text
+    self.textFinder.enableShortcut(enable)
+    # Only allow changing language if finder is disabled
+    self.ui.textFinderLanguageEdit.enabled = not enable
 
   def log(self, message):
     self.ui.statusTextEdit.append(message)
@@ -230,6 +364,8 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self._temporaryFolder = None
     self.translationFilesFolder = None
     self.weblateComponents = [("3d-slicer", "Slicer")]
+    self.weblateEditTranslationUrl = "https://hosted.weblate.org/translate/3d-slicer"
+    self.preferredLanguage = "fr-FR"
     self.gitRepositoryName = "SlicerLanguageTranslations"
     self.gitBranchName = "main"  # we store translations for all Slicer versions in the main branch
     self.logCallback = None
@@ -350,6 +486,16 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
       raise ValueError(f"No translation (qm) files were found at {self.translationFilesFolder}")
     
     self.log(f"Update successfully completed.\nInstalled {numberOfInstalledFiles} translation files in {applicationTranslationFolder}.")
+
+  def openTranslationGUI(self, text):
+    # Open translation of the first component (Slicer core)
+    # (in the future the user may choose a preferred component)
+    (component, filename) = self.weblateComponents[0]
+    url=qt.QUrl(f"{self.weblateEditTranslationUrl}/{component}/{self.preferredLanguage}/")
+    q = qt.QUrlQuery()
+    q.addQueryItem("q",text)
+    url.setQuery(q)
+    qt.QDesktopServices().openUrl(url)
 
 #
 # LanguageToolsTest
