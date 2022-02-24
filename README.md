@@ -49,7 +49,7 @@ Language can be selected in menu: Edit -> Application Settings, General section 
 
 - Go to Language Tools module
 - Open `Find text` section
-- Set edited language: the extracted strings will be opened on the website, showing translations in this language
+- Set edited language: the extracted strings will be opened on the website, showing translations in this language. Example: `fr-FR`, `hu-HU`.
 - Check `Enable text finder` checkbox
 - Hit `Ctrl+6` shortcut anytime to show the widget selector
 - Click on the widget that contains translatable text (hit any key to cancel widget selection)
