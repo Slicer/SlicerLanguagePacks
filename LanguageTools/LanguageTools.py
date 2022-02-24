@@ -111,19 +111,29 @@ class TextFinder(qt.QWidget):
     # Extract text
     try:
       text = None
-      if hasattr(widget, 'text'):
+      try:
         text = widget.text
-      elif hasattr(widget, 'title'):
-        text = widget.title
-      elif hasattr(widget, 'windowTitle'):
-        text = widget.windowTitle
-      elif hasattr(widget, 'toolTip'):
-        text = widget.toolTip
+      except:
+        pass
+      if not text:
+        try:
+          text = widget.title
+        except:
+          pass
+      if not text:
+        try:
+          text = widget.windowTitle
+        except:
+          pass
+      if not text:
+        try:
+          text = widget.toolTip
+        except:
+          pass
       if not text:
         raise ValueError("Failed to extract text from widget")
-
       result = slicer.util._messageDisplay(logging.INFO,
-        f"Edit translation of this text?\n\n[{text}]", qt.QMessageBox.Ok,
+        f"Edit translation of this text on the translation website?\n\n[{text}]", qt.QMessageBox.Ok,
         windowTitle="Translation lookup", icon=qt.QMessageBox.Question,
         standardButtons=qt.QMessageBox.Ok | qt.QMessageBox.Retry | qt.QMessageBox.Close)
       if result == qt.QMessageBox.Close:
