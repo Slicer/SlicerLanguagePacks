@@ -8,7 +8,7 @@
 <img src="https://hosted.weblate.org/widgets/3d-slicer/-/horizontal-auto.svg" alt="Oversettelsesstatus" />
 </a>
 
-Help translate the project on [Hosted Weblate](https://hosted.weblate.org/engage/3d-slicer/).
+Help translate the project on [Hosted Weblate](https://hosted.weblate.org/engage/3d-slicer/). How to translate? Check out the [Translators Manual](TranslatorsManual.md).
 
 ## How to use
 
