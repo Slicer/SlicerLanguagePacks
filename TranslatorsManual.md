@@ -1,5 +1,7 @@
 # General notes
 
+This document is a work in progress. Feel free to make changes or suggest changes.
+
 ## Glossary
 
 Some English words are used in Slicer with a very specific meaning. For example `volume` refers to a 3D image.
