@@ -42,6 +42,8 @@ Language can be selected in menu: Edit -> Application Settings, General section 
 
 ![](Docs/LanguageSelector.png)
 
+For convenience, an application language selector is also added to the Language Tools module, below the `Update translation files` button. Any updated translation files immediately show up in this language selector.
+
 ## Tips and tricks
 
 ### Find text tool

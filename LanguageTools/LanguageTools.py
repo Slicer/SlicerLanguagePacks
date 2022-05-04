@@ -199,6 +199,23 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.logic.logCallback = self.log
     self.textFinder.logic = self.logic
 
+    # Workaround for Slicer-5.0 (no Qt plugin was available for ctkLanguageComboBox)
+    if self.ui.languageSelector.__class__ != ctk.ctkLanguageComboBox:
+      layout = self.ui.languageSelectorLayout
+      layout.removeWidget(self.ui.languageSelector)
+      self.ui.languageSelector.hide()
+      languageSelector = ctk.ctkLanguageComboBox()
+      #qSize = qt.QSizePolicy()
+      #qSize.setHorizontalPolicy(qt.QSizePolicy.Expanding)
+      languageSelector.setSizePolicy(self.ui.languageSelector.sizePolicy)
+      languageSelector.toolTip = self.ui.languageSelector.toolTip
+      layout.addWidget(languageSelector)
+      self.ui.languageSelector = languageSelector
+
+    self.ui.languageSelector.countryFlagsVisible = False
+    self.ui.languageSelector.defaultLanguage = "en"
+    self.ui.languageSelector.directories = slicer.app.translationFolders()
+
     # Connections
 
     # These connections ensure that whenever user changes some settings on the GUI, that is saved in the MRML scene
@@ -209,12 +226,19 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
     self.ui.enableTextFindercheckBox.connect("toggled(bool)", self.enableTextFinder)
 
+    self.ui.languageSelector.connect("currentLanguageNameChanged(const QString&)", self.updateSettingsFromGUI)
+
     # Buttons
     self.ui.updateButton.connect('clicked(bool)', self.onUpdateButton)
     self.ui.restartButton.connect('clicked(bool)', self.onRestartButton)
 
     # Make sure parameter node is initialized (needed for module reload)
     self.updateGUIFromSettings()
+
+  def refreshLanguageList(self):
+    wasBlocked = self.ui.languageSelector.blockSignals(True)
+    self.ui.languageSelector.directories = slicer.app.translationFolders()
+    self.ui.languageSelector.blockSignals(wasBlocked)
 
   def cleanup(self):
     """
@@ -226,7 +250,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     """
     Called each time the user opens this module.
     """
-    pass
+    self.updateGUIFromSettings()
 
   def exit(self):
     """
@@ -271,9 +295,15 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       self.ui.githubRepositoryUrlEdit.text = settings.value("GitRepository", "https://github.com/Slicer/SlicerLanguageTranslations")
 
       self.ui.textFinderLanguageEdit.text = settings.value("FindTextLanguage", "fr-FR")
-      
+
     finally:
       settings.endGroup()
+
+    self.refreshLanguageList()
+    wasBlocked = self.ui.languageSelector.blockSignals(True)
+    print(f'Current language: {settings.value("language")}')
+    self.ui.languageSelector.currentLanguage = settings.value("language")
+    self.ui.languageSelector.blockSignals(wasBlocked)
 
     if not os.path.exists(self.ui.lreleasePathLineEdit.currentPath):
       self.ui.settingsCollapsibleButton.collapsed = False
@@ -310,6 +340,9 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     finally:
       settings.endGroup()
 
+    self.refreshLanguageList()
+    settings.setValue("language", self.ui.languageSelector.currentLanguage)
+
     self.ui.localTsFolderPathLineEdit.addCurrentPathToHistory()
 
   def onUpdateButton(self):
@@ -334,6 +367,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
       self.logic.convertTsFilesToQmFiles()
       self.logic.installQmFiles()
+
+    self.refreshLanguageList()
 
   def onRestartButton(self):
     slicer.util.restart()

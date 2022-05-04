@@ -11,36 +11,16 @@
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="7" column="0">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
-   <item row="5" column="0">
-    <widget class="QPushButton" name="restartButton">
-     <property name="toolTip">
-      <string>Download, compile, and install latest translations</string>
-     </property>
-     <property name="text">
-      <string>Restart the application</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="0">
+   <item row="6" column="0">
     <widget class="ctkCollapsibleButton" name="settingsCollapsibleButton">
      <property name="text">
       <string>Settings</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
+     </property>
+     <property name="collapsedHeight">
+      <number>6</number>
      </property>
      <layout class="QFormLayout" name="formLayout_3">
       <item row="0" column="0">
@@ -114,10 +94,13 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="0">
+   <item row="4" column="0">
     <widget class="ctkCollapsibleButton" name="outputsCollapsibleButton">
      <property name="text">
       <string>Input translations</string>
+     </property>
+     <property name="collapsedHeight">
+      <number>6</number>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="5" column="2">
@@ -362,30 +345,29 @@
      </layout>
     </widget>
    </item>
-   <item row="4" column="0">
-    <widget class="QPushButton" name="updateButton">
-     <property name="toolTip">
-      <string>Download, compile, and install latest translations</string>
+   <item row="12" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-     <property name="text">
-      <string>Update translation files</string>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
      </property>
-    </widget>
+    </spacer>
    </item>
-   <item row="6" column="0">
-    <widget class="QTextEdit" name="statusTextEdit">
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0">
+   <item row="3" column="0">
     <widget class="ctkCollapsibleButton" name="CollapsibleButton">
      <property name="text">
       <string>Find text</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
+     </property>
+     <property name="collapsedHeight">
+      <number>6</number>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <item row="0" column="0">
@@ -422,6 +404,60 @@
      </layout>
     </widget>
    </item>
+   <item row="10" column="0">
+    <widget class="QPushButton" name="restartButton">
+     <property name="toolTip">
+      <string>Download, compile, and install latest translations</string>
+     </property>
+     <property name="text">
+      <string>Restart the application</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QTextEdit" name="statusTextEdit">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QPushButton" name="updateButton">
+     <property name="toolTip">
+      <string>Download, compile, and install latest translations</string>
+     </property>
+     <property name="text">
+      <string>Update translation files</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <layout class="QHBoxLayout" name="languageSelectorLayout">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Application language:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="ctkLanguageComboBox" name="languageSelector">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Change only takes effect after restarting the application.</string>
+       </property>
+       <property name="countryFlagsVisible" stdset="0">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -446,6 +482,11 @@
    <extends>QWidget</extends>
    <header>qMRMLWidget.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkLanguageComboBox</class>
+   <extends>QComboBox</extends>
+   <header>ctkLanguageComboBox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>
