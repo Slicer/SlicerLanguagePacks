@@ -214,6 +214,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.ui.languageSelector.defaultLanguage = "en"
     self.ui.languageSelector.directories = slicer.app.translationFolders()
 
+    self.ui.translationFoldersTextBrowser.setPlainText(';'.join(slicer.app.translationFolders()))
+
     # Connections
 
     # These connections ensure that whenever user changes some settings on the GUI, that is saved in the MRML scene

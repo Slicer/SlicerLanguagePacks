@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>380</width>
-    <height>489</height>
+    <height>554</height>
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
@@ -88,6 +88,29 @@
         </property>
         <property name="text">
          <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Translation file folders:</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="ctkFittedTextBrowser" name="translationFoldersTextBrowser">
+        <property name="toolTip">
+         <string>List of folders where the application looks for translations. This is for information only, the paths cannot be changed.</string>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+        <property name="collapsed">
+         <bool>true</bool>
+        </property>
+        <property name="showDetailsText">
+         <string>Show more...</string>
         </property>
        </widget>
       </item>
@@ -471,6 +494,11 @@
    <extends>QWidget</extends>
    <header>ctkCollapsibleButton.h</header>
    <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>ctkFittedTextBrowser</class>
+   <extends>QTextBrowser</extends>
+   <header>ctkFittedTextBrowser.h</header>
   </customwidget>
   <customwidget>
    <class>ctkPathLineEdit</class>
