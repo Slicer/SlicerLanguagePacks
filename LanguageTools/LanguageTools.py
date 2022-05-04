@@ -205,8 +205,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       layout.removeWidget(self.ui.languageSelector)
       self.ui.languageSelector.hide()
       languageSelector = ctk.ctkLanguageComboBox()
-      #qSize = qt.QSizePolicy()
-      #qSize.setHorizontalPolicy(qt.QSizePolicy.Expanding)
       languageSelector.setSizePolicy(self.ui.languageSelector.sizePolicy)
       languageSelector.toolTip = self.ui.languageSelector.toolTip
       layout.addWidget(languageSelector)
@@ -236,6 +234,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.updateGUIFromSettings()
 
   def refreshLanguageList(self):
+    # In Slicer-5.1 this can be replaced by self.ui.languageSelector.refreshFromDirectories()
     wasBlocked = self.ui.languageSelector.blockSignals(True)
     self.ui.languageSelector.directories = slicer.app.translationFolders()
     self.ui.languageSelector.blockSignals(wasBlocked)
@@ -301,7 +300,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
     self.refreshLanguageList()
     wasBlocked = self.ui.languageSelector.blockSignals(True)
-    print(f'Current language: {settings.value("language")}')
     self.ui.languageSelector.currentLanguage = settings.value("language")
     self.ui.languageSelector.blockSignals(wasBlocked)
 
@@ -363,7 +361,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       elif self.ui.weblateSourceRadioButton.checked:
         self.logic.downloadTsFilesFromWeblate(self.ui.weblateDownloadUrlEdit.text, self.updatedLanguagesListFromGUI())
       else:
-        self.logic.downloadTsFilesFromGithub(self.ui.githubRepositoryUrlEdit.currentPath)
+        self.logic.downloadTsFilesFromGithub(self.ui.githubRepositoryUrlEdit.text)
 
       self.logic.convertTsFilesToQmFiles()
       self.logic.installQmFiles()
