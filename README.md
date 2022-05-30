@@ -64,6 +64,14 @@ Known limitations:
 - The tool only extract widgets from Qt widgets (not from views rendered by VTK library).
 - Extraction text from floating and popup windows is not supported.
 
+### Translation of external links
+
+If the translated text contains links to external sites that support multiple languages, it is generally preferable to not hardcode a specific language (to allow that external site to use its own preferred language). For example: <https://docs.github.com/get-started/quickstart/fork-a-repo> is preferred (instead of hardcoding English by adding `/en` like this: <https://docs.github.com/en/get-started/quickstart/fork-a-repo>).
+
+However, not all sites can automatically set a preferred language. For example, [ReadTheDocs](https://readthedocs.org) requires explicitly specifying language code in the URL: <https://docs.godotengine.org/en/stable/tutorials/assets_pipeline/import_process.html> is valid, but <https://docs.godotengine.org/stable/tutorials/assets_pipeline/import_process.html> is an invalid URL. In these cases, the URL of the link should be changed in each translation to match the target language.
+
+See related discussion [here](https://github.com/Slicer/Slicer/pull/6401#discussion_r884768951).
+
 ## Advanced use
 
 ### Install translation files offline
