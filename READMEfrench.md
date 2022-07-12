@@ -1,4 +1,4 @@
-# SlicerLanguagePacks extension
+# L'extension SlicerLanguagePacks
 
 Extension 3D Slicer pour la création, l'édition et le stockage de traductions pour le noyau et les extensions de Slicer.
 
