@@ -1,4 +1,4 @@
-## Comment utiliser le pack Language Extension de Slicer
+## Mode d'emploi
 
 ### Installation
 

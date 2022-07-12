@@ -12,9 +12,17 @@ Help translate the project on [Hosted Weblate](https://hosted.weblate.org/engage
 
 ## Documentation
 
-- English:
+### English
+
   - [How to use](HowToUse.md)
   - [Translators manual](TranslatorsManual.md)
   - [Advanced topics](AdvancedUse.md)
-- French:
+
+### French
+
+Extension 3D Slicer pour la création, l'édition et le stockage de traductions pour le noyau et les extensions de Slicer.
+
+Aidez à traduire le projet sur [Hosted Weblate](https://hosted.weblate.org/engage/3d-slicer/). Comment traduire ? Consultez les liens de documentation ci-dessous.
+
   - [Comment utiliser](HowToUse_fr.md)
+  - [Sujets avancés](AdvancedUse_fr.md)
