@@ -1,6 +1,6 @@
 # SlicerLanguagePacks extension
 
-3D Slicer extension for creating, editing, and storing translations for Slicer core and extensions.
+[3D Slicer](https://www.slicer.org) extension for creating, editing, and storing translations for Slicer core and extensions.
 
 ![](Docs/ExampleTranslations.png)
 
