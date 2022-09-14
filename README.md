@@ -17,6 +17,7 @@ Help translate the project on [Hosted Weblate](https://hosted.weblate.org/engage
   - [How to use](HowToUse.md)
   - [Translators manual](TranslatorsManual.md)
   - [Advanced topics](AdvancedUse.md)
+  - [Developers manual](DevelopersManual.md)
 
 ### French
 
