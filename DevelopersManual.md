@@ -10,26 +10,26 @@ Properties that must be marked as non-translatable in Qt designer by unchecking 
 
 ![](Docs/DesignerMarkAsNonTranslatable.png)
 
-- In node selector widgets, such as `qMRMLNodeComboBox`, `qMRMLCheckableNodeComboBox`, `qMRMLSubjectHierarchyTreeView`, `qMRMLTreeView`:
+- In node selector widgets, such as qMRMLNodeComboBox, qMRMLCheckableNodeComboBox, qMRMLSubjectHierarchyTreeView, qMRMLTreeView:
   - `nodeTypes`
   - `hideChildNodeTypes`
-  - `interactionNodeSingletonTag` (if not the default `Singleton`)
+  - `interactionNodeSingletonTag` (if not the default "Singleton" value)
   - `sceneModelType`
   - `levelFilter`
-- In MRML widgets (`qMRML*Widget`) that support quantities, such as `qMRMLRangeWidget` or `qMRMLCoordinatesWidget`:
+- In MRML widgets (qMRML...Widget) that support quantities, such as qMRMLRangeWidget or qMRMLCoordinatesWidget:
   - `quantity`
-- In widgets that save data into application settings, such as `ctkPathLineEdit`, `qMRMLSegmentationFileExportWidget`, `qMRMLSegmentEditorWidget`:
+- In widgets that save data into application settings, such as ctkPathLineEdit, qMRMLSegmentationFileExportWidget, qMRMLSegmentEditorWidget:
   - `settingKey`
   - `defaultTerminologyEntrySettingsKey`
-- In widgets that save data into node or subject hierarchy attributes, such as `qMRMLSubjectHierarchyComboBox`, `SubjectHierarchyTreeView`:
+- In widgets that save data into node or subject hierarchy attributes, such as qMRMLSubjectHierarchyComboBox, SubjectHierarchyTreeView:
   - `includeItemAttributeNamesFilter`
   - `excludeItemAttributeNamesFilter`
   - `includeNodeAttributeNamesFilter`
   - `excludeNodeAttributeNamesFilter`
-- In slice view widgets, such as `qMRMLSliceControllerWidget` and `qMRMLSliceWidget`:
+- In slice view widgets, such as qMRMLSliceControllerWidget and qMRMLSliceWidget:
   - `sliceViewName`
   - `sliceOrientation`
-- In `qMRMLSegmentationConversionParametersWidget`:
+- In qMRMLSegmentationConversionParametersWidget:
   - `targetRepresentationName`
-- In `qSlicerMouseModeToolBar`:
+- In qSlicerMouseModeToolBar:
   - `defaultPlaceClassName`
