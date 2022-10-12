@@ -6,9 +6,7 @@ These instructions are for Slicer module developers (in Slicer core or in Slicer
 
 By default, most string and stringlist properties that appear in .ui files are made avaiable for translation. This is usually the correct behavior, but in some cases strings contain strings that must not be translated and must not appear in translation source (.ts) files.
 
-Properties that must be marked as non-translatable in Qt designer by unchecking the `Translatable` option, unless they are set to their default value (typically empty):
-
-![](Docs/DesignerMarkAsNonTranslatable.png)
+Properties that **must be marked as non-translatable in Qt designer** by unchecking the `Translatable` option, unless they are set to their default value (typically empty):
 
 - In node selector widgets, such as qMRMLNodeComboBox, qMRMLCheckableNodeComboBox, qMRMLSubjectHierarchyTreeView, qMRMLTreeView:
   - `nodeTypes`
@@ -33,3 +31,5 @@ Properties that must be marked as non-translatable in Qt designer by unchecking 
   - `targetRepresentationName`
 - In qSlicerMouseModeToolBar:
   - `defaultPlaceClassName`
+
+![](Docs/DesignerMarkAsNonTranslatable.png)
