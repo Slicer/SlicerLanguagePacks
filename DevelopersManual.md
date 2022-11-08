@@ -46,7 +46,7 @@ Therefore, in the Slicer internationalization process, we have retained some rec
 ### How to use *tr()* in QObject classes
 
 Within a class inheriting from QObject, whether this inheritance is direct or not, all that is necessary to do is to use the [tr()](https://doc.qt.io/qt-5/qobject.html#tr) function to obtain translated text for your classes.
-```
+```c++
 LoginWidget::LoginWidget()
 {
     QLabel *label = new QLabel(tr("Password:"));
@@ -54,7 +54,7 @@ LoginWidget::LoginWidget()
 }
 ````
 Classes inheriting from QObject should add the [Q_OBJECT](https://doc.qt.io/qt-5/i18n-source-translation.html#defining-a-translation-context) macro in their definition so that the translation context is correctly handled by `Qt`.
-```
+```c++
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -72,7 +72,7 @@ Non-QObject classes don't have a translation function, so directly calling `tr()
 
 A common practice is to prefix `tr()` calls on these classes with a Qt  core class like `QObject::tr()`, `QLabel::tr()`, etc. However, we don't recommend this approach since `lupdate` will associate such translatable strings with a context that is different from the class where they are located.
 Therefore, when it's about to translate non-Qt classes, we recommand to provide translation support to the class by directly adding the [Q_DECLARE_TR_FUNCTIONS](https://doc.qt.io/qt-5/i18n-source-translation.html#translating-non-qt-classes) macro on it.
-```
+```c++
 class MyClass
 {
     Q_DECLARE_TR_FUNCTIONS(MyClass)
