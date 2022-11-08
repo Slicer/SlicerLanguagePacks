@@ -101,3 +101,17 @@ This problem may be solved by spelling out the class name in the call, for examp
 Qt lupdate tool throws `Class 'SomeClassName' lacks Q_OBJECT macro` warnings when translation function is called on a QObject class with no Q_OBJECT macro in its definition. The problem is also that `lupdate` cannot determine the class name `tr()` is called on and therefore it doesn't know the translation context.
 
 The solution is to add the `Q_OBJECT` macro in the class where `tr()` is called, or, in case of classes that should not be exposed (private classes, low level implementation classes, ...), to prefix `tr()` calls with the associated public class, as described in the previous sections.
+
+## Identifying translatable strings
+
+In the translation process, only strings that are displayed at the user interface level should be considered. Thus, strings refering to module names, file contents, file extensions, developer communications such as log messages (e.g. `PrintSelf` or `qCritical` outputs ) or any developer-related content, should be considered as non translatable.
+
+## Using `lupdate` to extract translatable strings
+
+To extract all translatable strings present on the Slicer source code, we can use the `Qt lupdate` tool. In `Qt 5.15.2`, which is used in the current Slicer version, `lupdate` can be found in `<QT_ROOT_FOLDER>/5.15.2/msvc2019_64/bin`. 
+
+Thus, to obtain the translation file, we just have to run the following command :
+
+`lupdate slicer_root_folder -ts translation_file.ts`
+
+**NB :** `slicer_root_folder` should be replaced by the path to your Slicer root folder and `translation_file` is the name of the translation file (has `.ts` extension).
