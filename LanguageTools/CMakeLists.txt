@@ -9,6 +9,8 @@ set(MODULE_PYTHON_SCRIPTS
 set(MODULE_PYTHON_RESOURCES
   Resources/Icons/${MODULE_NAME}.svg  # Google Materials icon: Language, 48dp
   Resources/UI/${MODULE_NAME}.ui
+  Resources/Fonts/NotoSansTC-Regular.otf
+  Resources/Fonts/NotoSerifTC-Regular.otf
   )
 
 #-----------------------------------------------------------------------------

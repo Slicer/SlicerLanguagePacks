@@ -368,6 +368,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       self.logic.convertTsFilesToQmFiles()
       self.logic.installQmFiles()
 
+      self.logic.installFontFiles()
+
     self.refreshLanguageList()
 
   def onRestartButton(self):
@@ -529,8 +531,36 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
 
     if numberOfInstalledFiles == 0:
       raise ValueError(f"No translation (qm) files were found at {self.translationFilesFolder}")
-    
+
     self.log(f"Update successfully completed.\nInstalled {numberOfInstalledFiles} translation files in {applicationTranslationFolder}.")
+
+  def installFontFiles(self):
+
+    if not hasattr(slicer.app.applicationLogic(), 'GetFontsDirectory'):
+      self.log(f"This Slicer version does not support custom viewer fonts.")
+      return
+
+    applicationFontsFolder = slicer.app.applicationLogic().GetFontsDirectory()
+    # Make sure the application Fonts folder exists
+    os.makedirs(applicationFontsFolder, exist_ok=True)
+
+    moduleDir = os.path.dirname(slicer.util.modulePath('LanguageTools'))
+    moduleFontsFolder = os.path.join(moduleDir, 'Resources', 'Fonts')
+    import shutil
+    from pathlib import Path
+    fontFiles = Path(moduleFontsFolder).glob('*.?tf')
+
+    numberOfInstalledFiles = 0
+    for file in fontFiles:
+      logging.debug(f"Installing font file: {file} in {applicationFontsFolder}")
+      shutil.copy(file, applicationFontsFolder)
+      numberOfInstalledFiles += 1
+
+    # Use font that has Chinese characters (and many other international characters)
+    slicer.app.userSettings().setValue('Views/FontFile/SansSerif', 'NotoSansTC-Regular.otf')
+    slicer.app.userSettings().setValue('Views/FontFile/Serif', 'NotoSerifTC-Regular.otf')
+
+    self.log(f"Installed {numberOfInstalledFiles} font files in {applicationFontsFolder}.")
 
   def openTranslationGUI(self, text):
     # Open translation of the first component (Slicer core)
