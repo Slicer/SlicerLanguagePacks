@@ -106,6 +106,13 @@ The solution is to add the `Q_OBJECT` macro in the class where `tr()` is called,
 
 In the translation process, only strings that are displayed at the user interface level should be considered. Thus, strings refering to module names, file contents, file extensions, developer communications such as log messages (e.g. `PrintSelf` or `qCritical` outputs ) or any developer-related content, should be considered as non translatable.
 
+To make it clear that a string must not be translated, `/*no tr*/` comment can be added to a string to indicate that the `tr()` function is intentionally not used.
+
+## Using common base classes for shared strings
+
+To prevent duplication of source strings, a `tr()` method of a common base class should be used for the following strins:
+- Module category names (`Informatics`, `Registration`, `Segmentation`, ...) should be translated using `qSlicerAbstractCoreModule::tr()`
+
 ## Using `lupdate` to extract translatable strings
 
 To extract all translatable strings present on the Slicer source code, we can use the `Qt lupdate` tool. In `Qt 5.15.2`, which is used in the current Slicer version, `lupdate` can be found in `<QT_ROOT_FOLDER>/5.15.2/msvc2019_64/bin`. 
