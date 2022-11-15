@@ -2,13 +2,13 @@
 
 The goal of this document is to provide new contributors to the community based translation of 3D Slicer on [Weblate](https://hosted.weblate.org/projects/3d-slicer/3d-slicer/) with tips on how to easily and accurately help translating the interface of the software.
 
-This document is a work in progress. Feel free suggest changes.
+This document is a work in progress. Feel free to suggest changes.
 
 ## Get Started on Weblate
 
 Weblate is a collaborative translation tool for open source projects. With the help of our wonderful contributors, we are working towards a full translation of the 3D Slicer interface, through a mainly community based effort. Thank you for joining us!
 
-You can find a video tutorial of how to create a Weblate account [here](https://youtu.be/LSvc9MmrxPA)
+You can find a video tutorial on how to create a Weblate account [here](https://youtu.be/LSvc9MmrxPA)
 
 If you create an account using your email and a username, you will receive a confirmation email. Open the link it contains, and follow the instructions.
 
@@ -18,14 +18,14 @@ If you sign in using GitHub, you will be redirected to a GitHub page where you w
 
 [Here](https://github.com/Slicer/SlicerLanguagePacks/blob/main/HowToUse.md) is a link to a tutorial on how to install and set up the Slicer Language Pack to enable other languages in the app.
 
-Note: Be sure to repeat the “Update translation files” and “Restart the application” steps every now and then to have the latest and most complete translations, as new terms may have been translated since you last used Slicer.
+**Note:** Be sure to repeat the `Update translation files` and `Restart the application` steps every now and then to have the latest and most complete translations, as new terms may have been translated since you last used Slicer.
 
 ## Locating a string on the Slicer Graphic User Interface (GUI)
 
 A specific string can have many different occurrences on the Slicer GUI, sometimes even in the same module.  The position and function of an element on the interface can affect its meaning and by extension, its translation. It is therefore helpful to know these few tips to identify exactly which element of the interface you are translating on Weblate at a given moment.
 
 ### The "key" indicator
-In the upper right corner of the translation on Weblate, you will notice the word “Key” in bold, followed by a string. That string can help you know approximately (sometimes exactly)  in which module or window of the GUI, the term you are translating is located, as illustrated below.
+In the upper right corner of the translation on Weblate, you will notice the word `Key` in bold, followed by a string. That string can help you know approximately (sometimes exactly)  in which module or window of the GUI, the term you are translating is located, as illustrated below.
 
 ![](Docs/TranslationGuidelines/key1.png)
 
@@ -38,14 +38,14 @@ As mentioned above, you may have multiple occurrences of a term in the same modu
 ![](Docs/TranslationGuidelines/nearbyStrings2.png)
 
 ### "Source string location"
-The `source string location` tag on Weblate can help you go one level further and find exactly **which line of code contains the string** you are currently translating. It can be found in the “String Information” box on the lower right
+The `source string location` tag on Weblate can help you go one level further and find exactly **which line of code contains the string** you are currently translating. It can be found in the `String Information` box on the lower right
 
 ![](Docs/TranslationGuidelines/stringlocation1.png)
 
-(the reason the line numbers do not match in this specific example is that the code has been updated in between when the translation files were uploaded and now)
-
 ![](Docs/TranslationGuidelines/stringlocation2.png)
 ![](Docs/TranslationGuidelines/stringlocation3.png)
+
+*(the reason the line numbers do not match in this specific example is that the code has been updated in between when the translation files were uploaded and now)*
 
 ## Translation of difficult terms
 
@@ -92,7 +92,7 @@ You may also tag them with the `read-only` flag (read more about Weblate flags [
 
 ## Validation of translation
 
-There are several ways to indicate that a translation needs to be reviewed. The most commonly used by our contributors are the “needs editing” checkbox and the “suggest” feature.  
+There are several ways to indicate that a translation needs to be reviewed. The most commonly used by our contributors are the `needs editing` checkbox and the `suggest` feature.  
 
 ![](Docs/TranslationGuidelines/validation1.png)
 
