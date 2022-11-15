@@ -87,11 +87,8 @@ Any string starting containing `vtk` or  `MRML` should not be translated and sho
 
 You may also tag them with the `read-only` flag (read more about Weblate flags [here](https://docs.weblate.org/en/latest/admin/checks.html#customizing-behavior-using-flags))
 
-<p align="center">
-  <img align="left" width="100" height="100" src="Docs/TranslationGuidelines/untranslatable2.png">
-
-  <img align="left" width="100" height="100" src="Docs/TranslationGuidelines/untranslatable3.png">
- </p>
+![](Docs/TranslationGuidelines/untranslatable2.png)
+![](Docs/TranslationGuidelines/untranslatable3.png)
 
 ## Validation of translation
 
