@@ -59,7 +59,7 @@ class TextFinder(qt.QWidget):
       self.shortcut.deleteLater()
       self.shortcut = None
       self.hideOverlay()
-    else: 
+    else:
       self.shortcut = qt.QShortcut(self.parent())
       self.shortcut.setKey(self.shortcutKeySequence)
       self.shortcut.connect( "activated()", self.showFullSize)
@@ -291,7 +291,10 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       self.ui.latestTsFileOnlyCheckBox.checked = settings.value("UseLatestTsFile", True)
 
       self.ui.lreleasePathLineEdit.currentPath = settings.value("LreleaseFilePath", "")
-      self.ui.slicerVersionEdit.text = settings.value("SlicerVersion", "master")
+      self.ui.slicerVersionEdit.text = settings.value("SlicerVersion", "main")
+      # Previously, default was "master" but now it is "main"
+      if self.ui.slicerVersionEdit.text == "master":
+          self.ui.slicerVersionEdit.text = "main"
       self.ui.weblateDownloadUrlEdit.text = settings.value("WeblateDownloadUrl", "https://hosted.weblate.org/download/3d-slicer")
       self.ui.githubRepositoryUrlEdit.text = settings.value("GitRepository", "https://github.com/Slicer/SlicerLanguageTranslations")
 
@@ -406,7 +409,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     Called when the logic class is instantiated. Can be used for initializing member variables.
     """
     ScriptedLoadableModuleLogic.__init__(self)
-    self.slicerVersion = "master"
+    self.slicerVersion = "main"
     self.lreleasePath = None
     self._temporaryFolder = None
     self.translationFilesFolder = None
@@ -414,7 +417,6 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self.weblateEditTranslationUrl = "https://hosted.weblate.org/translate/3d-slicer"
     self.preferredLanguage = "fr-FR"
     self.gitRepositoryName = "SlicerLanguageTranslations"
-    self.gitBranchName = "main"  # we store translations for all Slicer versions in the main branch
     self.logCallback = None
 
   def log(self, message):
@@ -487,13 +489,13 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     # Download file
     import SampleData
     dataLogic = SampleData.SampleDataLogic()
-    translationZipFilePath = dataLogic.downloadFile(f'{githubRepositoryUrl}/archive/refs/heads/{self.gitBranchName}.zip', self.temporaryFolder(), 'GitHubTranslations.zip')
+    translationZipFilePath = dataLogic.downloadFile(f'{githubRepositoryUrl}/archive/refs/heads/{self.slicerVersion}.zip', self.temporaryFolder(), 'GitHubTranslations.zip')
 
     # Unzip file
     slicer.util.extractArchive(translationZipFilePath, tempFolder)
 
-    # /temp.../SlicerLanguageTranslations-main/translated/master
-    self.translationFilesFolder = f'{tempFolder}/{self.gitRepositoryName}-{self.gitBranchName}/translated/{self.slicerVersion}'
+    # /temp.../SlicerLanguageTranslations-main/translations
+    self.translationFilesFolder = f'{tempFolder}/{self.gitRepositoryName}-{self.slicerVersion}/translations'
 
   def convertTsFilesToQmFiles(self):
     if not self.translationFilesFolder:
