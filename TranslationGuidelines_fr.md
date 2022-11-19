@@ -93,9 +93,9 @@ Toute chaîne commençant par `vtk` ou contenant `MRML` ne doit pas être tradui
 
 Vous pouvez également les marquer avec le drapeau `read-only` (pour en savoir plus sur les drapeaux Weblate, cliquez [ici](https://docs.weblate.org/en/latest/admin/checks.html#customizing-behavior-using-flags)).
 
-![ ](TranslationGuidelines_fr_Images/12_chaine_intraduisible2.PNG)
+![ ](TranslationGuidelines_fr_Images/12_chaine_intaduisible2.PNG)
 
-![ ](TranslationGuidelines_fr_Images/13_chaine_intraduisible3.PNG)
+![ ](TranslationGuidelines_fr_Images/13_chaine_intaduisible3.PNG)
 
 ## Validation de la traduction
 
