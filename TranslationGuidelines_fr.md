@@ -42,7 +42,7 @@ La balise `source string location` de Weblate peut vous aider à aller un peu pl
 
 ![ ](TranslationGuidelines_fr_Images/4_stringlocation.PNG)
 
-![ ](TranslationGuidelines_fr_Images/5_stringlocation.PNG)
+![ ](TranslationGuidelines_fr_Images/5_stringlocation2.PNG)
 
 *(la raison pour laquelle les numéros de ligne ne correspondent pas dans cet exemple spécifique est que le code a été mis à jour entre le moment où les fichiers de traduction ont été téléchargés et maintenant)*
 
@@ -60,11 +60,11 @@ Lorsque vous traduisez une chaîne de caractères sur Weblate, vous avez la poss
 
  Lorsque vous choisissez cette dernière option, les différences entre votre traduction et la traduction actuelle sont mises en évidence en vert et les parties qu'elles remplacent sont barrées et mises en évidence en rouge, comme illustré ci-dessous.
 
-![ ](hTranslationGuidelines_fr_Images/7_Suggérer2.PNG)
+![ ](TranslationGuidelines_fr_Images/7_Suggérer2.PNG)
 
  La suggestion peut ensuite être approuvée, modifiée ou rejetée par vous-même, un autre utilisateur ou un correcteur désigné.
 
-![ ](TranslationGuidelines_fr_Images/8_Suggérer2.PNG)
+![ ](TranslationGuidelines_fr_Images/8_Suggérer3.PNG)
 
  Cette option est utile dans le cas où vous n'êtes pas sûr de la traduction que vous avez soumise et que vous souhaitez prendre le temps de mieux comprendre le terme avant de le confirmer ou que vous souhaitez obtenir un deuxième avis d'autres utilisateurs.
 
@@ -93,9 +93,9 @@ Toute chaîne commençant par `vtk` ou contenant `MRML` ne doit pas être tradui
 
 Vous pouvez également les marquer avec le drapeau `read-only` (pour en savoir plus sur les drapeaux Weblate, cliquez [ici](https://docs.weblate.org/en/latest/admin/checks.html#customizing-behavior-using-flags)).
 
-![ ](TranslationGuidelines_fr_Images/12_chaine_intraduisinle2.PNG)
+![ ](TranslationGuidelines_fr_Images/12_chaine_intraduisible2.PNG)
 
-![ ](TranslationGuidelines_fr_Images/13_chaine_intraduisinle3.PNG)
+![ ](TranslationGuidelines_fr_Images/13_chaine_intraduisible3.PNG)
 
 ## Validation de la traduction
 
