@@ -33,7 +33,7 @@ In the upper right corner of the translation on Weblate, you will notice the wor
 
 ### Search for untranslated strings
 
-It may be advisable to start translation of strings with the main application user interface. To achieve this, enter search term that excludes strings in CLI (command-line interface modules) modules: `(state:<translated) AND NOT (key:"CLI_")`
+It may be advisable to start translation of strings with the main application user interface. To achieve this, enter search term that excludes strings in CLI (command-line interface modules) modules: `NOT state:translated AND NOT (key:"CLI_")`
 
 ### Nearby strings
 As mentioned above, you may have multiple occurrences of a term in the same module’s interface. In that case, it can be useful to rely on the elements surrounding the one you are translating. Weblate pairs each string with a list of strings that are directly before or after the element in the GUI code.
