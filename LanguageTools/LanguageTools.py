@@ -525,7 +525,15 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     tsFiles = sorted(glob.glob(f"{self.translationFilesFolder}/*.ts"), key=os.path.getmtime)
 
     for file in tsFiles:
-        lreleaseProcess = slicer.util.launchConsoleProcess([self.lreleasePath, str(file)])
+        lreleasePath = self.lreleasePath
+
+        # Determine if using a bundled lrelease tool. If the bundled tool is used then run it in Slicer's environment,
+        # if a system Qt tool is used then run it in the startup environment.
+        lreleaseDir = qt.QFileInfo(lreleasePath).absoluteDir().canonicalPath()
+        applicationBinDir = qt.QDir(slicer.app.applicationDirPath()).canonicalPath()
+        useSlicerLreleaseTool = (lreleaseDir == applicationBinDir)
+
+        lreleaseProcess = slicer.util.launchConsoleProcess([lreleasePath, str(file)], useStartupEnvironment = not useSlicerLreleaseTool)
         slicer.util.logProcessOutput(lreleaseProcess)
 
   def installQmFiles(self):
