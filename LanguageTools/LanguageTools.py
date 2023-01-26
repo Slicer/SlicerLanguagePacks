@@ -308,7 +308,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.ui.languageSelector.currentLanguage = settings.value("language")
     self.ui.languageSelector.blockSignals(wasBlocked)
 
-    if not os.path.exists(self.ui.lreleasePathLineEdit.currentPath):
+    self.logic.customLreleasePath = self.ui.lreleasePathLineEdit.currentPath
+    if not self.logic.lreleasePath:
       self.ui.settingsCollapsibleButton.collapsed = False
 
   def updatedLanguagesListFromGUI(self):
@@ -357,7 +358,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       self.updateSettingsFromGUI()
 
       self.logic.slicerVersion = self.ui.slicerVersionEdit.text
-      self.logic.lreleasePath = self.ui.lreleasePathLineEdit.currentPath
+      self.logic.customLreleasePath = self.ui.lreleasePathLineEdit.currentPath
 
       self.logic.removeTemporaryFolder()
 
@@ -372,6 +373,12 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       self.logic.installQmFiles()
 
       self.logic.installFontFiles()
+
+      # Make sure internationalization is enabled in application settings
+      # (if user uses this module then it means that internationalization is needed).
+      self.logic.enableInternationalization()
+
+      self.log(f"Update completed! Select application language and restart the application to see the results.")
 
     self.refreshLanguageList()
 
@@ -410,7 +417,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     """
     ScriptedLoadableModuleLogic.__init__(self)
     self.slicerVersion = "main"
-    self.lreleasePath = None
+    self.customLreleasePath = None
     self._temporaryFolder = None
     self.translationFilesFolder = None
     self.weblateComponents = [("3d-slicer", "Slicer")]
@@ -418,6 +425,15 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self.preferredLanguage = "fr-FR"
     self.gitRepositoryName = "SlicerLanguageTranslations"
     self.logCallback = None
+
+  @property
+  def lreleasePath(self):
+    if (self.customLreleasePath) and (os.path.exists(self.customLreleasePath)):
+      return self.customLreleasePath
+    # Search for lrelease bundled with Slicer or installed on the system
+    import shutil
+    lreleasePath = shutil.which('lrelease')
+    return lreleasePath
 
   def log(self, message):
     if self.logCallback:
@@ -563,6 +579,9 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     slicer.app.userSettings().setValue('Views/FontFile/Serif', 'NotoSerifTC-Regular.otf')
 
     self.log(f"Installed {numberOfInstalledFiles} font files in {applicationFontsFolder}.")
+
+  def enableInternationalization(self, enabled=True):
+    slicer.app.userSettings().setValue('Internationalization/Enabled', enabled)
 
   def openTranslationGUI(self, text):
     # Open translation of the first component (Slicer core)

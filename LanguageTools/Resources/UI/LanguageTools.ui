@@ -33,7 +33,7 @@
       <item row="0" column="1">
        <widget class="ctkPathLineEdit" name="lreleasePathLineEdit">
         <property name="toolTip">
-         <string>Path to Qt lrelease executable.</string>
+         <string>Path to Qt lrelease executable. Only needs to be set if it the tool is not bundled with the Slicer installer and not found in system path.</string>
         </property>
         <property name="showHistoryButton">
          <bool>false</bool>
@@ -474,7 +474,7 @@
        <property name="toolTip">
         <string>Change only takes effect after restarting the application.</string>
        </property>
-       <property name="countryFlagsVisible" stdset="0">
+       <property name="countryFlagsVisible">
         <bool>false</bool>
        </property>
       </widget>
@@ -501,6 +501,11 @@
    <header>ctkFittedTextBrowser.h</header>
   </customwidget>
   <customwidget>
+   <class>ctkLanguageComboBox</class>
+   <extends>QComboBox</extends>
+   <header>ctkLanguageComboBox.h</header>
+  </customwidget>
+  <customwidget>
    <class>ctkPathLineEdit</class>
    <extends>QWidget</extends>
    <header>ctkPathLineEdit.h</header>
@@ -510,11 +515,6 @@
    <extends>QWidget</extends>
    <header>qMRMLWidget.h</header>
    <container>1</container>
-  </customwidget>
-  <customwidget>
-   <class>ctkLanguageComboBox</class>
-   <extends>QComboBox</extends>
-   <header>ctkLanguageComboBox.h</header>
   </customwidget>
  </customwidgets>
  <resources/>

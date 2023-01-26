@@ -20,7 +20,8 @@
   - Option A: `Weblate`. Download selected langauges directly from Weblate. This allows getting the most recent translations immediately, which is useful for translators wanting to test their translated application immediately.
   - Option B: `GitHub`. Download all languages from [SlicerLanguageTranslations](https://github.com/Slicer/SlicerLanguageTranslations) repository. This is the fastest way to get updated translation files for all languages, but these translations files are updated only once a day.
 - Compile the translation files and install them into the application by clicking `Update translation files` button.
-- Click `Restart the application` button to start using the new translation files.
+- Select the desired language in the `Application languge` list
+- Click `Restart the application` button to start using the new translation files in the user interface.
 
 ![](Docs/LanguageTools.png)
 
@@ -31,4 +32,3 @@ Language can be selected in menu: Edit -> Application Settings, General section 
 ![](Docs/LanguageSelector.png)
 
 For convenience, an application language selector is also added to the Language Tools module, below the `Update translation files` button. Any updated translation files immediately show up in this language selector.
-
