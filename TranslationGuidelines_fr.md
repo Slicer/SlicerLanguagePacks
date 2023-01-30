@@ -6,7 +6,7 @@ L'objectif de ce document est de fournir des conseils aux nouveaux contributeurs
 
 Weblate est un outil de traduction collaborative pour les projets open source. Avec l'aide de nos merveilleux contributeurs, nous travaillons à une traduction complète de l'interface de 3D Slicer, grâce à un effort principalement communautaire. Merci de vous joindre à nous !
 
-Vous pouvez trouver un tutoriel vidéo sur la façon de créer un compte Weblate [ici](https://youtu.be/4liUV00j4qU).
+Vous pouvez trouver un tutoriel vidéo sur la façon de créer un compte Weblate [ici](https://www.youtube.com/watch?v=uF50VclvTt4).
 
 Si vous créez un compte en utilisant votre e-mail et un nom d'utilisateur, vous recevrez un e-mail de confirmation. Ouvrez le lien qu'il contient et suivez les instructions.
 
