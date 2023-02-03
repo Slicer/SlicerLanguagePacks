@@ -199,6 +199,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.logic.logCallback = self.log
     self.textFinder.logic = self.logic
 
+    self.refreshWeblateLanguageList()
+
     # Workaround for Slicer-5.0 (no Qt plugin was available for ctkLanguageComboBox)
     if self.ui.languageSelector.__class__ != ctk.ctkLanguageComboBox:
       layout = self.ui.languageSelectorLayout
@@ -224,6 +226,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.ui.githubSourceRadioButton.connect("toggled(bool)", lambda toggled, source="github": self.setTranslationSource(source, toggled))
     self.ui.localTsFolderRadioButton.connect("toggled(bool)", lambda toggled, source="localTsFolder": self.setTranslationSource(source, toggled))
 
+    self.ui.languagesListRefreshButton.connect("clicked()", lambda: self.refreshWeblateLanguageList(True))
+
     self.ui.enableTextFindercheckBox.connect("toggled(bool)", self.enableTextFinder)
 
     self.ui.languageSelector.connect("currentLanguageNameChanged(const QString&)", self.updateSettingsFromGUI)
@@ -234,6 +238,46 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
     # Make sure parameter node is initialized (needed for module reload)
     self.updateGUIFromSettings()
+
+  def selectedWeblateLanguages(self):
+    languages = []
+    for modelIndex in self.ui.languagesComboBox.checkedIndexes():
+      languages.append(self.ui.languagesComboBox.itemData(modelIndex.row()))
+    return languages
+
+  def setSelectedWeblateLanguages(self, languages):
+    for languageIndex in range(self.ui.languagesComboBox.count):
+      selected = self.ui.languagesComboBox.itemData(languageIndex) in languages
+      modelIndex = self.ui.languagesComboBox.model().index(languageIndex,0)
+      self.ui.languagesComboBox.setCheckState(modelIndex, qt.Qt.Checked if selected else qt.Qt.Unchecked)
+
+  def refreshWeblateLanguageList(self, forceUpdateFromServer=False):
+    # Refresh language list in the checkable combobox by querying Weblate
+    wasBlocked = self.ui.languagesComboBox.blockSignals(True)
+
+    try:
+
+      # Save previous selection in widget
+      selectedLanguages = self.selectedWeblateLanguages()
+
+      # Get list of available languages
+      self.ui.languagesComboBox.clear()
+      weblateLanguages = self.logic.weblateLanguages("3d-slicer", forceUpdateFromServer)
+      for weblateLanguage in weblateLanguages:
+        self.ui.languagesComboBox.addItem(f"{weblateLanguage['name']} ({weblateLanguage['code']})", weblateLanguage['code'])
+      
+      # Restore previous selection in widget
+      self.setSelectedWeblateLanguages(selectedLanguages)
+      self.ui.languagesComboBox.show()
+
+    except Exception as e:
+      import traceback
+      traceback.print_exc()
+      if forceUpdateFromServer:
+        slicer.util.errorDisplay("Failed to retrieve language list from Weblate.")
+      self.ui.languagesComboBox.hide()
+
+    self.ui.languagesComboBox.blockSignals(wasBlocked)
 
   def refreshLanguageList(self):
     # In Slicer-5.1 this can be replaced by self.ui.languageSelector.refreshFromDirectories()
@@ -271,6 +315,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.ui.languagesComboBox.enabled = (translationSource == "weblate")
 
   def updateGUIFromSettings(self):
+    self.refreshWeblateLanguageList()
+
     settings = slicer.app.userSettings()
     try:
       settings.beginGroup("Internationalization/LanguageTools")
@@ -282,10 +328,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       self.setTranslationSource(translationSource)
 
       languages = settings.value("UpdateLanguages", "fr-FR").split(",")
-      for languageIndex in range(self.ui.languagesComboBox.count):
-        selected = self.ui.languagesComboBox.itemText(languageIndex) in languages
-        modelIndex = self.ui.languagesComboBox.model().index(languageIndex,0)
-        self.ui.languagesComboBox.setCheckState(modelIndex, qt.Qt.Checked if selected else qt.Qt.Unchecked)
+      self.setSelectedWeblateLanguages(languages)
 
       self.ui.localTsFolderPathLineEdit.currentPath = settings.value("localTsFolderPath", "")
       self.ui.latestTsFileOnlyCheckBox.checked = settings.value("UseLatestTsFile", True)
@@ -312,12 +355,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     if not self.logic.lreleasePath:
       self.ui.settingsCollapsibleButton.collapsed = False
 
-  def updatedLanguagesListFromGUI(self):
-    languages = []
-    for modelIndex in self.ui.languagesComboBox.checkedIndexes():
-      languages.append(self.ui.languagesComboBox.model().data(modelIndex))
-    return languages
-
   def updateSettingsFromGUI(self):
     settings = slicer.app.userSettings()
     try:
@@ -338,7 +375,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
       settings.setValue("FindTextLanguage", self.ui.textFinderLanguageEdit.text)
 
-      languages = self.updatedLanguagesListFromGUI()
+      languages = self.selectedWeblateLanguages()
       settings.setValue("UpdateLanguages", ','.join(languages))
 
     finally:
@@ -365,7 +402,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       if self.ui.localTsFolderRadioButton.checked:
         self.logic.copyTsFilesFromFolder(self.ui.localTsFolderPathLineEdit.currentPath, self.ui.latestTsFileOnlyCheckBox.checked)
       elif self.ui.weblateSourceRadioButton.checked:
-        self.logic.downloadTsFilesFromWeblate(self.ui.weblateDownloadUrlEdit.text, self.updatedLanguagesListFromGUI())
+        self.logic.downloadTsFilesFromWeblate(self.ui.weblateDownloadUrlEdit.text, self.selectedWeblateLanguages())
       else:
         self.logic.downloadTsFilesFromGithub(self.ui.githubRepositoryUrlEdit.text)
 
@@ -438,6 +475,38 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
   def log(self, message):
     if self.logCallback:
       self.logCallback(message)
+
+  def weblateLanguages(self, component, forceUpdateFromServer=False):
+    """Query list of languages 3d-slicer project has been translated to on Weblate.
+    Only contacts the server if never contacted the server before or if update from server is specifically requested.
+    The result is cached in application settings.
+    """
+    import json
+    settings = slicer.app.userSettings()
+    languagesSettingsKey = f"Internationalization/LanguageTools/WeblateLanguages/{component}"
+
+    # Get component statistics from Weblate server if specifically requested or there is no cached server response yet
+    if forceUpdateFromServer or not settings.value(languagesSettingsKey):
+      import requests
+      result = requests.get(f'https://hosted.weblate.org/api/components/3d-slicer/{component}/statistics/', {'format': 'json'})
+      if not result.ok:
+        raise RuntimeError(f"Failed to query list of languages from Weblate ({result.status_code}:{result.reason})")
+      translations = result.json()['results']
+      languages = []
+      for translation in translations:
+        if translation['code'] == "en":
+          # Skip the English translation (it should not be needed and there is some problem with the file)
+          continue
+        if translation['translated'] < 3:
+          # At least a few translated terms are required for a language to show up
+          continue
+        languages.append({'name': translation['name'], 'code': translation['code'], 'translated_percent': translation['translated_percent']})
+      # Save in settings
+      settings.setValue(languagesSettingsKey, json.dumps(languages))
+    else:
+      languages = json.loads(settings.value(languagesSettingsKey))
+
+    return languages
 
   def temporaryFolder(self):
     if not self._temporaryFolder:

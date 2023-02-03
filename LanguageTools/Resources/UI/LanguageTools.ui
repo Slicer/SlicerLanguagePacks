@@ -11,10 +11,188 @@
    </rect>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
+   <item row="12" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="8" column="0">
+    <widget class="QPushButton" name="updateButton">
+     <property name="toolTip">
+      <string>Download, compile, and install latest translations</string>
+     </property>
+     <property name="text">
+      <string>Update translation files</string>
+     </property>
+    </widget>
+   </item>
+   <item row="11" column="0">
+    <widget class="QTextEdit" name="statusTextEdit">
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="ctkCollapsibleButton" name="outputsCollapsibleButton">
+     <property name="text">
+      <string>Input translations</string>
+     </property>
+     <property name="collapsedHeight">
+      <number>6</number>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="4" column="0">
+       <widget class="QLabel" name="localTsFolderLabel">
+        <property name="text">
+         <string>Input folder:</string>
+        </property>
+        <property name="indent">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="languagesLabel">
+        <property name="text">
+         <string>Languages:</string>
+        </property>
+        <property name="indent">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="0" colspan="3">
+       <widget class="QRadioButton" name="weblateSourceRadioButton">
+        <property name="text">
+         <string>Weblate (latest translations)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="3">
+       <widget class="QRadioButton" name="githubSourceRadioButton">
+        <property name="text">
+         <string>GitHub (updated daily)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="3">
+       <widget class="QRadioButton" name="localTsFolderRadioButton">
+        <property name="text">
+         <string>Local folder (for offline use)</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="latestTsFileOnlyLabel">
+        <property name="text">
+         <string>Latest file only:</string>
+        </property>
+        <property name="indent">
+         <number>20</number>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QToolButton" name="languagesListRefreshButton">
+        <property name="toolTip">
+         <string>Refresh Weblate language list by querying the Weblate server.</string>
+        </property>
+        <property name="text">
+         <string>refresh</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1" colspan="2">
+       <widget class="ctkCheckableComboBox" name="languagesComboBox">
+        <property name="toolTip">
+         <string>Select language(s) that will be downloaded and installed.</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1" colspan="3">
+       <widget class="ctkPathLineEdit" name="localTsFolderPathLineEdit">
+        <property name="toolTip">
+         <string>Folder containing translation (.ts) files.</string>
+        </property>
+        <property name="filters">
+         <set>ctkPathLineEdit::Dirs|ctkPathLineEdit::Drives|ctkPathLineEdit::Executable|ctkPathLineEdit::NoDot|ctkPathLineEdit::NoDotDot|ctkPathLineEdit::Readable</set>
+        </property>
+        <property name="settingKey">
+         <string>Internationalization/LanguageTools/LocalTsFolderPathHistory</string>
+        </property>
+        <property name="nameFilters">
+         <stringlist>
+          <string>*</string>
+         </stringlist>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QCheckBox" name="latestTsFileOnlyCheckBox">
+        <property name="toolTip">
+         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this option is checked then only the latest .ts file in the folder will be used. Enable this option to ignore previously downloaded .ts files are saved in the same folder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="9" column="0">
+    <layout class="QHBoxLayout" name="languageSelectorLayout">
+     <item>
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>Application language:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="ctkLanguageComboBox" name="languageSelector">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Change only takes effect after restarting the application.</string>
+       </property>
+       <property name="countryFlagsVisible">
+        <bool>false</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="restartButton">
+       <property name="toolTip">
+        <string>Restart the application to see updated translations on the graphical user interface.</string>
+       </property>
+       <property name="text">
+        <string>Restart the application</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
    <item row="6" column="0">
     <widget class="ctkCollapsibleButton" name="settingsCollapsibleButton">
      <property name="text">
-      <string>Settings</string>
+      <string>Advanced settings</string>
      </property>
      <property name="collapsed">
       <bool>true</bool>
@@ -33,7 +211,7 @@
       <item row="0" column="1">
        <widget class="ctkPathLineEdit" name="lreleasePathLineEdit">
         <property name="toolTip">
-         <string>Path to Qt lrelease executable. Only needs to be set if it the tool is not bundled with the Slicer installer and not found in system path.</string>
+         <string>Path to Qt lrelease executable. Leave empty to use default (the one bundled with the Slicer installer or available in system paths).</string>
         </property>
         <property name="showHistoryButton">
          <bool>false</bool>
@@ -117,270 +295,6 @@
      </layout>
     </widget>
    </item>
-   <item row="4" column="0">
-    <widget class="ctkCollapsibleButton" name="outputsCollapsibleButton">
-     <property name="text">
-      <string>Input translations</string>
-     </property>
-     <property name="collapsedHeight">
-      <number>6</number>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="5" column="2">
-       <widget class="QCheckBox" name="latestTsFileOnlyCheckBox">
-        <property name="toolTip">
-         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If this option is checked then only the latest .ts file in the folder will be used. Enable this option to ignore previously downloaded .ts files are saved in the same folder.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="2">
-       <widget class="ctkPathLineEdit" name="localTsFolderPathLineEdit">
-        <property name="toolTip">
-         <string>Folder containing translation (.ts) files.</string>
-        </property>
-        <property name="filters">
-         <set>ctkPathLineEdit::Dirs|ctkPathLineEdit::Drives|ctkPathLineEdit::Executable|ctkPathLineEdit::NoDot|ctkPathLineEdit::NoDotDot|ctkPathLineEdit::Readable</set>
-        </property>
-        <property name="settingKey">
-         <string>Internationalization/LanguageTools/LocalTsFolderPathHistory</string>
-        </property>
-        <property name="nameFilters">
-         <stringlist>
-          <string>*</string>
-         </stringlist>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0" colspan="3">
-       <widget class="QRadioButton" name="weblateSourceRadioButton">
-        <property name="text">
-         <string>Weblate (latest translations)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="localTsFolderLabel">
-        <property name="text">
-         <string>Input folder:</string>
-        </property>
-        <property name="indent">
-         <number>20</number>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="latestTsFileOnlyLabel">
-        <property name="text">
-         <string>Latest file only:</string>
-        </property>
-        <property name="indent">
-         <number>20</number>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="languagesLabel">
-        <property name="text">
-         <string>Languages:</string>
-        </property>
-        <property name="indent">
-         <number>20</number>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0" colspan="3">
-       <widget class="QRadioButton" name="localTsFolderRadioButton">
-        <property name="text">
-         <string>Local folder (for offline use)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="3">
-       <widget class="QRadioButton" name="githubSourceRadioButton">
-        <property name="text">
-         <string>GitHub (updated daily)</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="ctkCheckableComboBox" name="languagesComboBox">
-        <property name="toolTip">
-         <string>Select language(s) that will be downloaded and installed.</string>
-        </property>
-        <item>
-         <property name="text">
-          <string>af-ZA</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>ar-SA</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>ca-ES</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>cs-CZ</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>da-DK</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>de-DE</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>el-GR</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>es-419</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>es-ES</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>fi-FI</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>fr-FR</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>he-IL</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>hu-HU</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>it-IT</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>ja-JP</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>ko-KR</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>nl-NL</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>no-NO</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>pl-PL</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>pt-BR</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>pt-PT</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>ro-RO</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>ru-RU</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>sr-SP</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>sv-SE</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>tr-TR</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>uk-UA</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>vi-VN</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>zh-CN</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>zh-TW</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="12" column="0">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>20</width>
-       <height>40</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="3" column="0">
     <widget class="ctkCollapsibleButton" name="CollapsibleButton">
      <property name="text">
@@ -427,63 +341,15 @@
      </layout>
     </widget>
    </item>
-   <item row="10" column="0">
-    <widget class="QPushButton" name="restartButton">
-     <property name="toolTip">
-      <string>Download, compile, and install latest translations</string>
-     </property>
-     <property name="text">
-      <string>Restart the application</string>
-     </property>
-    </widget>
-   </item>
-   <item row="11" column="0">
-    <widget class="QTextEdit" name="statusTextEdit">
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="0">
-    <widget class="QPushButton" name="updateButton">
-     <property name="toolTip">
-      <string>Download, compile, and install latest translations</string>
-     </property>
-     <property name="text">
-      <string>Update translation files</string>
-     </property>
-    </widget>
-   </item>
-   <item row="9" column="0">
-    <layout class="QHBoxLayout" name="languageSelectorLayout">
-     <item>
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Application language:</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="ctkLanguageComboBox" name="languageSelector">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="toolTip">
-        <string>Change only takes effect after restarting the application.</string>
-       </property>
-       <property name="countryFlagsVisible">
-        <bool>false</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
   </layout>
  </widget>
  <customwidgets>
+  <customwidget>
+   <class>qMRMLWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLWidget.h</header>
+   <container>1</container>
+  </customwidget>
   <customwidget>
    <class>ctkCheckableComboBox</class>
    <extends>QComboBox</extends>
@@ -509,12 +375,6 @@
    <class>ctkPathLineEdit</class>
    <extends>QWidget</extends>
    <header>ctkPathLineEdit.h</header>
-  </customwidget>
-  <customwidget>
-   <class>qMRMLWidget</class>
-   <extends>QWidget</extends>
-   <header>qMRMLWidget.h</header>
-   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>
