@@ -88,7 +88,7 @@ Doing so will provide the class with `tr()` function that can be directly used t
 
 ### Translating keyboard shortcuts
 
-According to [Qt recommendations]([url](https://doc.qt.io/qt-6/qkeysequence.html#keyboard-layout-issues)), keyboard shortcuts should be specified using translatable strings to be able to better accommodate different keyboard layouts commonly used for a specific language.
+According to [Qt recommendations](https://doc.qt.io/qt-6/qkeysequence.html#keyboard-layout-issues), keyboard shortcuts should be specified using translatable strings to be able to better accommodate different keyboard layouts commonly used for a specific language.
 
 Examples:
 
