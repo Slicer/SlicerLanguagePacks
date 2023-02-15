@@ -86,6 +86,19 @@ Doing so will provide the class with `tr()` function that can be directly used t
 
 >**NOTE:** If for any reason the class name should not be exposed to other developers or translators (private classes, ...), we recommand to prefix `tr()` calls with the associated public class as follows :  `PublicClassName::tr("text to translate")`
 
+### Translating keyboard shortcuts
+
+According to [Qt recommendations]([url](https://doc.qt.io/qt-6/qkeysequence.html#keyboard-layout-issues)), keyboard shortcuts should be specified using translatable strings to be able to better accommodate different keyboard layouts commonly used for a specific language.
+
+Examples:
+
+```c++
+this->RunFileAction->setShortcut(QKeySequence::Print);  // best option (if a standard key sequence is available)
+this->RunFileAction->setShortcut(ctkConsole::tr("Ctrl+g"));  // preferred option, if a standard key sequence is not available
+this->RunFileAction->setShortcut("Ctrl+g");  // do not use
+this->RunFileAction->setShortcut(Qt::CTRL | Qt::Key_G);  // do not use
+```
+
 ### Qt lupdate common warnings
 
 If `tr()` calls are not correctly handled on the source code, some warnings may appear when running `lupdate`.
