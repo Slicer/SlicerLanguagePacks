@@ -265,7 +265,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       weblateLanguages = self.logic.weblateLanguages("3d-slicer", forceUpdateFromServer)
       for weblateLanguage in weblateLanguages:
         self.ui.languagesComboBox.addItem(f"{weblateLanguage['name']} ({weblateLanguage['code']})", weblateLanguage['code'])
-      
+
       # Restore previous selection in widget
       self.setSelectedWeblateLanguages(selectedLanguages)
       self.ui.languagesComboBox.show()
@@ -488,6 +488,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     # Get component statistics from Weblate server if specifically requested or there is no cached server response yet
     if forceUpdateFromServer or not settings.value(languagesSettingsKey):
       import requests
+      # Example URL: https://hosted.weblate.org/api/components/3d-slicer/3d-slicer/statistics/?format=json
       result = requests.get(f'https://hosted.weblate.org/api/components/3d-slicer/{component}/statistics/', {'format': 'json'})
       if not result.ok:
         raise RuntimeError(f"Failed to query list of languages from Weblate ({result.status_code}:{result.reason})")
@@ -497,6 +498,10 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
         if translation['code'] == "en":
           # Skip the English translation (it should not be needed and there is some problem with the file)
           continue
+        if 'code' in translation:
+          # Make sure that the separator between language and region is '-' (such as 'fr-FR') and not '_' (such as 'fr_FR').
+          # This is necessary because Weblate seems to use '_', while everywhere in Slicer we use '-'.
+          translation['code'] = translation['code'].replace('_', '-')
         if translation['translated'] < 3:
           # At least a few translated terms are required for a language to show up
           continue
