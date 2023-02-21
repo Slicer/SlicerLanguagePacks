@@ -99,6 +99,14 @@ this->RunFileAction->setShortcut("Ctrl+g");  // do not use
 this->RunFileAction->setShortcut(Qt::CTRL | Qt::Key_G);  // do not use
 ```
 
+### Translating module title
+
+Module title (the name that is visible in the module selector) is returned by the module class and it should be translated.
+
+In older C++ loadable modules, the module name was set in CMakeLists.txt using a macro and was set in the module's header file using `QTMODULE_TITLE` precompiler definition. To make C++ loadable module title translatable (see example [here](https://github.com/Slicer/Slicer/pull/6828/commits/f4d771a6f1e6f501e67ae0f73123edcfdb1b9c5a)):
+- Remove `set(MODULE_TITLE ${MODULE_NAME})` and `TITLE ${MODULE_TITLE}` lines from `CMakeLists.txt`
+- Use `tr("qSlicerLoadableModuleTemplateModule")` in `qSlicerGetTitleMacro()` in the module header file
+
 ### Qt lupdate common warnings
 
 If `tr()` calls are not correctly handled on the source code, some warnings may appear when running `lupdate`.
