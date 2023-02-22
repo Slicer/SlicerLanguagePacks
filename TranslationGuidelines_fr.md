@@ -120,3 +120,7 @@ Chaque projet sur Weblate est associé à un **glossaire**. Les éléments répe
 Le panneau `Glossaire` ne contiendra aucune information dans le cas d'un terme ou d'une chaîne qui ne figure pas dans le glossaire. En revanche, si le terme est référencé dans le glossaire, vous aurez une proposition de `traduction` ainsi que `l'explication` du terme. Vous pouvez vous fier à cette dernière pour vous assurer que vous comprenez mieux le terme et donc fournir la traduction la plus précise possible.
 
 Notez que `l'explication` n'est disponible qu'en anglais.
+
+## Style
+
+In French, use sentence case, i.e., do not capitalize every word of a sentence. This applies everywhere, including button text, window title, etc. Rationale: Title case is not common in French. macOS operating system (which uses title case heavily in English) and Microsoft Office software use sentence case in French localized versions.

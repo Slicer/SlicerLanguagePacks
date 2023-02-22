@@ -1,8 +1,8 @@
-# TRANSLATION GUIDELINES
+# Translation Guidelines
 
 The goal of this document is to provide new contributors to the community based translation of 3D Slicer on [Weblate](https://hosted.weblate.org/projects/3d-slicer/3d-slicer/) with tips on how to easily and accurately help translating the interface of the software.
 
-This document is a work in progress. Feel free to suggest changes.
+This document is a work in progress. Feel free to suggest changes via [GitHub "pull request"](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files).
 
 ## Get Started on Weblate
 
@@ -85,6 +85,7 @@ You can change your notification settings [here](https://hosted.weblate.org/acco
 
 ### Untranslatable strings
 Any string starting containing `vtk` or  `MRML` should not be translated and should be reported as bugs in Slicer bug reports. 
+
 **Example:**
 
 ![](Docs/TranslationGuidelines/untranslatable1.png)
@@ -101,6 +102,10 @@ There are several ways to indicate that a translation needs to be reviewed. The 
 ![](Docs/TranslationGuidelines/validation1.png)
 
 ![](Docs/TranslationGuidelines/validation2.png)
+
+## Style
+
+For consistent style, it is important for all translators for a specific language use the same guidelines. Detailed Style Guide for most languages are available on [Microsoft's website](https://www.microsoft.com/en-us/language/StyleGuides). If translators agree in using a style guide then they only need to provide a download link to that style guide and document any differences they wish to make to those guidelines.
 
 ## Glossary terms
 
@@ -122,9 +127,3 @@ Each project on Weblate has a **glossary** associated with it. It is a collectio
 The `Glossary` panel will contain no information in the case of a term or string that is not in the glossary. However, if the term is referenced in the glossary, you will have a suggested `translation` as well as the `explanation` of the term. You can rely on the latter to make sure you have a better understanding of the term and therefore provide the most accurate translation possible.
 
 Note that the `explanation` is only available in English. 
-
-## Title/sentence case
-
-- In French, use sentence case, i.e., do not capitalize every word of a sentence. This applies everywhere, including button text, window title, etc.
-  - Rationale: Title case is not common in French. macOS operating system (which uses title case heavily in English) and Microsoft Office software
-    use sentence case in French localized versions.
