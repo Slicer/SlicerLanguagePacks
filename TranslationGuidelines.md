@@ -127,3 +127,5 @@ Each project on Weblate has a **glossary** associated with it. It is a collectio
 The `Glossary` panel will contain no information in the case of a term or string that is not in the glossary. However, if the term is referenced in the glossary, you will have a suggested `translation` as well as the `explanation` of the term. You can rely on the latter to make sure you have a better understanding of the term and therefore provide the most accurate translation possible.
 
 Note that the `explanation` is only available in English. 
+
+To find good translation for generic computing terms, you can use [Microsoft's terminology search function](https://www.microsoft.com/en-us/language/Search).
