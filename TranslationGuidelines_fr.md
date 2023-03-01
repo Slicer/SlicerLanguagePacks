@@ -125,5 +125,4 @@ Notez que `l'explication` n'est disponible qu'en anglais.
 
 In French, use sentence case, i.e., do not capitalize every word of a sentence. This applies everywhere, including button text, window title, etc. Rationale: Title case is not common in French. macOS operating system (which uses title case heavily in English) and Microsoft Office software use sentence case in French localized versions.
 
-Le document de localization de Microsoft en francais est disponible sur [ce lien.](https://github.com/Slicer/SlicerLanguagePacks/releases/tag/TranslationResources#:~:text=fra%2Dfra%2DStyle.Guide.pdf)
-
+Le document de localization de Microsoft en francais est disponible sur [ce lien.](https://github.com/Slicer/SlicerLanguagePacks/releases/download/TranslationResources/fra-fra-Style.Guide.pdf)
