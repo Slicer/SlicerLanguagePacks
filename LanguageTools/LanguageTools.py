@@ -457,7 +457,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self.customLreleasePath = None
     self._temporaryFolder = None
     self.translationFilesFolder = None
-    self.weblateComponents = [("3d-slicer", "Slicer")]
+    self.weblateComponents = [("3d-slicer", "Slicer"), ("ctk", "CTK")]
     self.weblateEditTranslationUrl = "https://hosted.weblate.org/translate/3d-slicer"
     self.preferredLanguage = "fr-FR"
     self.gitRepositoryName = "SlicerLanguageTranslations"
@@ -566,7 +566,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
 
     for (component, filename) in self.weblateComponents:
       for language in languages:
-        self.log(f'Download translations for {language}...')
+        self.log(f'Download translations for {component}/{language}...')
         tsFile = dataLogic.downloadFile(f'{downloadUrl}/{component}/{language}', self.temporaryFolder(), f'{filename}_{language}.ts')
 
   def downloadTsFilesFromGithub(self, githubRepositoryUrl):
