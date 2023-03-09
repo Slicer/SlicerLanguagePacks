@@ -567,7 +567,12 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     for (component, filename) in self.weblateComponents:
       for language in languages:
         self.log(f'Download translations for {component}/{language}...')
-        tsFile = dataLogic.downloadFile(f'{downloadUrl}/{component}/{language}', self.temporaryFolder(), f'{filename}_{language}.ts')
+        fullDownloadUrl = f'{downloadUrl}/{component}/{language}'
+        try:
+          tsFile = dataLogic.downloadFile(fullDownloadUrl, self.temporaryFolder(), f'{filename}_{language}.ts')
+        except:
+          logging.warning(f"Failed to download translation from: {fullDownloadUrl}")
+          self.log("  Download failed. This component may not have been translated to the selected language.")
 
   def downloadTsFilesFromGithub(self, githubRepositoryUrl):
     """Download .ts files from a Github repository.
