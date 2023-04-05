@@ -134,12 +134,30 @@ To make it clear that a string must not be translated, `/*no tr*/` comment can b
 To prevent duplication of source strings, a `tr()` method of a common base class should be used for the following strins:
 - Module category names (`Informatics`, `Registration`, `Segmentation`, ...) should be translated using `qSlicerAbstractCoreModule::tr()`
 
-## Using `lupdate` to extract translatable strings
+## Extract translatable strings
 
-To extract all translatable strings present on the Slicer source code, we can use the `Qt lupdate` tool. In `Qt 5.15.2`, which is used in the current Slicer version, `lupdate` can be found in `<QT_ROOT_FOLDER>/5.15.2/msvc2019_64/bin`. 
+We rely on Qt's lupdate tool for extracting translatable strings from source code and merge it with existing translation files. We perform additional steps to extract translatable script from XML description of CLI modules and from Python files and we also support many languages. Therefore, a Python script is created that can perform all the processing steps: [update_translations.py]([url](https://github.com/Slicer/Slicer/blob/main/Utilities/Scripts/update_translations.py)).
 
-Thus, to obtain the translation file, we just have to run the following command :
+### How to update translatable strings
 
-`lupdate slicer_root_folder -ts translation_file.ts`
+#### Prerequisites
+- Clone the https://github.com/Slicer/SlicerLanguageTranslations repository
+- Clone the https://github.com/Slicer/Slicer repository
+- Install Qt-6.3 or later (earlier versions do not have lupdate that can extract strings from Python code)
+- Install Python-3.9 or later
 
-**NB :** `slicer_root_folder` should be replaced by the path to your Slicer root folder and `translation_file` is the name of the translation file (has `.ts` extension).
+#### Update translation source files
+- Make sure that all pull requests on the repository submitted by Weblate are merged (to avoid merge conflicts). If changes are expected in the repository (for example, because there have been some recent updates) then it may worth waiting until those changes are completed. It is also possible to temporarily lock Weblate to not accept any modifications while we perform the steps below.
+- Make sure the cloned repository is up-to-date and there are no locally modified files. (to avoid merge conflicts and avoid obsolete content getting into the translation source files)
+- Run these commands:
+
+```
+set LUPDATE=c:\Qt6\6.3.0\msvc2019_64\bin\lupdate.exe
+set PYTHON=c:\Users\andra\AppData\Local\Programs\Python\Python39\python.exe
+set TRANSLATIONS=c:/D/SlicerLanguageTranslations/translations
+set SLICER_SOURCE=c:/D/S4
+set SLICER_BUILD=c:/D/S4D
+%PYTHON% %SLICER_SOURCE%\Utilities\Scripts\update_translations.py -t %TRANSLATIONS% --lupdate %LUPDATE% -v --component Slicer -s %SLICER_SOURCE%
+%PYTHON% %SLICER_SOURCE%\Utilities\Scripts\update_translations.py -t %TRANSLATIONS% --lupdate %LUPDATE% -v --component CTK -s %SLICER_BUILD%/CTK
+@echo Process output: %errorlevel%
+```
