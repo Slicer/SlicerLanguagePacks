@@ -11,6 +11,7 @@ set(MODULE_PYTHON_RESOURCES
   Resources/UI/${MODULE_NAME}.ui
   Resources/Fonts/NotoSansTC-Regular.otf
   Resources/Fonts/NotoSerifTC-Regular.otf
+  Resources/CTK~vtkModalityWidget_LANG.ts
   )
 
 #-----------------------------------------------------------------------------
