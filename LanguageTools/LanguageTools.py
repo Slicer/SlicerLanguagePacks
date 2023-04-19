@@ -109,40 +109,55 @@ class TextFinder(qt.QWidget):
     self.showPointCursor(False)
 
     # Extract text
+    foundStrings = []
     try:
-      text = None
       try:
-        text = widget.text
+        foundStrings.append(["text", widget.text])
       except:
         pass
-      if not text:
-        try:
-          text = widget.title
-        except:
-          pass
-      if not text:
-        try:
-          text = widget.windowTitle
-        except:
-          pass
-      if not text:
-        try:
-          text = widget.toolTip
-        except:
-          pass
-      if not text:
-        raise ValueError("Failed to extract text from widget")
+      try:
+        foundStrings.append(["title", widget.title])
+      except:
+        pass
+      try:
+        foundStrings.append(["window title", widget.windowTitle])
+      except:
+        pass
+      try:
+        foundStrings.append(["tooltip", widget.toolTip])
+      except:
+        pass
+      try:
+        # QTabBar
+        for tabIndex in range(widget.count):
+          foundStrings.append(["tab text", widget.tabText(tabIndex)])
+      except:
+        pass
+      # Remove empty strings
+      foundStrings = [foundString for foundString in foundStrings if foundString[1]]
+      if not foundStrings:
+        raise ValueError("Failed to extract any text from widget")
+
+      import html
+      import re
+      links = "<ul>\n"
+      for foundString in foundStrings:
+        label = foundString[0]
+        # Strip HTML tags from text (often HTML formatting is added in code and not found in the translated text)
+        text = re.compile(r'<.*?>').sub('', foundString[1])
+        url = self.logic.translationUrlFromText(text).toString()
+        exactUrl = self.logic.translationUrlFromText(foundString[1], exactMatch=True).toString()
+        links += f'<li>{label}: "{text}" [<a href="{url}">any match</a>] [<a href="{exactUrl}">exact match</a>]</li>\n'
+      links += "</ul>"
+
       result = slicer.util._messageDisplay(logging.INFO,
-        f"Edit translation of this text on the translation website?\n\n[{text}]", qt.QMessageBox.Ok,
+        f"<html>Click on the text to find it on the translation website:\n\n{links}</html>", qt.QMessageBox.Close,
         windowTitle="Translation lookup", icon=qt.QMessageBox.Question,
-        standardButtons=qt.QMessageBox.Ok | qt.QMessageBox.Retry | qt.QMessageBox.Close)
+        standardButtons=qt.QMessageBox.Close | qt.QMessageBox.Retry)
       if result == qt.QMessageBox.Close:
         # cancelled
         self.hideOverlay()
         return
-      if result == qt.QMessageBox.Ok:
-        # Open text of first widget in the browswer
-        self.logic.openTranslationGUI(text)
 
     except Exception as e:
       import traceback
@@ -152,7 +167,7 @@ class TextFinder(qt.QWidget):
       objectInfo = widget.className()
       if widget.objectName:
         objectInfo += f" ({widget.objectName})"
-      if not slicer.util.confirmRetryCloseDisplay("Failed to extract widget name from object: " + objectInfo):
+      if not slicer.util.confirmRetryCloseDisplay("Failed to extract any text from: " + objectInfo):
         # cancelled
         self.hideOverlay()
         return
@@ -712,14 +727,21 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
   def enableInternationalization(self, enabled=True):
     slicer.app.userSettings().setValue('Internationalization/Enabled', enabled)
 
-  def openTranslationGUI(self, text):
-    # Open translation of the first component (Slicer core)
-    # (in the future the user may choose a preferred component)
+  def translationUrlFromText(self, text, exactMatch=False):
     (component, filename) = self.weblateComponents[0]
     url=qt.QUrl(f"{self.weblateEditTranslationUrl}/{component}/{self.preferredLanguage}/")
     q = qt.QUrlQuery()
-    q.addQueryItem("q",text)
+    if exactMatch:
+      q.addQueryItem("q", f'source:="{text}" or target:="{text}"')
+    else:
+      q.addQueryItem("q", text)
     url.setQuery(q)
+    return url
+
+  def openTranslationGUI(self, text):
+    # Open translation of the first component (Slicer core)
+    # (in the future the user may choose a preferred component)
+    url = self.translationUrlFromText(text)
     qt.QDesktopServices().openUrl(url)
 
 #
