@@ -86,6 +86,35 @@ Doing so will provide the class with `tr()` function that can be directly used t
 
 >**NOTE:** If for any reason the class name should not be exposed to other developers or translators (private classes, ...), we recommand to prefix `tr()` calls with the associated public class as follows :  `PublicClassName::tr("text to translate")`
 
+### Translating multiline strings
+
+Long strings may be defined in multiple lines like this:
+
+```
+QString help = QString(
+  "Volume Rendering Module provides advanced tools for toggling interactive "
+  "volume rendering of datasets."
+  );
+```
+
+Translate such multiline strings using one `tr()` function like this to allow translators to translate complete senetences:
+
+```
+QString help = tr(
+  "Volume Rendering Module provides advanced tools for toggling interactive "
+  "volume rendering of datasets."
+  );
+```
+
+Do not translate like this, as the translatable strings would contain sentence fragments: 
+
+```
+// THIS IS WRONG!
+QString help =
+  tr("Volume Rendering Module provides advanced tools for toggling interactive ") +
+  tr("volume rendering of datasets.<br/>");
+```
+
 ### Translating keyboard shortcuts
 
 According to [Qt recommendations](https://doc.qt.io/qt-6/qkeysequence.html#keyboard-layout-issues), keyboard shortcuts should be specified using translatable strings to be able to better accommodate different keyboard layouts commonly used for a specific language.
