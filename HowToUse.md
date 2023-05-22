@@ -4,7 +4,7 @@
 
 - [Download](https://download.slicer.org) and install a recent 3D Slicer Preview Release (released 2023-05-17 or later)
 - Install SlicerLanguagePacks extension.
-  ![](Docs/LanguageInstall .png)
+  ![](Docs/LanguageInstall.png)
 
 ### Download and install latest translations
 
@@ -17,7 +17,7 @@
 - Set the language of application in the `Application languge`
 - Click `Restart the application` button to start using the new translation files in the user interface.
 
-![](Docs/UpdateTranslation .png)
+![](UpdateTranslation.png)
 ![](Docs/SetLanguage.png)
 
 
