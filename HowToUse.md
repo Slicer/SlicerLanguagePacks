@@ -17,7 +17,8 @@
 - Set the language of application in the `Application languge`
 - Click `Restart the application` button to start using the new translation files in the user interface.
 
-![](UpdateTranslation.png)
+![](Docs/UpdateTranslation.png)
+
 ![](Docs/SetLanguage.png)
 
 
