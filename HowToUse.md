@@ -8,8 +8,11 @@
 [1] Click on the `Extensions Manager` icon.
 
 [2] Write the word `Language` in the search box.
+
 [3] Click on `Install` button.
+
 [4] Click on `Restart` button.
+
   ![](Docs/LanguageInstall.png)
 
 ### Download and install latest translations
