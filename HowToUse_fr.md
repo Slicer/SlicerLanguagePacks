@@ -5,7 +5,7 @@
 - [Télécharger](https://download.slicer.org) et installez un aperçu d'une version récente de 3D Slicer (publiée le 17/05/2023 ou une version ultérieure). 
 - Installez l'extension SlicerLanguagePacks.
 
-<img width="558" alt="InstallLanguagesPacks" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/19b52f39-6f3f-4cd1-9d75-590dcc29a660">
+<img width="700" alt="InstallLanguagesPacks" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/19b52f39-6f3f-4cd1-9d75-590dcc29a660">
 
 
 ### Télécharger et installer les dernières traductions
