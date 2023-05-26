@@ -28,4 +28,4 @@
 
 <img width="686" alt="UseLanguagesPacks" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/29d825e4-aaf6-4b61-890a-2fcb6782a89b">
 
-Pour plus de comprehension, vous pouvez regarder une vidéo du procédé [ici](https://www.youtube.com/watch?v=pANAmbhl36o&t=10s).
+Pour plus de comprehension, vous pouvez regarder la vidéo du procédé [ici](https://www.youtube.com/watch?v=pANAmbhl36o&t=10s).
