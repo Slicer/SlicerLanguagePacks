@@ -18,7 +18,7 @@
 - Sélectionnez une ou plusieurs des langues téléchargées et installées dans `languages`.
 - Compilez les fichiers de traduction et les installez dans l'application en cliquant sur le bouton `Update translation files`.
 
-<img width="736" alt="ConfigLanguagesPacks" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/366ce575-494e-4cda-ab8d-85ff4a7df784">
+<img width="900" alt="ConfigLanguagesPacks" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/366ce575-494e-4cda-ab8d-85ff4a7df784">
 
 
 ### Définir la langue de l'application
@@ -26,6 +26,6 @@
 - Définissez la langue de l'application dans `Application language`.
 - Cliquez sur le bouton `Restart the application` pour redémarrer l'application et commencer à utiliser les nouveaux fichiers de traduction dans l'interface utilisateur.
 
-<img width="686" alt="UseLanguagesPacks" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/29d825e4-aaf6-4b61-890a-2fcb6782a89b">
+<img width="900" alt="UseLanguagesPacks" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/29d825e4-aaf6-4b61-890a-2fcb6782a89b">
 
 Pour plus de comprehension, vous pouvez regarder la vidéo du procédé [ici](https://www.youtube.com/watch?v=pANAmbhl36o&t=10s).
