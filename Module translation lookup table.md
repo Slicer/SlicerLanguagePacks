@@ -48,7 +48,7 @@ The platform hosting the translation project, Weblate, classifies the strings un
 | DICOM   | Create DICOM Series  | ***  | [CLI_CreateDICOMSeries](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=1a81c7b547118336&q=data&sort_by=context)  |
 
 
-|Difficulty level chart| |
-| * |easy|
-| ** |intermediate|
-| *** |hard|
+| Difficulty level chart |  |
+| * | easy |
+| ** | intermediate |
+| *** | hard |
