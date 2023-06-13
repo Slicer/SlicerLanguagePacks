@@ -132,10 +132,19 @@ To find good translation for generic computing terms, you can use [Microsoft's t
 
 ## Find Text
  
-  - `1` : Selects `Enable text finder` in the Find text section and select the French language.
+  - `1` : Select `Enable text finder` in the Find text section and select the French language.
+  
   ![](Docs/EnableT.png)
+  
   - `2` :  Navigates to the Welcome module of Slicer and press `Ctrl+6` to activate the `Enable text finder` option.
+  
   ![](Docs/ActivateET.PNG)
+  
   - `3` : Clicks on `Download Sample Data` to identify the location of the text on Weblate
-  - `4` : Selects `exact match`
+  - `4` : Select `exact match`
+  
   ![](Docs/ExactM.png)
+  
+  - `5` : It will take you to where `the text` is located on `Weblate`
+  - 
+![](Docs/Resultat.png)
