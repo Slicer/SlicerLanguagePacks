@@ -1,3 +1,8 @@
+This table aims to serve as an entry point for new contributors to Slicer translations.
+The platform hosting the translation project, Weblate, classifies the strings under categories identified by a "**key**". This classification follows the source code file distribution into modules. Simply put, each link to a Weblate key (the column on the far right) will direct you to the translation interface of the first string of the list of strings contained in the module you picked.
+
+
+
 | Module Names | Subcategory | Difficulty level | Link to Weblate Key|
 | ------------- | ------------- | ------------- | ------------- |
 | Slicer Welcome | Main  | *  | [qSlicerWelcomeModule](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=b14a7af15fa889c1&q=welcome&sort_by=context)  | 
@@ -41,3 +46,9 @@
 | DICOM   | Patcher  | ***  | [DICOMPatcher](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=abfee6b2216dd1e1&q=data&sort_by=context)  |
 | DICOM   | Scalar Volume Plugin | ***  | [DICOMScalarVolumePlugin](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=d74c5744d1fd239c&q=data&sort_by=context)  |
 | DICOM   | Create DICOM Series  | ***  | [CLI_CreateDICOMSeries](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=1a81c7b547118336&q=data&sort_by=context)  |
+
+
+|Difficulty level chart|
+| * |easy|
+| ** |intermediate|
+| *** |hard|
