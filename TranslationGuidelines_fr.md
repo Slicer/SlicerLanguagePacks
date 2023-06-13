@@ -126,3 +126,15 @@ Notez que `l'explication` n'est disponible qu'en anglais.
 In French, use sentence case, i.e., do not capitalize every word of a sentence. This applies everywhere, including button text, window title, etc. Rationale: Title case is not common in French. macOS operating system (which uses title case heavily in English) and Microsoft Office software use sentence case in French localized versions.
 
 Le document de localization de Microsoft en français est disponible sur [ce lien.](https://github.com/Slicer/SlicerLanguagePacks/releases/download/TranslationResources/fra-fra-Style.Guide.pdf)
+
+## Find Text
+ 
+  - `1` : L'utilisateur sélectionne `Enable text finder` dans la section Rechercher du texte et sélectionne la langue française.
+  ![](Docs/EnableT.png)
+  
+  - `2` : L'utilisateur accède au module d'accueil de Slicer et appuie sur `Ctrl+6` pour activer l'option `Enable text finder`.
+  ![](Docs/ActivateET.PNG)
+  
+  - `3` : L'utilisateur clique sur `Download Sample Data` pour identifier l'emplacement du texte sur Weblate.
+  - `4` : L'utilisateur sélectionne `exact match`.
+  ![](Docs/ExactM.png)
