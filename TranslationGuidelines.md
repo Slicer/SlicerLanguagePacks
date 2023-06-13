@@ -136,7 +136,7 @@ To find good translation for generic computing terms, you can use [Microsoft's t
   
   ![](Docs/EnableT.png)
   
-  - `2` :  Navigate to Slicer Welcome module and press `Ctrl+6` to activate the `Enable text finder` option.
+  - `2` :  Navigate to Slicer Welcome module and press `Ctrl+6` or `Ctrl+Shift+6` to activate the `Enable text finder` option.
   
   ![](Docs/ActivateET.PNG)
   
