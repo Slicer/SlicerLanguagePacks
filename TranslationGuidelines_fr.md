@@ -135,7 +135,7 @@ Pour utiliser la fonctionnalité `Find text` suivez le flux de travail suivant 
   <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/ebf4e7c7-1ec8-467b-a663-ab254a7a9b63">
   
   
-  - `2` : L'utilisateur accède au module d'accueil de Slicer et appuie sur `Ctrl+6` pour activer l'option `Enable text finder`.
+  - `2` : L'utilisateur accède au module d'accueil de Slicer et appuie sur `Ctrl+6` ou sur `Ctrl+shift+6` pour activer l'option `Enable text finder`.
   
   <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/2031485f-5fcf-49d1-8f44-27665d13c578">
   
