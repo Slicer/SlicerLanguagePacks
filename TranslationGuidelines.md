@@ -132,6 +132,8 @@ To find good translation for generic computing terms, you can use [Microsoft's t
 
 ## Find Text tool of the Language Packs Extension
  
+ To use the `Find text` feature follow the following workflow :
+ 
   - `1` : Select `Enable text finder` in the Find text section of the Language Packs extension and select the French language.
   
   ![](Docs/EnableT.png)
