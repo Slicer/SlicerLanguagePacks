@@ -130,21 +130,21 @@ Note that the `explanation` is only available in English.
 
 To find good translation for generic computing terms, you can use [Microsoft's terminology search function](https://www.microsoft.com/en-us/language/Search).
 
-## Find Text
+## Find Text tool of the Language Packs Extension
  
-  - `1` : Select `Enable text finder` in the Find text section and select the French language.
+  - `1` : Select `Enable text finder` in the Find text section of the Language Packs extension and select the French language.
   
   ![](Docs/EnableT.png)
   
-  - `2` :  Navigates to the Welcome module of Slicer and press `Ctrl+6` to activate the `Enable text finder` option.
+  - `2` :  Navigate to Slicer Welcome module and press `Ctrl+6` to activate the `Enable text finder` option.
   
   ![](Docs/ActivateET.PNG)
   
-  - `3` : Clicks on `Download Sample Data` to identify the location of the text on Weblate
+  - `3` : Click on `Add DICOM Data` to locate the string in the Slicer Weblate repository.
   - `4` : Select `exact match`
   
   ![](Docs/ExactM.png)
   
-  - `5` : It will take you to where `the text` is located on `Weblate`
+  - `5` : The link will take you to the location of the strings in the Slicer Weblate repository. 
   
 ![](Docs/Resultat.png)
