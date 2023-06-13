@@ -129,3 +129,13 @@ The `Glossary` panel will contain no information in the case of a term or string
 Note that the `explanation` is only available in English. 
 
 To find good translation for generic computing terms, you can use [Microsoft's terminology search function](https://www.microsoft.com/en-us/language/Search).
+
+## Find Text
+ 
+  - `1` : Selects `Enable text finder` in the Find text section and select the French language.
+  ![](Docs/LanguageInstall.png)
+  - `2` :  Navigates to the Welcome module of Slicer and press `Ctrl+6` to activate the `Enable text finder` option.
+  ![](Docs/LanguageInstall.png)
+  - `3` : Clicks on `Download Sample Data` to identify the location of the text on Weblate
+  - `4` : Selects `exact match`
+  ![](Docs/LanguageInstall.png)
