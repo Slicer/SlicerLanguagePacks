@@ -146,4 +146,5 @@ Pour utiliser la fonctionnalité `Find text` suivez le flux de travail suivant 
   <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/5cf94bbb-cad2-4e06-912f-c7cda7bfd83a">
 
  - `5` : The link will take you to the location of the strings in the Slicer Weblate repository. Le lien vous amènera à l'emplacement des `strings` dans le `Slicer Weblate repository`.
- - <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/5d0088a6-21f2-43f0-9f94-cb774c2e6684">
+ 
+ <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/5d0088a6-21f2-43f0-9f94-cb774c2e6684">
