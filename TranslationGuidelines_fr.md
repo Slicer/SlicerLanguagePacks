@@ -132,10 +132,11 @@ Pour utiliser la fonctionnalité `Find text` suivez le flux de travail suivant 
 
   - `1` : L'utilisateur sélectionne `Enable text finder` dans la section Rechercher du texte et sélectionne la langue française.
   <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/ebf4e7c7-1ec8-467b-a663-ab254a7a9b63">
+  
   - `2` : L'utilisateur accède au module d'accueil de Slicer et appuie sur `Ctrl+6` pour activer l'option `Enable text finder`.
   <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/2031485f-5fcf-49d1-8f44-27665d13c578">
   
-  - `3` : L'utilisateur clique sur `Download Sample Data` pour identifier l'emplacement du texte sur Weblate.
+  - `3` : L'utilisateur clique sur `Télécharger des examples de données` pour identifier l'emplacement du texte sur Weblate.
   - `4` : L'utilisateur sélectionne `exact match`.
   <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/5cf94bbb-cad2-4e06-912f-c7cda7bfd83a">
 
