@@ -20,7 +20,7 @@
 | Dialog boxes  | Standard File dialog  | *  | [qSlicerStandardFileDialog](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=32a7946556a2c170&q=dialog&sort_by=-priority%2Cposition)  |
 | Volumes  |      | *  | [qSlicerVolumesModule](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=1155896f21274bf8&q=volumes&sort_by=context)  |
 | Models   | Main  | *  | [qSlicerModelsModule](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=9941c5f0110820ae&q=models&sort_by=context)  |
-| Models | Model Maker   | *  | [](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=a06238af8792fc12&q=models&sort_by=context)  |
+| Models | Model Maker   | *  | [CLI_ModelMaker](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=a06238af8792fc12&q=models&sort_by=context)  |
 | Models  | Models IO Options Widget  | *  | [qSlicerModelsIOOptionsWidget](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=ed0bc3b0d90d9310&q=models&sort_by=context)  |
 | Models  | Models Widget  | *  | [qSlicerModelsModuleWidget](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=f2c9003e104b004a&q=models&sort_by=context)  |
 | Data   | Main  | *  | [qSlicerDataModule](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=f9f2b8552d2e461e&q=data&sort_by=context)  |
