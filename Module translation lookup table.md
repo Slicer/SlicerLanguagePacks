@@ -1,9 +1,9 @@
-This table aims to serve as an entry point for new contributors to Slicer translations.
-The platform hosting the translation project, Weblate, classifies the strings under categories identified by a "**key**". This classification follows the source code file distribution into modules. Simply put, each link to a Weblate key (the column on the far right) will direct you to the translation interface of the first string of the list of strings contained in the module you picked.
+3D Slicer Module Translation Lookup Table aims to serve as an entry point for new contributors to Slicer translations.
+The web-based platform hosting Slicer translations, Weblate, classifies the strings under categories identified by a "**key**". This classification follows 3D Slicer source code file distribution into modules. Simply put, each link to a Weblate key (the column on the far right in the Module Translation Lookup Table) will direct you to Weblate's translation interface of the first string of the list of strings contained in the module you picked.
 
 
 
-| Module Names | Subcategory | Difficulty level | Link to Weblate Key|
+| 3D Slicer Module Name | Subcategory | Level of Translation Difficulty | Link to 3D Slicer Weblate Key|
 | ------------- | ------------- | ------------- | ------------- |
 | Slicer Welcome | Main  | *  | [qSlicerWelcomeModule](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=b14a7af15fa889c1&q=welcome&sort_by=context)  | 
 | Slicer Welcome  | Widget | * | [qSlicerWelcomeModuleWidget](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=45304ec69f7d48e9&q=data&sort_by=context)  |
@@ -48,10 +48,10 @@ The platform hosting the translation project, Weblate, classifies the strings un
 | DICOM   | Create DICOM Series  | ***  | [CLI_CreateDICOMSeries](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=1a81c7b547118336&q=data&sort_by=context)  |
 
 
-| Difficulty level chart  |   |
+| Translation Difficulty Chart  |   |
 | ------------- | ------------- |
 | *  | easy  |
 | **  | intermediate  |
 | ***  | difficult  |
 
-The difficulty level is assessed based on how accessible of understanding the module is for a user that is unfamiliar with Slicer or the concepts in the module
+The difficulty level is assessed based on how accessible of understanding the module is for a user that is unfamiliar with 3D Slicer and/or the functionalities of the module.
