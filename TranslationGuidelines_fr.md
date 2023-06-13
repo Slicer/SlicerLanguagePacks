@@ -128,13 +128,15 @@ In French, use sentence case, i.e., do not capitalize every word of a sentence. 
 Le document de localization de Microsoft en français est disponible sur [ce lien.](https://github.com/Slicer/SlicerLanguagePacks/releases/download/TranslationResources/fra-fra-Style.Guide.pdf)
 
 ## Find Text
- 
+Pour utiliser la fonctionnalité `Find text` suivez le flux de travail suivant :
+
   - `1` : L'utilisateur sélectionne `Enable text finder` dans la section Rechercher du texte et sélectionne la langue française.
-  ![](Docs/EnableT.png)
+  ![image](https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/db84bf1e-8aa0-4084-9d49-818d586da774)
   
   - `2` : L'utilisateur accède au module d'accueil de Slicer et appuie sur `Ctrl+6` pour activer l'option `Enable text finder`.
-  ![](Docs/ActivateET.PNG)
+  <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/2031485f-5fcf-49d1-8f44-27665d13c578">
   
   - `3` : L'utilisateur clique sur `Download Sample Data` pour identifier l'emplacement du texte sur Weblate.
   - `4` : L'utilisateur sélectionne `exact match`.
-  ![](Docs/ExactM.png)
+  ![image](https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/d195f8a0-6510-4bb3-af2f-52013235d999)
+
