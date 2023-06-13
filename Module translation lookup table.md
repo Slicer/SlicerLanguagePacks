@@ -53,3 +53,5 @@ The platform hosting the translation project, Weblate, classifies the strings un
 | *  | easy  |
 | **  | intermediate  |
 | ***  | difficult  |
+
+The difficulty level is assessed based on how accessible of understanding the module is for a user that is unfamiliar with Slicer or the concepts in the module
