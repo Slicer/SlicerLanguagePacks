@@ -131,12 +131,11 @@ Le document de localization de Microsoft en français est disponible sur [ce lie
 Pour utiliser la fonctionnalité `Find text` suivez le flux de travail suivant :
 
   - `1` : L'utilisateur sélectionne `Enable text finder` dans la section Rechercher du texte et sélectionne la langue française.
-  ![image](https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/db84bf1e-8aa0-4084-9d49-818d586da774)
-  
+  <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/ebf4e7c7-1ec8-467b-a663-ab254a7a9b63">
   - `2` : L'utilisateur accède au module d'accueil de Slicer et appuie sur `Ctrl+6` pour activer l'option `Enable text finder`.
   <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/2031485f-5fcf-49d1-8f44-27665d13c578">
   
   - `3` : L'utilisateur clique sur `Download Sample Data` pour identifier l'emplacement du texte sur Weblate.
   - `4` : L'utilisateur sélectionne `exact match`.
-  ![image](https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/d195f8a0-6510-4bb3-af2f-52013235d999)
+  <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/5cf94bbb-cad2-4e06-912f-c7cda7bfd83a">
 
