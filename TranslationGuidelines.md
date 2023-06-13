@@ -146,5 +146,5 @@ To find good translation for generic computing terms, you can use [Microsoft's t
   ![](Docs/ExactM.png)
   
   - `5` : It will take you to where `the text` is located on `Weblate`
-  - 
+  
 ![](Docs/Resultat.png)
