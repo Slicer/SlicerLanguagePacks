@@ -46,7 +46,7 @@ La balise `source string location` de Weblate peut vous aider à aller un peu pl
 
 *(la raison pour laquelle les numéros de ligne ne correspondent pas dans cet exemple spécifique est que le code a été mis à jour entre le moment où les fichiers de traduction ont été téléchargés et maintenant)*
 
-## Traduction de termes difficiles
+## 3. Traduction de termes difficiles
 
 Sur l'interface complexe de 3D Slicer, certains termes peuvent avoir des significations très spécifiques au contexte et risquent de perdre de leur précision s'ils ne sont pas traduits avec soin. Repérer la chaîne de caractères sur l'interface ou utiliser l'élément qu'elle désigne peut aider à mieux comprendre la définition exacte du terme et donc à le traduire le plus précisément possible.
 Une autre façon de garantir la meilleure qualité de traduction est de tirer parti de l'approche communautaire sur laquelle repose notre processus d'internationalisation.
@@ -103,7 +103,7 @@ Vous pouvez également compter sur les suggestions automatiques pour vous aider 
 
 ![ ](TranslationGuidelines_fr_Images/17_suggestionAutoPNG.PNG)
 
-## Validation de la traduction
+## 4. Validation de la traduction
 
 Il existe plusieurs façons d'indiquer qu'une traduction doit être révisée. Les plus couramment utilisées par nos contributeurs sont la case à cocher `à vérifier` et la fonction `suggérer`.
 
@@ -111,7 +111,13 @@ Il existe plusieurs façons d'indiquer qu'une traduction doit être révisée. L
 
 ![ ](TranslationGuidelines_fr_Images/15_Validation2.PNG)
 
-## Termes du glossaire
+## 5. Style
+
+In French, use sentence case, i.e., do not capitalize every word of a sentence. This applies everywhere, including button text, window title, etc. Rationale: Title case is not common in French. macOS operating system (which uses title case heavily in English) and Microsoft Office software use sentence case in French localized versions.
+
+Le document de localization de Microsoft en français est disponible sur [ce lien.](https://github.com/Slicer/SlicerLanguagePacks/releases/download/TranslationResources/fra-fra-Style.Guide.pdf)
+
+## 6. Termes du glossaire
 
 Chaque projet sur Weblate est associé à un **glossaire**. Les éléments répertoriés dans le glossaire sont ensuite liés aux chaînes de caractères qui les contiennent, dans le composant principal de traduction (lorsqu'une chaîne de caractères contient un terme du glossaire, il y aura une référence à ce terme sur la droite de l'interface dans un panneau intitulé `Glossaire`). Cela peut être utile pour traduire des termes plus ou moins difficiles à partir de l'interface.
 
@@ -121,13 +127,7 @@ Le panneau `Glossaire` ne contiendra aucune information dans le cas d'un terme o
 
 Notez que `l'explication` n'est disponible qu'en anglais.
 
-## Style
-
-In French, use sentence case, i.e., do not capitalize every word of a sentence. This applies everywhere, including button text, window title, etc. Rationale: Title case is not common in French. macOS operating system (which uses title case heavily in English) and Microsoft Office software use sentence case in French localized versions.
-
-Le document de localization de Microsoft en français est disponible sur [ce lien.](https://github.com/Slicer/SlicerLanguagePacks/releases/download/TranslationResources/fra-fra-Style.Guide.pdf)
-
-## Find Text
+## 7. Find Text
 Pour utiliser la fonctionnalité `Find text` suivez le flux de travail suivant :
 
   - `1` : L'utilisateur sélectionne `Enable text finder` dans la section Rechercher du texte et sélectionne la langue française.
@@ -148,3 +148,5 @@ Pour utiliser la fonctionnalité `Find text` suivez le flux de travail suivant 
  - `5` : Le lien vous amènera à l'emplacement des `strings` dans le `Slicer Weblate repository`.
  
  <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/a9cae130-1506-4e58-a0f0-099975e16d90">
+
+Pour plus d'explication, vous pouvez regarder une vidéo pratique [ici](https://www.youtube.com/watch?v=npb4bBE-9cY)
