@@ -2,7 +2,7 @@
 
 L'objectif de ce document est de fournir des conseils aux nouveaux contributeurs à la traduction communautaire de 3D Slicer sur [Weblate](https://hosted.weblate.org/projects/3d-slicer/3d-slicer/) sur la manière d'aider facilement et précisément à traduire l'interface du logiciel.
 
-## Démarrez sur Weblate
+## 1. Démarrez sur Weblate
 
 Weblate est un outil de traduction collaborative pour les projets open source. Avec l'aide de nos merveilleux contributeurs, nous travaillons à une traduction complète de l'interface de 3D Slicer, grâce à un effort principalement communautaire. Merci de vous joindre à nous !
 
@@ -18,7 +18,7 @@ Si vous vous inscrivez en utilisant GitHub, vous serez redirigé vers une page G
 
 **Remarque** : veillez à répéter les étapes: `Mettre à jour les fichiers de traduction`  et `redémarrer l'application` de temps à autre pour disposer des traductions les plus récentes et les plus complètes, car de nouveaux termes peuvent avoir été traduits depuis votre dernière utilisation de Slicer.
 
-## Localisation d'une chaîne de caractères sur l'interface utilisateur graphique (GUI) du Slicer
+## 2. Localisation d'une chaîne de caractères sur l'interface utilisateur graphique (GUI) du Slicer
 
 Une chaîne spécifique peut avoir de nombreuses occurrences différentes sur l'interface graphique de Slicer, parfois même dans le même module.  La position et la fonction d'un élément sur l'interface peuvent affecter sa signification et, par extension, sa traduction. Il est donc utile de connaître ces quelques conseils pour identifier exactement l'élément de l'interface que vous traduisez sur Weblate à un moment donné.
 
