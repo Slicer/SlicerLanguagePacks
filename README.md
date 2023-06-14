@@ -32,3 +32,7 @@ Aidez à traduire le projet sur [Hosted Weblate](https://hosted.weblate.org/enga
 ### Hungarian
 
   - [Útmutató magyarra fordításhoz](TranslationGuidelines_hu.md)
+
+### Português Brasileiro
+
+  - [Como usar](HowToUse_pt-br.md)
