@@ -4,7 +4,7 @@ The goal of this document is to provide new contributors to the community based 
 
 This document is a work in progress. Feel free to suggest changes via [GitHub "pull request"](https://docs.github.com/en/repositories/working-with-files/managing-files/editing-files).
 
-## Get Started on Weblate
+## 1. Get Started on Weblate
 
 Weblate is a collaborative translation tool for open source projects. With the help of our wonderful contributors, we are working towards a full translation of the 3D Slicer interface, through a mainly community based effort. Thank you for joining us!
 
@@ -20,7 +20,7 @@ If you sign in using GitHub, you will be redirected to a GitHub page where you w
 
 **Note:** Be sure to repeat the `Update translation files` and `Restart the application` steps every now and then to have the latest and most complete translations, as new terms may have been translated since you last used Slicer.
 
-## Locating a string on the Slicer Graphic User Interface (GUI)
+## 2. Locating a string on the Slicer Graphic User Interface (GUI)
 
 A specific string can have many different occurrences on the Slicer GUI, sometimes even in the same module.  The position and function of an element on the interface can affect its meaning and by extension, its translation. It is therefore helpful to know these few tips to identify exactly which element of the interface you are translating on Weblate at a given moment.
 
@@ -51,7 +51,7 @@ The `source string location` tag on Weblate can help you go one level further an
 
 *(the reason the line numbers do not match in this specific example is that the code has been updated in between when the translation files were uploaded and now)*
 
-## Translation of difficult terms
+## 3. Translation of difficult terms
 
 On the complex interface of 3D Slicer, certain terms can have very context-specific meanings that are likely to lose their accuracy if not translated carefully. Locating the string on the interface or using the element it designates can help understanding better the exact definition of the term and therefore translating it as accurately as possible.
 Another way to ensure the highest quality of translation is to take advantage of the community based approach that our internationalization process is based on.
@@ -95,7 +95,7 @@ You may also tag them with the `read-only` flag (read more about Weblate flags [
 ![](Docs/TranslationGuidelines/untranslatable2.png)
 ![](Docs/TranslationGuidelines/untranslatable3.png)
 
-## Validation of translation
+## 4. Validation of translation
 
 There are several ways to indicate that a translation needs to be reviewed. The most commonly used by our contributors are the `needs editing` checkbox and the `suggest` feature.  
 
@@ -103,11 +103,11 @@ There are several ways to indicate that a translation needs to be reviewed. The 
 
 ![](Docs/TranslationGuidelines/validation2.png)
 
-## Style
+## 5. Style
 
 For consistent style, it is important for all translators for a specific language use the same guidelines. Detailed Style Guide for most languages are available on [Microsoft's website](https://www.microsoft.com/en-us/language/StyleGuides). If translators agree in using a style guide then they only need to provide a download link to that style guide and document any differences they wish to make to those guidelines.
 
-## Glossary terms
+## 6. Glossary terms
 
 Some English words are used in Slicer with a very specific meaning. For example `volume` refers to a 3D image.
 Some of these words are listed in the [Slicer Glossary](https://slicer.readthedocs.io/en/latest/user_guide/getting_started.html#glossary).
@@ -130,7 +130,7 @@ Note that the `explanation` is only available in English.
 
 To find good translation for generic computing terms, you can use [Microsoft's terminology search function](https://www.microsoft.com/en-us/language/Search).
 
-## Find Text tool of the Language Packs Extension
+## 7. Find Text tool of the Language Packs Extension
  
  To use the `Find text` feature follow the following workflow :
  
@@ -151,4 +151,4 @@ To find good translation for generic computing terms, you can use [Microsoft's t
   
 ![](Docs/Resultat.png)
 
-For more clarification, you can watch a pratical video [here](https://www.youtube.com/watch?v=npb4bBE-9cY)
+For more explanation, you can watch a pratical video [here](https://www.youtube.com/watch?v=npb4bBE-9cY)
