@@ -128,7 +128,7 @@ Le panneau `Glossaire` ne contiendra aucune information dans le cas d'un terme o
 Notez que `l'explication` n'est disponible qu'en anglais.
 
 ## 7. Find Text
-Pour utiliser la fonctionnalité `Find text` suivez le flux de travail suivant :
+Pour utiliser la fonctionnalité `Find text` de l'extension `Language Packs`, suivez le flux de travail suivant :
 
   - `1` : L'utilisateur sélectionne `Enable text finder` dans la section Rechercher du texte et sélectionne la langue française.
   
