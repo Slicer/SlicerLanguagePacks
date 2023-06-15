@@ -58,4 +58,4 @@ You can now also use the Excel file version of this table (Module_translation_lo
 | **  | intermediate  |
 | ***  | difficult  |
 
-The difficulty level is assessed based on how accessible of understanding the module is for a user that is unfamiliar with 3D Slicer and/or the functionalities of the module.
+Le niveau de difficulté est évalué en fonction de l'accessibilité de la compréhension du module pour un utilisateur qui n'est pas familier avec 3D Slicer et/ou les fonctionnalités du module.
