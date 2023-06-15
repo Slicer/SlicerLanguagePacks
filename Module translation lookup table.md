@@ -5,7 +5,7 @@ The web-based platform hosting Slicer translations, Weblate, classifies the stri
 
 ![image](https://github.com/Slicer/SlicerLanguagePacks/assets/67284524/09ffc708-e7bd-41b6-a916-64007648deae)
 
-We are currently working on editing the Excel file version of this table to render the language specific link based on the user's language selection input in the file. 
+You can now also use the Excel file version of this table (Module_translation_lookup_table_Attila.xlsx accessible [here](https://github.com/Slicer/SlicerLanguagePacks/releases/tag/TranslationResources)) that allows you to select the target langguage and updates the links accordingly so they redirect you the corresponding translation interface.
 
 | 3D Slicer Module Name | Subcategory | Level of Translation Difficulty | Link to 3D Slicer Weblate Key|
 | ------------- | ------------- | ------------- | ------------- |
