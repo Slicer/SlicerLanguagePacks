@@ -41,3 +41,4 @@ Aidez à traduire le projet sur [Hosted Weblate](https://hosted.weblate.org/enga
 
   - [Como se usa](HowToUse_es_419.md)
   - [Temas avanzados](AdvancedUse_esp.md)
+  - [Manual para Desarrolladores](DevelopersManual_esp.md)

@@ -29,4 +29,4 @@
 ![](Docs/ConfigurarIdioma.png)
 
 
-Hay disponible un tutorial en video de los diferentes pasos [aquí](https://www.youtube.com/watch?v=pANAmbhl36o&t=10s).
+Hay disponible un tutorial en video de los diferentes pasos [aquí](https://www.youtube.com/watch?v=M5nTnAQqhT0).
