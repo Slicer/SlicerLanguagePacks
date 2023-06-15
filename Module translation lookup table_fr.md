@@ -55,7 +55,7 @@ You can now also use the Excel file version of this table (Module_translation_lo
 | Tableau des difficultés de traduction  |   |
 | ------------- | ------------- |
 | *  | Facile  |
-| **  | intermédiare  |
+| **  | intermédiaire  |
 | ***  | difficile  |
 
 Le niveau de difficulté est évalué en fonction de l'accessibilité de la compréhension du module pour un utilisateur qui n'est pas familier avec 3D Slicer et/ou les fonctionnalités du module.
