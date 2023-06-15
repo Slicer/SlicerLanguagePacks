@@ -52,10 +52,10 @@ You can now also use the Excel file version of this table (Module_translation_lo
 | DICOM   | Create DICOM Series  | ***  | [CLI_CreateDICOMSeries](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=1a81c7b547118336&q=data&sort_by=context)  |
 
 
-| Translation Difficulty Chart  |   |
+| Tableau des difficultés de traduction  |   |
 | ------------- | ------------- |
-| *  | easy  |
-| **  | intermediate  |
-| ***  | difficult  |
+| *  | Facile  |
+| **  | intermédiare  |
+| ***  | difficile  |
 
 Le niveau de difficulté est évalué en fonction de l'accessibilité de la compréhension du module pour un utilisateur qui n'est pas familier avec 3D Slicer et/ou les fonctionnalités du module.
