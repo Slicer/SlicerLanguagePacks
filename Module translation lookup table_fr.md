@@ -52,7 +52,7 @@ You can now also use the Excel file version of this table (Module_translation_lo
 | DICOM   | Create DICOM Series  | ***  | [CLI_CreateDICOMSeries](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=1a81c7b547118336&q=data&sort_by=context)  |
 
 
-| Tableau des difficultés de traduction  |   |
+| Niveau de difficulté  |   |
 | ------------- | ------------- |
 | *  | Facile  |
 | **  | intermédiaire  |
