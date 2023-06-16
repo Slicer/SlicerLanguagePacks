@@ -1,7 +1,7 @@
 le module "Translation Lookup Table" de 3D Slicer vise à servir de point d'entrée pour les contributeurs qui souhaitent participer à la traduction de 3D Slicer.
 La plateforme Web hébergeant les traductions de Slicer, Weblate, classe les chaînes de caractères sous des catégories identifiées par une **clé**. Cette classification suit la répartition des fichiers source du code 3D Slicer en modules. En termes simples, chaque lien vers une clé Weblate (dernière colonne à droite dans le tableau "Lookup Table") vous dirigera vers l'interface de traduction de Weblate de la première chaîne de caractères de la liste de chaînes contenues dans le module que vous avez choisi.
 
-**NOTE**: Les liens dans ce tableau vous redirigeront par défaut vers l'interface de traduction en français. Pour basculer et ajouter/modifier la traduction dans votre langue préférée, vous pouvez utiliser la fonctionnalité "autres langues" disponible sur l'interface, comme illustré ci-dessous.
+**NOTE**: Les liens dans ce tableau vous redirigeront par défaut vers l'interface de traduction en français. Pour basculer et ajouter/modifier la traduction dans votre langue préférée, vous pouvez utiliser la fonctionnalité "other languages" disponible sur l'interface, comme illustré ci-dessous.
 
 ![image](https://github.com/Slicer/SlicerLanguagePacks/assets/67284524/09ffc708-e7bd-41b6-a916-64007648deae)
 
