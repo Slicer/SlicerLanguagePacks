@@ -1,13 +1,13 @@
-3D Slicer Module Translation Lookup Table aims to serve as an entry point for new contributors to Slicer translations.
-The web-based platform hosting Slicer translations, Weblate, classifies the strings under categories identified by a "**key**". This classification follows 3D Slicer source code file distribution into modules. Simply put, each link to a Weblate key (the column on the far right in the Module Translation Lookup Table) will direct you to Weblate's translation interface of the first string of the list of strings contained in the module you picked.
+le module "Translation Lookup Table" de 3D Slicer vise à servir de point d'entrée pour les contributeurs qui souhaitent participer à la traduction de 3D Slicer.
+La plateforme Web hébergeant les traductions de Slicer, Weblate, classe les chaînes de caractères sous des catégories identifiées par une **clé**. Cette classification suit la répartition des fichiers source du code 3D Slicer en modules. En termes simples, chaque lien vers une clé Weblate (dernière colonne à droite) vous dirigera vers l'interface de traduction de Weblate de la première chaîne de caractères de la liste de chaînes contenues dans le module que vous avez choisi.
 
-**NOTE**: The links in this table will redirect you to the interface og the french Translation by default. To switch and add/edit the translation in your preferred language, you can use the "other languages" feature available on the interface as shown below.
+**NOTE**: Les liens dans cette table vous redirigeront par défaut vers l'interface de traduction en français. Pour basculer et ajouter/modifier la traduction dans votre langue préférée, vous pouvez utiliser la fonctionnalité "autres langues" disponible sur l'interface, comme illustré ci-dessous.
 
 ![image](https://github.com/Slicer/SlicerLanguagePacks/assets/67284524/09ffc708-e7bd-41b6-a916-64007648deae)
 
 You can now also use the Excel file version of this table (Module_translation_lookup_table_Attila.xlsx accessible [here](https://github.com/Slicer/SlicerLanguagePacks/releases/tag/TranslationResources)) that allows you to select the target langguage and updates the links accordingly so they redirect you the corresponding translation interface.
 
-| 3D Slicer Module Name | Subcategory | Level of Translation Difficulty | Link to 3D Slicer Weblate Key|
+| Nom du Module | sous-catégorie | Niveau de difficulté | liens vers Weblate|
 | ------------- | ------------- | ------------- | ------------- |
 | Slicer Welcome | Main  | *  | [qSlicerWelcomeModule](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=b14a7af15fa889c1&q=welcome&sort_by=context)  | 
 | Slicer Welcome  | Widget | * | [qSlicerWelcomeModuleWidget](https://hosted.weblate.org/translate/3d-slicer/3d-slicer/fr/?checksum=45304ec69f7d48e9&q=data&sort_by=context)  |
