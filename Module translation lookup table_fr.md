@@ -5,7 +5,7 @@ La plateforme Web hébergeant les traductions de Slicer (**Weblate**) classe les
 
 ![image](https://github.com/Slicer/SlicerLanguagePacks/assets/67284524/09ffc708-e7bd-41b6-a916-64007648deae)
 
-Vous pouvez également utiliser la version du tableau au format Excel  (Module_translation_lookup_table_Attila.xlsx accessible [here](https://github.com/Slicer/SlicerLanguagePacks/releases/tag/TranslationResources))qui vous permet de sélectionner la langue cible et met à jour les liens en conséquence afin qu'ils vous redirigent vers l'interface de traduction correspondante.
+Vous pouvez également utiliser la version du tableau au format Excel  (Module_translation_lookup_table_Attila.xlsx accessible [ici](https://github.com/Slicer/SlicerLanguagePacks/releases/tag/TranslationResources))qui vous permet de sélectionner la langue cible et met à jour les liens en conséquence afin qu'ils vous redirigent vers l'interface de traduction correspondante.
 
 | Nom du Module | sous-catégorie | Niveau de difficulté | liens vers Weblate|
 | ------------- | ------------- | ------------- | ------------- |
