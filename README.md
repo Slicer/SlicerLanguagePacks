@@ -36,6 +36,9 @@ Aidez à traduire le projet sur [Hosted Weblate](https://hosted.weblate.org/enga
 ### Português Brasileiro
 
   - [Como usar](HowToUse_pt-br.md)
+  - [Guia de Tradução](TranslationGuidelines_pt-br.md)
+  - [Tópicos Avançados](AdvancedUse_pt-br.md)
+  - [Manual do Desenvolvedor](DevelopersManual_pt-br.md)
 
   ### Español
 
