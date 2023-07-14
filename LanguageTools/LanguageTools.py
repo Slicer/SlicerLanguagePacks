@@ -586,6 +586,13 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
         self.log(f'Download translations for {component}/{language}...')
         fullDownloadUrl = f'{downloadUrl}/{component}/{language}'
         try:
+          if language == "zh-Hans":
+            tsFile = dataLogic.downloadFile(fullDownloadUrl, self.temporaryFolder(), f'{filename}_zh-CN.ts')
+            continue
+          if language == "zh-Hant":
+            tsFile = dataLogic.downloadFile(fullDownloadUrl, self.temporaryFolder(), f'{filename}_zh-TW.ts')
+            continue
+          #Fix Chinese Language Compatibility of Weblate translation
           tsFile = dataLogic.downloadFile(fullDownloadUrl, self.temporaryFolder(), f'{filename}_{language}.ts')
         except:
           logging.warning(f"Failed to download translation from: {fullDownloadUrl}")
