@@ -581,14 +581,19 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     import SampleData
     dataLogic = SampleData.SampleDataLogic()
 
+    import xml.etree.cElementTree as ET
     for (component, filename) in self.weblateComponents:
       for language in languages:
         self.log(f'Download translations for {component}/{language}...')
         fullDownloadUrl = f'{downloadUrl}/{component}/{language}'
         try:
           tsFile = dataLogic.downloadFile(fullDownloadUrl, self.temporaryFolder(), f'{filename}_{language}.ts')
-        except:
-          logging.warning(f"Failed to download translation from: {fullDownloadUrl}")
+          # Rename the file to ensure language code in filename matches language code defined in the file content
+          tree = ET.ElementTree(file=tsFile)
+          locale = tree.getroot().attrib['language'].replace("_", "-")  # such as 'zh-CN'
+          os.rename(tsFile,f'{self.temporaryFolder()}/{filename}_{locale}.ts')
+        except Exception as e:
+          logging.debug(f"Failed to download translation from: {fullDownloadUrl} -- {str(e)}")
           self.log("  Download failed. This component may not have been translated to the selected language.")
 
   def downloadTsFilesFromGithub(self, githubRepositoryUrl):
@@ -601,7 +606,9 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     # Download file
     import SampleData
     dataLogic = SampleData.SampleDataLogic()
-    translationZipFilePath = dataLogic.downloadFile(f'{githubRepositoryUrl}/archive/refs/heads/{self.slicerVersion}.zip', self.temporaryFolder(), 'GitHubTranslations.zip')
+    fullUrl = f'{githubRepositoryUrl}/archive/refs/heads/{self.slicerVersion}.zip'
+    logging.debug(f"Download translations from Github: {fullUrl}")
+    translationZipFilePath = dataLogic.downloadFile(fullUrl, self.temporaryFolder(), 'GitHubTranslations.zip')
 
     # Unzip file
     slicer.util.extractArchive(translationZipFilePath, tempFolder)
@@ -636,7 +643,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
       for tsFile in tsFiles:
         for file in tsFiles:
           tree = ET.ElementTree(file=file)
-          locale = tree.getroot().attrib['language']  # such as 'zh-CN'
+          locale = tree.getroot().attrib['language'].replace('_', '-')  # such as 'zh-CN'
           locales.add(locale)
       # Read patch file template that contains translations that will overwrite modality codes
       # in all languages.
