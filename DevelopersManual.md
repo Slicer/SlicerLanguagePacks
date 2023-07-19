@@ -238,4 +238,5 @@ Whenever a pull request is received that adds translation for a new extension:
     - `Add screenshots to show where strings are being used.`
     - `Use flags to indicate special strings in your translation.`
     - `Enable add-on: Add missing languages`
+- Add component to list of translation components in Language Tools module by editing [LanguageTools.py](https://github.com/Slicer/SlicerLanguagePacks/blob/main/LanguageTools/LanguageTools.py#L477). Note: instead of hardcoding components, the module should query the list of available translation components from Weblate (this issue is tracked at https://github.com/Slicer/SlicerLanguagePacks/issues/36).
 - Commment on the pull request that the translations can be added on Weblate.
