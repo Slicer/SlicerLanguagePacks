@@ -106,7 +106,7 @@ QString help = tr(
   );
 ```
 
-Do not translate like this, as the translatable strings would contain sentence fragments: 
+Do not translate like this, as the translatable strings would contain sentence fragments:
 
 ```
 // THIS IS WRONG!
@@ -142,7 +142,7 @@ If `tr()` calls are not correctly handled on the source code, some warnings may 
 
 #### Cannot invoke tr() like this
 
-Qt lupdate tool throws `Cannot invoke tr() like this` warnings when translation function is called using an object like `q->tr(...)`. The problem is that lupdate cannot determine the class name `tr()` is called on and therefore it does not know the translation context. 
+Qt lupdate tool throws `Cannot invoke tr() like this` warnings when translation function is called using an object like `q->tr(...)`. The problem is that lupdate cannot determine the class name `tr()` is called on and therefore it does not know the translation context.
 
 This problem may be solved by spelling out the class name in the call, for example `qSlicerScalarVolumeDisplayWidget::tr(...)`, as described in the previous sections.
 
@@ -190,3 +190,52 @@ set SLICER_BUILD=c:/D/S4D
 %PYTHON% %SLICER_SOURCE%\Utilities\Scripts\update_translations.py -t %TRANSLATIONS% --lupdate %LUPDATE% -v --component CTK -s %SLICER_BUILD%/CTK
 @echo Process output: %errorlevel%
 ```
+
+## How to make an extension translatable
+
+### Tasks for extension developer
+
+- Create source translation file for the extension in en-US locale using `update_translations.py`:
+
+In the following steps, `MyExtension` will be used as example, replace that by the actual extension name (e.g., `SlicerIGT`).
+
+Example (update paths according to locations on your computer):
+
+```
+set LUPDATE=c:\Qt6\6.3.0\msvc2019_64\bin\lupdate.exe
+set PYTHON=c:\Users\andra\AppData\Local\Programs\Python\Python39\python.exe
+set TRANSLATIONS=c:/D/SlicerLanguageTranslations/translations
+set SLICER_SOURCE=c:/D/S4
+%PYTHON% %SLICER_SOURCE%\Utilities\Scripts\update_translations.py -t %TRANSLATIONS% --lupdate %LUPDATE% -v --component MyExtension -s c:\D\MyExtension
+```
+- Contribute the newly created `MyExtension_en-US.ts` file to the https://github.com/Slicer/SlicerLanguageTranslations repository using a GitHub pull request.
+- Wait for SlicerLanguagePacks team to merge the pull request and create the new translation component. You will get updates about the progress via comments in the pull request.
+
+### Tasks for SlicerLanguagePacks team member
+
+Whenever a pull request is received that adds translation for a new extension:
+
+- Review and merge the pull request
+- Create a new component on weblate, using the extension name.
+  - Go to https://hosted.weblate.org/projects/3d-slicer/
+  - Click on the `+` button above the list of components
+  - Fill the form:
+    - Component name: extension name
+    - Source code repository: `https://github.com/Slicer/SlicerLanguageTranslations`
+    - Repository branch: `main`
+    - Click `Continue`
+  - Fill the `Choose translation files to import` form:
+    - Select: `File format Qt Linguist translation file, File mask translations/MyExtension_*.ts`
+    - Click `Continue`
+  - Fill the form:
+    - Version control system: `GitHub pull request`
+    - Template for new translations: `translations/MyExtension_en-US.ts`
+    - Translation license: `ISC License`
+    - Click `Save`
+  - Wait until the update is completed
+  - Check that these are the only warnings:
+    - `Configure repository hooks for automated flow of updates to Weblate.`
+    - `Add screenshots to show where strings are being used.`
+    - `Use flags to indicate special strings in your translation.`
+    - `Enable add-on: Add missing languages`
+- Commment on the pull request that the translations can be added on Weblate.
