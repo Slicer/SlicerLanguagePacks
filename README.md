@@ -28,7 +28,7 @@ Aidez à traduire le projet sur [Hosted Weblate](https://hosted.weblate.org/enga
   - [Comment utiliser](HowToUse_fr.md)
   - [Sujets avancés](AdvancedUse_fr.md)
   - [Directives de traduction](TranslationGuidelines_fr.md)
-  - [Glossaire](Gossary_fr.md)
+  - [Glossaire](Glossary_fr.md)
 
 ### Hungarian
 
