@@ -1,8 +1,8 @@
-Glossaire
+### Glossaire
 
 Les termes utilisés dans divers domaines de l'informatique médicale et biomédicale ainsi que dans les images cliniques ne sont pas toujours cohérents. Cette section définit les termes couramment utilisés dans 3D Slicer, en particulier ceux qui peuvent avoir des significations différentes dans d'autres contextes.
 
-Limites: Décrit la boîte englobante d'un objet spatial le long de 3 axes. Défini en VTK par 6 valeurs à virgule flottante : Xmin, Xmax, Ymin, Ymax, Zmin, Zmax.
+ Limites: Décrit la boîte englobante d'un objet spatial le long de 3 axes. Défini en VTK par 6 valeurs à virgule flottante : Xmin, Xmax, Ymin, Ymax, Zmin, Zmax.
 
 Luminosité / Contraste : Spécifie la correspondance linéaire des valeurs de voxel à la luminosité d'un pixel affiché. La luminosité est décalage linéaire, le contraste est le multiplicateur. En imagerie médicale, cette correspondance linéaire est plus communément spécifiée par des valeurs de fenêtre/niveau.
 
