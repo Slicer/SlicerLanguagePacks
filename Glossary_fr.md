@@ -10,82 +10,82 @@ Cellule : Les cellules de données sont des éléments topologiques simples de m
 
 Légende des couleurs (ou barre de couleur, barre scalaire) : Un widget superposé sur des vues en coupes ou en 3D qui affiche une légende des couleurs, indiquant la signification des couleurs.
 
-Coordinate system (or coordinate frame, reference frame, space): Specified by the position of origin, axis directions, and distance unit. All coordinate systems in 3D Slicer are right-handed.
+Système de coordonnées (ou cadre de coordonnées, référentiel, espace) :Spécifié par la position de l'origine, les directions des axes et l'unité de distance. Tous les systèmes de coordonnées en 3D Slicer sont droitiers.
 
-Extension (or Slicer extension): A collection of modules that is not bundled with the core application but can be downloaded and installed using the Extensions manager.
+Extension: Une collection de modules qui n'est pas incluse dans l'application principale, mais qui peut être téléchargée et installée à l'aide du gestionnaire d'extensions.
 
-Extensions manager: A software component of Slicer that allows browsing, installing, uninstalling extensions in the Extensions catalog (also known as the Slicer app store) directly from the application.
+Gestionnaire d'extensions: Un composant logiciel de Slicer qui permet de parcourir, d'installer et de désinstaller des extensions dans le catalogue des extensions (également connu sous le nom de boutique d'applications Slicer) directement à partir de l'application.
 
-Extensions index: A repository that contains description of each extension that the Extension catalog is built from.
+Index des extensions : Un référentiel qui contient la description de chaque extension à partir duquel le catalogue des extensions est construit.
 
-Extent: Range of integer coordinates along 3 axes. Defined in VTK by 6 values, for IJK axes: I_min, I_max, J_min, J_max, K_min, K_max. Both minimum and maximum values are inclusive, therefore size of an array is (I_max - I_min + 1) x (J_max - J_min + 1) x (K_max - K_min + 1).
+Étendue : Plage de coordonnées entières le long de 3 axes. Défini en VTK par 6 valeurs, pour les axes IJK : I_min, I_max, J_min, J_max, K_min, K_max. Les valeurs minimales et maximales sont inclusives, donc la taille d'un tableau est (I_max - I_min + 1) x (J_max - J_min + 1) x (K_max - K_min + 1).
 
-Fiducial: Represents a point in 3D space. The term originates from image-guided surgery, where “fiducial markers” are used to mark point positions.
+Repère fiducial : Représente un point dans l'espace 3D. Le terme provient de la chirurgie guidée par l'image, où des "marqueurs fiduciaires" sont utilisés pour marquer les positions des points.
 
-Frame: One time point in a time sequence. To avoid ambiguity, this term is not used to refer to a slice of a volume.
+Cadre : Un point temporel dans une séquence temporelle. Pour éviter toute ambiguïté, ce terme n'est pas utilisé pour désigner une coupe d'un volume.
 
-Geometry: Specifies location and shape of an object in 3D space. See “Volume” term for definition of image geometry.
+Géométrie : Spécifie l'emplacement et la forme d'un objet dans l'espace 3D. Voir le terme "Volume" pour la définition de la géométrie d'image.
 
-Image intensity: Typically refers to the value of a voxel. Displayed pixel brightness and color is computed from this value based on the chosen window/level and color lookup table.
+Intensité de l'image : Elle réfère généralement à la valeur d'un voxel. La luminosité et la couleur des pixels affichés sont calculées à partir de cette valeur en fonction de la fenêtre/niveau choisie et de la table de recherche de couleurs.
 
-IJK: Voxel coordinate system axes. Integer coordinate values correspond to voxel center positions. IJK values are often used as coordinate values to designate an element within a 3D array. By VTK convention, and I indexes the column, J indexes the row, K indexes the slice. Note that numpy uses the opposite ordering convention, where a[K][J][I]. Sometimes this memory layout is described as I being the fastest moving index and K being the slowest moving.
+IJK : Axes du système de coordonnées du voxel. Les valeurs de coordonnées entières correspondent aux positions centrales des voxels. Les valeurs IJK sont souvent utilisées comme valeurs de coordonnées pour désigner un élément dans un tableau 3D. Selon la convention VTK, I indexe la colonne, J indexe la ligne, K indexe la tranche. Notez que numpy utilise la convention inverse, où a[K][J][I]. Parfois, cette disposition de la mémoire est décrite comme I étant l'indice le plus rapide et K étant l'indice le plus lent.
 
-ITK: Insight Toolkit. Software library that Slicer uses for most image processing operations.
+ITK : Bibliothèque logicielle utilisée par Slicer pour la plupart des opérations de traitement d'image.
 
-Labelmap (or labelmap volume, labelmap volume node): Volume node that has discrete (integer) voxel values. Typically each value corresponds to a specific structure or region. This allows compact representation of non-overlapping regions in a single 3D array. Most software use a single labelmap to store an image segmentation, but Slicer uses a dedicated segmentation node, which can contain multiple representations (multiple labelmaps to allow storing overlapping segments; closed surface representation for quick 3D visualization, etc.).
+Labelmap /Carte d'étiquette (ou volume de labelmap, nœud de volume de labelmap) : Nœud de volume qui a des valeurs de voxel discrètes (entières). Chaque valeur correspond généralement à une structure ou à une région spécifique. Cela permet une représentation compacte de régions non superposées dans un seul tableau 3D. La plupart des logiciels utilisent une seule image de labelmap pour stocker une segmentation d'image, mais Slicer utilise un nœud de segmentation dédié, qui peut contenir plusieurs représentations (multiples images de labelmap pour permettre le stockage de segments superposés ; représentation de surface fermée pour une visualisation 3D rapide, etc.).
 
-LPS: Left-posterior-superior anatomical coordinate system. Most commonly used coordinate system in medical image computing. Slicer stores all data in LPS coordinate system on disk (and converts to/from RAS when writing to or reading from disk).
+LPS (Left-posterior-superior) :Système de coordonnées anatomiques gauche-postérieur-supérieur. Système de coordonnées le plus couramment utilisé en informatique médicale d'imagerie. Slicer stocke toutes les données dans le système de coordonnées LPS sur le disque (et convertit en/from RAS lors de l'écriture/lecture depuis le disque).
 
-Markups: Simple geometric objects and measurements that the user can place in viewers. Markups module can be used to create such objects. There are several types, such as point list, line, curve, plane, ROI.
+Markups: Objets géométriques simples et mesures que l'utilisateur peut placer dans les vues. Le module "Markups" peut être utilisé pour créer de tels objets. Il existe plusieurs types, tels que liste de points, ligne, courbe, plan, ROI (Région d'Intérêt).
 
-Source volume: Voxel values of this volume is used during segmentation by those effects that rely on the intensity of an underlying volume.
+Volume source : Les valeurs de voxel de ce volume sont utilisées pendant la segmentation par les effets qui dépendent de l'intensité d'un volume sous-jacent.
 
-MRML: Medical Reality Markup Language: Software library for storage, visualization, and processing of information objects that may be used in medical applications. The library is designed to be reusable in various software applications, but 3D Slicer is the only major application that is known to use it.
+MRML (Medical Reality Markup Language): Une bibliothèque logicielle pour le stockage, la visualisation et le traitement d'objets d'informations qui peuvent être utilisés dans des applications médicales. La bibliothèque est conçue pour être réutilisable dans différentes applications logicielles, mais 3D Slicer est la seule application majeure connue pour l'utiliser.
 
-Model (or model node): MRML node storing surface mesh (consists of triangle, polygon, or other 2D cells) or volumetric mesh (consists of tetrahedral, wedge, or other 3D cells)
+Modèle (ou nœud de modèle) : Nœud MRML stockant un maillage de surface (composé de triangles, polygones ou autres cellules 2D) ou un maillage volumétrique (composé de tétraèdres, de coins ou d'autres cellules 3D).
 
-Module (or Slicer module): A Slicer module is a software component consisting of a graphical user interface (that is displayed in the module panel when the module is selected), a logic (that implements algorithms that operate on MRML nodes), and may provide new MRML node types, displayable managers (that are responsible for displaying those nodes in views), input/output plugins (that are responsible for load/save MRML nodes in files), and various other plugins. Modules are typically independent and only communicate with each other via modifying MRML nodes, but sometimes a module use features provided by other modules by calling methods in its logic.
+Module (ou module Slicer) : Un module Slicer est un composant logiciel composé d'une interface utilisateur graphique (affichée dans le panneau du module lorsque le module est sélectionné), d'une logique (implémentant des algorithmes qui opèrent sur les nœuds MRML) et peut fournir de nouveaux types de nœuds MRML, des gestionnaires d'affichage (responsables de l'affichage de ces nœuds dans les vues), des greffons d'entrée/sortie (responsables du chargement/sauvegarde de nœuds MRML dans des fichiers) et divers autres greffons. Les modules sont généralement indépendants et ne communiquent entre eux que par la modification des nœuds MRML, mais parfois, un module utilise des fonctionnalités fournies par d'autres modules en appelant des méthodes dans sa logique
 
-Node (or MRML node): One data object in the scene. A node can represent data (such as an image or a mesh), describe how it is displayed (color, opacity, etc.), stored on disk, spatial transformations applied on them, etc. There is a C++ class hierarchy to define the common behaviors of nodes, such as the property of being storable on disk or being geometrically transformable. The structure of this class hierarchy can be inspected in the code or in the API documentation.
+Nœud (ou nœud MRML) : Un objet de données dans la scène. Un nœud peut représenter des données (comme une image ou un maillage), décrire comment elles sont affichées (couleur, opacité, etc.), stockées sur le disque, les transformations spatiales qui leur sont appliquées, etc. Il existe une hiérarchie de classes C++ pour définir les comportements communs des nœuds, tels que la propriété d'être stockable sur le disque ou d'être transformable géométriquement. La structure de cette hiérarchie de classes peut être inspectée dans le code ou dans la documentation de l'API.
 
-Orientation marker: Arrow, box, or human shaped marker to show axis directions in slice views and 3D views.
+Marqueur d'orientation : Flèche, boîte ou marqueur en forme d'humain pour montrer les directions des axes dans les vues en tranches et en 3D.
 
-RAS: Right-anterior-superior anatomical coordinate system. Coordinate system used internally in Slicer. It can be converted to/from LPS coordinate system by inverting the direction of the first two axes.
+RAS (Right-anterior-superior) : Système de coordonnées anatomiques droite-antéro-supérieure. Système de coordonnées utilisé en interne dans Slicer. Il peut être converti vers/depuis le système de coordonnées LPS en inversant la direction des deux premiers axes.
 
-Reference: Has no specific meaning, but typically refers to a secondary input (data object, coordinate frame, geometry, etc.) for an operation.
+Référence : Elle (la référence) n'a pas de signification spécifique, mais fait généralement référence à une entrée secondaire (objet de données, cadre de coordonnées, géométrie, etc.) pour une opération.
 
-Region of interest (ROI): Specifies a box-shaped region in 3D. Can be used for cropping volumes, clipping models, etc.
+ROI (Region of interest) : Spécifie une région en forme de boîte en 3D. Peut être utilisée pour rogner des volumes, découper des modèles, etc.
 
-Registration: The process of aligning objects in space. Result of the registration is a transform, which transforms the “moving” object to the “fixed” object.
+Enregistrement : processus d'alignement d'objets dans l'espace. Le résultat de l'enregistrement est une transformation, qui transforme l'objet "en mouvement" en objet "fixe".
 
-Resolution: Voxel size of a volume, typically specified in mm/pixel. It is rarely used in the user interface because its meaning is slightly misleading: high resolution value means large spacing, which means coarse (low) image resolution.
+Résolution: Taille du voxel d'un volume, généralement spécifiée en mm/pixel. Elle est rarement utilisée dans l'interface utilisateur car son sens est légèrement trompeur : une valeur de haute résolution signifie un grand espacement, ce qui correspond à une résolution d'image grossière (basse).
 
-Ruler: It may refer to: 1. View ruler: The line that is displayed as an overlay in viewers to serve as a size reference. 2. Markups line: distance measurement tool.
+Régle : Cela peut se référer à : 1. Règle d'affichage : La ligne qui est affichée en superposition dans les vues pour servir de référence de taille. 2. Ligne de marquage : outil de mesure de distance.
 
-Scalar component: One element of a vector. Number of scalar components means the length of the vector.
+Composant scalaire : Un élément d'un vecteur. Le nombre de composants scalaires correspond à la longueur du vecteur.
 
-Scalar value: A simple number. Typically floating-point.
+Valeur scalaire : Un nombre simple . Généralement à virgule flottante.
 
-Scene (or MRML scene): This is the data structure that contains all the data that is currently loaded into the application and additional information about how they should be displayed or used. The term originates from computer graphics.
+Scène (ou scène MRML) : C'est la structure de données qui contient toutes les données actuellement chargées dans l'application et des informations supplémentaires sur la façon dont elles doivent être affichées ou utilisées. Le terme provient de l'infographie.
 
-Segment: Corresponds to a single structure in a segmentation. See more information in the Image segmentation section.
+Segment :Correspond à une structure unique dans une segmentation. Voir plus d'informations dans la section Segmentation d'image.
 
-Segmentation (also known as contouring, annotation; region of interest, structure set, mask): Process of delineating 3D structures in images. Segmentation can also refer to the MRML node that is the result of the segmentation process. A segmentation node typically contains multiple segments (each segment corresponds to one 3D structure). Segmentation nodes are not labelmap nodes or model nodes but they can store multiple representations (binary labelmap, closed surface, etc.). See more information in Image segmentation section.
+Segmentation (également connue sous le nom de délimitation, annotation, ensemble de structures, masque) : Processus de délimitation de structures 3D dans des images. La segmentation peut également se référer au nœud MRML qui est le résultat du processus de segmentation. Un nœud de segmentation contient généralement plusieurs segments (chaque segment correspond à une structure 3D). Les nœuds de segmentation ne sont pas des nœuds de labelmap ou de modèle, mais ils peuvent stocker plusieurs représentations (labelmap binaire, surface fermée, etc.). Voir plus d'informations dans la section Segmentation d'image.
 
-Slice: Intersection of a 3D object with a plane.
+Coupe : Intersection d'un objet 3D avec un plan.
 
-Slice view annotations: text in corner of slice views displaying name, and selected DICOM tags of the displayed volumes
+Annotations des vues en coupe : texte dans le coin des vues en coupes affichant le nom et les balises DICOM sélectionnées des volumes affichés.
 
-Spacing: Voxel size of a volume, typically specified in mm/pixel.
+Espacement : Taille du voxel d'un volume, généralement spécifiée en mm/pixel.
 
-Transform (or transformation): Can transform any 3D object from one coordinate system to another. Most common type is rigid transform, which can change position and orientation of an object. Linear transforms can scale, mirror, shear objects. Non-linear transforms can arbitrarily warp the 3D space. To display a volume in the world coordinate system, the volume has to be resampled, therefore transform from the world coordinate system to the volume is needed (it is called the resampling transform). To transform all other node types to the world coordinate system, all points must be transformed to the world coordinate system (modeling transform). Since a transform node must be applicable to any nodes, transform nodes can provide both from and to the parent (store one and compute the other on-the-fly).
+Transformation : Peut transformer n'importe quel objet 3D d'un système de coordonnées à un autre. Le type le plus courant est la transformation rigide, qui peut changer la position et l'orientation d'un objet. Les transformations linéaires peuvent mettre à l'échelle, refléter, ciseler les objets. Les transformations non linéaires peuvent déformer arbitrairement l'espace 3D. Pour afficher un volume dans le système de coordonnées du monde, le volume doit être rééchantillonné, donc une transformation du système de coordonnées du monde au volume est nécessaire (elle est appelée transformation de rééchantillonnage). Pour transformer tous les autres types de nœuds dans le système de coordonnées du monde, tous les points doivent être transformés dans le système de coordonnées du monde (transformation de modélisation). Étant donné qu'un nœud de transformation doit être applicable à n'importe quel nœud, les nœuds de transformation peuvent fournir à la fois "de" et "vers" le parent (stocker un et calculer l'autre à la volée).
 
-Volume (or volume node, scalar volume, image): MRML node storing 3D array of voxels. Indices of the array are typically referred to as IJK. Range of IJK coordinates are called extents. Geometry of the volume is specified by its origin (position of the IJK=(0,0,0) point), spacing (size of a voxel along I, J, K axes), axis directions (direction of I, J, K axes in the reference coordinate system) with respect to a frame of reference. 2D images are single-slice 3D volumes, with their position and orientation specified in 3D space.
+Volume (ou nœud de volume, volume scalaire, image) :  Nœud MRML stockant un tableau 3D de voxels. Les indices du tableau sont généralement désignés sous le nom de IJK. L'étendue des coordonnées IJK est appelée étendue. La géométrie du volume est spécifiée par son origine (position du point IJK=(0,0,0)), son espacement (taille d'un voxel le long des axes I, J, K), les directions des axes (direction des axes I, J, K dans le système de coordonnées de référence) par rapport à un référentiel. Les images 2D sont des volumes 3D à une seule tranche, dont la position et l'orientation sont spécifiées dans l'espace 3D.
 
-Voxel: One element of a 3D volume. It has a rectangular prism shape. Coordinates of a voxel correspond to the position of its center point. Value of a voxel may be a simple scalar value or a vector.
+Voxel :Un élément d'un volume 3D. Il a une forme de prisme rectangulaire. Les coordonnées d'un voxel correspondent à la position de son point central. La valeur d'un voxel peut être une valeur scalaire simple ou un vecteur.
 
-VR: Abbreviation that can refer to volume rendering or virtual reality. To avoid ambiguity it is generally recommended to use the full term instead (or explicitly define the meaning of the abbreviation in the given context).
+VR: Abréviation qui peut se référer au rendu de volume ou à la réalité virtuelle. Pour éviter toute ambiguïté, il est généralement recommandé d'utiliser le terme complet (ou de définir explicitement la signification de l'abréviation dans le contexte donné).
 
-VTK: Visualization Toolkit. Software library that Slicer uses for to data representation and visualization. Since most Slicer classes are derived from VTK classes and they heavily use other VTK classes, Slicer adopted many conventions of VTK style and application programming interface.
+VTK (Visualization Toolkit) : Bibliothèque logicielle utilisée par Slicer pour la représentation et la visualisation des données. Étant donné que la plupart des classes Slicer sont dérivées des classes VTK et qu'elles utilisent largement d'autres classes VTK, Slicer a adopté de nombreuses conventions du style et de l'interface de programmation de VTK.
 
-Window/level (or window width/window level): Specifies linear mapping of voxel values to the brightness of a displayed pixel. Window is the size of the intensity range that is mapped to the full displayable intensity range. Level is the voxel value that is mapped to the center of the full displayable intensity range.
+Fenêtre/niveau (ou largeur de fenêtre/niveau de fenêtre): Spécifie la correspondance linéaire des valeurs de voxel à la luminosité d'un pixel affiché. La fenêtre est la plage d'intensité qui est mappée sur la plage d'intensité complète affichable. Le niveau est la valeur du voxel qui est mappée au centre de la plage d'intensité complète affichable.
