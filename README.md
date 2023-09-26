@@ -30,9 +30,6 @@ Aidez à traduire le projet sur [Hosted Weblate](https://hosted.weblate.org/enga
   - [Directives de traduction](TranslationGuidelines_fr.md)
   - [Glossaire](Glossary_fr.md)
 
-### Hungarian
-
-  - [Útmutató magyarra fordításhoz](TranslationGuidelines_hu.md)
 
 ### Português Brasileiro
 
@@ -49,3 +46,7 @@ Aidez à traduire le projet sur [Hosted Weblate](https://hosted.weblate.org/enga
   - [Temas avanzados](AdvancedUse_esp.md)
   - [Manual para Desarrolladores](DevelopersManual_esp.md)
   - [Glosario](Glossary_es.md)
+
+### Hungarian
+
+- [Útmutató magyarra fordításhoz](TranslationGuidelines_hu.md)
