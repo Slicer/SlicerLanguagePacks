@@ -35,7 +35,7 @@ Aidez à traduire le projet sur [Hosted Weblate](https://hosted.weblate.org/enga
 
 Extensão [3D Slicer] (https://www.slicer.org) para criar, editar e armazenar traduções para o núcleo e as extensões do Slicer.
 
-Ajude a traduzir o projeto em [Hosted Weblate] (https://hosted.weblate.org/engage/3d-slicer/). Como traduzir? Veja os links da documentação abaixo.
+Ajude a traduzir o projeto em [Hosted Weblate](https://hosted.weblate.org/engage/3d-slicer/). Como traduzir? Veja os links da documentação abaixo.
 
   - [Como usar](HowToUse_pt-br.md)
   - [Guia de Tradução](TranslationGuidelines_pt-br.md)
@@ -45,7 +45,7 @@ Ajude a traduzir o projeto em [Hosted Weblate] (https://hosted.weblate.org/engag
 
   ### Español
 
-  Extensión de [3D Slicer](https://www.slicer.org/) para la creación, edición y almacenamiento de traducciones para el núcleo y extensiones de Slicer.
+  Extensión de 3D Slicer para la creación, edición y almacenamiento de traducciones para el núcleo y extensiones de Slicer.
 Ayuda a traducir el proyecto en [Hosted Weblate](https://hosted.weblate.org/engage/3d-slicer/). ¿Cómo traducir? Consulta la documentación en los siguientes enlaces:
 
   - [Como se usa](HowToUse_es_419.md)
