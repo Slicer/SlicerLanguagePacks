@@ -26,8 +26,8 @@ Extension 3D Slicer pour la création, l'édition et le stockage de traductions 
 Aidez à traduire le projet sur [Hosted Weblate](https://hosted.weblate.org/engage/3d-slicer/). Comment traduire ? Consultez les liens de documentation ci-dessous.
 
   - [Comment utiliser](HowToUse_fr.md)
-  - [Sujets avancés](AdvancedUse_fr.md)
   - [Directives de traduction](TranslationGuidelines_fr.md)
+  - [Sujets avancés](AdvancedUse_fr.md)
   - [Glossaire](Glossary_fr.md)
 
 
