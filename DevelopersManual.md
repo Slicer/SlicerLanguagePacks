@@ -169,7 +169,7 @@ from slicer.i18n import tr as _
 from slicer.i18n import translate
 ```
 
-Translate strings using `_()` function. Note that module categories are translated using the `qSlicerAbstractCoreModule` context.
+Translate strings using `_(translatableString)` function (more convenient, as context is determined automatically) or `translate(contextName, translatableString)` function. Note that module categories are translated using the `qSlicerAbstractCoreModule` context.
 
 ```python
 ...
