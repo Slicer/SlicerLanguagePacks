@@ -35,9 +35,9 @@ Properties that **must be marked as non-translatable in Qt designer** by uncheck
 
 ![](Docs/DesignerMarkAsNonTranslatable.png)
 
-## Correctly using the translation function
+## Preparing Qt-based C++ source files for translation
 
-Wherever your program uses a string litteral (quoted text) that will be displayed in the user interface, make sure to get it processed by the [*translation function*](https://doc.qt.io/qt-5/i18n-source-translation.html#using-tr-for-all-literal-text). In source codes, `tr()` is indeed used to mark translatable strings so that, at runtime, `Qt` may replace them by their translated version that corresponds to the display language.
+Wherever your program uses a string literal (quoted text) that will be displayed in the user interface, make sure to get it processed by the [*translation function*](https://doc.qt.io/qt-5/i18n-source-translation.html#using-tr-for-all-literal-text). In source codes, `tr()` is indeed used to mark translatable strings so that, at runtime, `Qt` may replace them by their translated version that corresponds to the display language.
 
 In the translation process, it's very important to know how to correctly call `tr()` since it determines the context that will be associated with any string when it's about to translate it.
 
@@ -66,7 +66,7 @@ class MainWindow : public QMainWindow
 
 > **_NOTE:_**  To avoid errors with some build tools (e.g. cmake), it's recommanded to always declare classes with Q_OBJECT macro in the header file (.h), not in the implementation one (.cpp). If for any reason your QObject class must be declared in the .cpp file (**e.g.** low level implementation classes), we recommand not to add the Q_OBJECT macro to that class, but rather, to prefix all `tr()` calls with the associated public class as follows : `PublicClassName::tr("text to translate")`
 
-### How to use *tr ()* in non-QObject classes
+### How to use *tr()* in non-QObject classes
 
 Non-QObject classes don't have a translation function, so directly calling `tr()` on them may result in errors.
 
@@ -97,7 +97,7 @@ QString help = QString(
   );
 ```
 
-Translate such multiline strings using one `tr()` function like this to allow translators to translate complete senetences:
+Translate such multiline strings using one `tr()` function like this to allow translators to translate complete sentences:
 
 ```
 QString help = tr(
@@ -152,6 +152,41 @@ Qt lupdate tool throws `Class 'SomeClassName' lacks Q_OBJECT macro` warnings whe
 
 The solution is to add the `Q_OBJECT` macro in the class where `tr()` is called, or, in case of classes that should not be exposed (private classes, low level implementation classes, ...), to prefix `tr()` calls with the associated public class, as described in the previous sections.
 
+## Preparing VTK-based C++ source files for translation
+
+Use the `vtkMRMLTr(context, sourceText)` macro for translating text that will be displayed to users (such as error messages). `context` must be set to the VTK class. For example:
+
+    std::string fileType = vtkMRMLTr("vtkMRMLLinearTransformSequenceStorageNode", "Linear transform sequence");
+
+Placeholders (strings that are replaced by values at runtime) are currently not supported.
+
+## Preparing Python source files for translation
+
+Import `_` and `translate` methods from `slicer.i18n`:
+
+```python
+from slicer.i18n import tr as _
+from slicer.i18n import translate
+```
+
+Translate strings using `_()` function. Note that module categories are translated using the `qSlicerAbstractCoreModule` context.
+
+```python
+...
+class ImportItkSnapLabel(ScriptedLoadableModule):
+    def __init__(self, parent):
+        ScriptedLoadableModule.__init__(self, parent)
+        self.parent.title = _("Import ITK-Snap label description")
+        self.parent.categories = [translate("qSlicerAbstractCoreModule", "Informatics")]
+        ...
+```
+
+You can use Python-style named placeholders:
+```
+someMessage = _("{missing_file_count} of {total_file_count} selected files listed in the database cannot be found on disk.").format(
+                    missing_file_count=missingFileCount, total_file_count=allFileCount))
+```
+
 ## Identifying translatable strings
 
 In the translation process, only strings that are displayed at the user interface level should be considered. Thus, strings refering to module names, file contents, file extensions, developer communications such as log messages (e.g. `PrintSelf` or `qCritical` outputs ) or any developer-related content, should be considered as non translatable.
@@ -160,8 +195,8 @@ To make it clear that a string must not be translated, `/*no tr*/` comment can b
 
 ## Using common base classes for shared strings
 
-To prevent duplication of source strings, a `tr()` method of a common base class should be used for the following strins:
-- Module category names (`Informatics`, `Registration`, `Segmentation`, ...) should be translated using `qSlicerAbstractCoreModule::tr()`
+To prevent duplication of source strings, a `tr()` method of a common base class should be used for the following strings:
+- Module category names (`Informatics`, `Registration`, `Segmentation`, ...) should be translated using `qSlicerAbstractCoreModule::tr("SomeCategory")` in C++ and `translate("qSlicerAbstractCoreModule", "SomeCategory")` in Python.
 
 ## Extract translatable strings
 
