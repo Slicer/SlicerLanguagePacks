@@ -474,7 +474,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self.customLreleasePath = None
     self._temporaryFolder = None
     self.translationFilesFolder = None
-    self.weblateComponents = [("3d-slicer", "Slicer"), ("ctk", "CTK")]
+    self.weblateComponents = self.getWeblateComponents()
     self.weblateEditTranslationUrl = "https://hosted.weblate.org/translate/3d-slicer"
     self.preferredLanguage = "fr-FR"
     self.gitRepositoryName = "SlicerLanguageTranslations"
@@ -529,6 +529,28 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
       languages = json.loads(settings.value(languagesSettingsKey))
 
     return languages
+
+  def getWeblateComponents(self):
+    """Query list of 3d-slicer components available on Weblate.
+    Each component is a tuple of the component slug and its name like
+    The returned list looks like this: [("3d-slicer", "Slicer"), ("ctk", "CTK")]
+    """
+    import requests
+    result = requests.get('https://hosted.weblate.org/api/projects/3d-slicer/components/', {'format': 'json'})
+    if not result.ok:
+      raise RuntimeError(f"Failed to query list of components from Weblate ({result.status_code}:{result.reason})")
+    components = result.json()['results']
+    weblateComponents = []
+    for component in components:
+      if component['name'] == 'Glossary':
+        # Glossary component is ignored, its text is not showed in Slicer GUI
+        continue;
+      elif component['name'] == '3D Slicer':
+        # For Backward compatibility, in the generated filename
+        component['name'] = 'Slicer'
+      weblateComponents.append((component['slug'],  component['name'].replace(' ', '')))
+
+    return weblateComponents;
 
   def temporaryFolder(self):
     if not self._temporaryFolder:
