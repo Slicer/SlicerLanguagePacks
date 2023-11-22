@@ -42,7 +42,7 @@ As mentioned above, you may have multiple occurrences of a term in the same modu
 ![](Docs/TranslationGuidelines/nearbyStrings2.png)
 
 ### "Source string location"
-The `source string location` tag on Weblate can help you go one level further and find exactly **which line of code contains the string** you are currently translating. It can be found in the `String Information` box on the lower right
+The `source string location` tag on Weblate can help you go one level further and find exactly **which line of code contains the string** you are currently translating. It can be found in the `String Information` box on the lower right.
 
 ![](Docs/TranslationGuidelines/stringlocation1.png)
 
@@ -72,7 +72,7 @@ The suggestion can then be approved or edited or discarded by yourself or anothe
 This option is useful in case you are unsure of the translation you submitted and you would like to take the time to understand the term better before confirming it or you would like to get a second opinion from other users.
 
 ### The comments section
-Weblate also offers the possibility to leave a comment on a string’s translation page. This allows you to engage with other contributors in your language and start a conversation about the understanding each of you have of the term and eventually agree on a common meaning and translation
+Weblate also offers the possibility to leave a comment on a string’s translation page. This allows you to engage with other contributors in your language and start a conversation about the understanding each of you have of the term and eventually agree on a common meaning and translation.
 
 ![](Docs/TranslationGuidelines/comments1.png) 
 
@@ -110,7 +110,7 @@ For consistent style, it is important for all translators for a specific languag
 ## 6. Glossary terms
 
 Some English words are used in Slicer with a very specific meaning. For example `volume` refers to a 3D image.
-Some of these words are listed in the [Slicer Glossary](https://slicer.readthedocs.io/en/latest/user_guide/getting_started.html#glossary).
+Some of these words are listed in the [Slicer Glossary].(https://slicer.readthedocs.io/en/latest/user_guide/getting_started.html#glossary).
 
 When translating these words to another language, it often makes sense to not translate these words directly,
 but find a word that better describes the actual meaning, and translate that word. For example, instead of translating
