@@ -123,14 +123,11 @@
         <property name="toolTip">
          <string>Folder containing translation (.ts) files.</string>
         </property>
-        <property name="filters">
-         <set>ctkPathLineEdit::Dirs|ctkPathLineEdit::Drives|ctkPathLineEdit::Executable|ctkPathLineEdit::NoDot|ctkPathLineEdit::NoDotDot|ctkPathLineEdit::Readable</set>
-        </property>
         <property name="settingKey">
-         <string>Internationalization/LanguageTools/LocalTsFolderPathHistory</string>
+         <string notr="true">Internationalization/LanguageTools/LocalTsFolderPathHistory</string>
         </property>
         <property name="nameFilters">
-         <stringlist>
+         <stringlist notr="true">
           <string>*</string>
          </stringlist>
         </property>
@@ -213,6 +210,9 @@
         <property name="toolTip">
          <string>Path to Qt lrelease executable. Leave empty to use default (the one bundled with the Slicer installer or available in system paths).</string>
         </property>
+        <property name="settingKey">
+         <string notr="true"/>
+        </property>
         <property name="showHistoryButton">
          <bool>false</bool>
         </property>
@@ -231,7 +231,7 @@
          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;master, 4.13, 4.14, ...&lt;/p&gt;&lt;p&gt;Only used for GitHub.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
         </property>
         <property name="text">
-         <string>master</string>
+         <string notr="true">main</string>
         </property>
        </widget>
       </item>
@@ -262,7 +262,7 @@
       <item row="2" column="1">
        <widget class="QLineEdit" name="weblateDownloadUrlEdit">
         <property name="toolTip">
-         <string>Github repository that stores the translated strings.</string>
+         <string>Weblate project that stores the translated strings.</string>
         </property>
         <property name="text">
          <string/>
@@ -334,7 +334,7 @@
       <item row="1" column="1">
        <widget class="QLineEdit" name="textFinderLanguageEdit">
         <property name="text">
-         <string>fr-FR</string>
+         <string notr="true">fr-FR</string>
         </property>
        </widget>
       </item>
@@ -344,12 +344,6 @@
   </layout>
  </widget>
  <customwidgets>
-  <customwidget>
-   <class>qMRMLWidget</class>
-   <extends>QWidget</extends>
-   <header>qMRMLWidget.h</header>
-   <container>1</container>
-  </customwidget>
   <customwidget>
    <class>ctkCheckableComboBox</class>
    <extends>QComboBox</extends>
@@ -375,6 +369,12 @@
    <class>ctkPathLineEdit</class>
    <extends>QWidget</extends>
    <header>ctkPathLineEdit.h</header>
+  </customwidget>
+  <customwidget>
+   <class>qMRMLWidget</class>
+   <extends>QWidget</extends>
+   <header>qMRMLWidget.h</header>
+   <container>1</container>
   </customwidget>
  </customwidgets>
  <resources/>

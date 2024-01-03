@@ -2,6 +2,8 @@ import os
 import unittest
 import logging
 import vtk, qt, ctk, slicer
+from slicer.i18n import tr as _
+from slicer.i18n import translate
 from slicer.ScriptedLoadableModule import *
 from slicer.util import VTKObservationMixin
 
@@ -16,17 +18,17 @@ class LanguageTools(ScriptedLoadableModule):
 
   def __init__(self, parent):
     ScriptedLoadableModule.__init__(self, parent)
-    self.parent.title = "Language Tools"
-    self.parent.categories = ["Utilities"]
+    self.parent.title = _("Language Tools")
+    self.parent.categories = [translate("qSlicerAbstractCoreModule", "Utilities")]
     self.parent.dependencies = []
     self.parent.contributors = ["Andras Lasso (PerkLab)"]
-    self.parent.helpText = """
+    self.parent.helpText = _("""
 This module can build translation files and install them locally. It is useful for creating and testing translations.
 See more information in the <a href="https://github.com/Slicer/SlicerLanguagePacks">extension's documentation</a>.
-"""
-    self.parent.acknowledgementText = """
+""")
+    self.parent.acknowledgementText = _("""
 Developed of this module was partially funded by <a href="https://chanzuckerberg.com/eoss/proposals/3d-slicer-in-my-language-internationalization-and-usability-improvements/">CZI EOSS grant</a>.
-"""
+""")
 
 #
 # LanguageToolsWidget
@@ -136,7 +138,7 @@ class TextFinder(qt.QWidget):
       # Remove empty strings
       foundStrings = [foundString for foundString in foundStrings if foundString[1]]
       if not foundStrings:
-        raise ValueError("Failed to extract any text from widget")
+        raise ValueError(_("Failed to extract any text from widget"))
 
       import html
       import re
@@ -151,8 +153,10 @@ class TextFinder(qt.QWidget):
       links += "</ul>"
 
       result = slicer.util._messageDisplay(logging.INFO,
-        f"<html>Click on the text to find it on the translation website:\n\n{links}</html>", qt.QMessageBox.Close,
-        windowTitle="Translation lookup", icon=qt.QMessageBox.Question,
+        "<html>" + _("Click on the text to find it on the translation website:\n\n{links}").format(links=links) + "</html>",
+        qt.QMessageBox.Close,
+        windowTitle="Translation lookup",
+        icon=qt.QMessageBox.Question,
         standardButtons=qt.QMessageBox.Close | qt.QMessageBox.Retry)
       if result == qt.QMessageBox.Close:
         # cancelled
@@ -167,7 +171,7 @@ class TextFinder(qt.QWidget):
       objectInfo = widget.className()
       if widget.objectName:
         objectInfo += f" ({widget.objectName})"
-      if not slicer.util.confirmRetryCloseDisplay("Failed to extract any text from: " + objectInfo):
+      if not slicer.util.confirmRetryCloseDisplay(_("Failed to extract any text from: {object}").format(object=objectInfo)):
         # cancelled
         self.hideOverlay()
         return
@@ -289,7 +293,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       import traceback
       traceback.print_exc()
       if forceUpdateFromServer:
-        slicer.util.errorDisplay("Failed to retrieve language list from Weblate.")
+        slicer.util.errorDisplay(_("Failed to retrieve language list from Weblate."))
       self.ui.languagesComboBox.hide()
 
     self.ui.languagesComboBox.blockSignals(wasBlocked)
@@ -405,7 +409,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     """
     Run processing when user clicks "Apply" button.
     """
-    with slicer.util.tryWithErrorDisplay("Update failed.", waitCursor=True):
+    with slicer.util.tryWithErrorDisplay(_("Update failed."), waitCursor=True):
       self.ui.statusTextEdit.clear()
       self.updateSettingsFromGUI()
 
@@ -432,7 +436,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       # (if user uses this module then it means that internationalization is needed).
       self.logic.enableInternationalization()
 
-      self.log(f"Update completed! Select application language and restart the application to see the results.")
+      self.log(_("Update completed! Select application language and restart the application to see the results."))
 
     self.refreshLanguageList()
 
@@ -508,7 +512,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
       # Example URL: https://hosted.weblate.org/api/components/3d-slicer/3d-slicer/statistics/?format=json
       result = requests.get(f'https://hosted.weblate.org/api/components/3d-slicer/{component}/statistics/', {'format': 'json'})
       if not result.ok:
-        raise RuntimeError(f"Failed to query list of languages from Weblate ({result.status_code}:{result.reason})")
+        raise RuntimeError(_("Failed to query list of languages from Weblate ({status_code}:{reason})").format(status_code=result.status_code, reason=result.reason))
       translations = result.json()['results']
       languages = []
       for translation in translations:
@@ -538,7 +542,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     import requests
     result = requests.get('https://hosted.weblate.org/api/projects/3d-slicer/components/', {'format': 'json'})
     if not result.ok:
-      raise RuntimeError(f"Failed to query list of components from Weblate ({result.status_code}:{result.reason})")
+      raise RuntimeError(_("Failed to query list of components from Weblate ({status_code}:{reason})").format(status_code=result.status_code, reason=result.reason))
     components = result.json()['results']
     weblateComponents = []
     for component in components:
@@ -577,11 +581,11 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     tsFiles = sorted(glob.glob(f"{tsFolder}/*.ts"), key=os.path.getmtime)
 
     if not tsFiles:
-      raise ValueError("No .ts files were found in the specified location.")
+      raise ValueError(_("No .ts files were found in the specified location."))
 
     if latestTsFileOnly:
       tsFiles = [tsFiles[-1]]
-      self.log(f"Use translation file: {tsFiles[0]}")
+      self.log(_("Use translation file: {file}").format(file={tsFiles[0]}))
 
     import shutil
     import xml.etree.cElementTree as ET
@@ -606,7 +610,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     import xml.etree.cElementTree as ET
     for (component, filename) in self.weblateComponents:
       for language in languages:
-        self.log(f'Download translations for {component}/{language}...')
+        self.log(_('Download translations for {component}/{language}...').format(component=component, language=language))
         fullDownloadUrl = f'{downloadUrl}/{component}/{language}'
         try:
           tsFile = dataLogic.downloadFile(fullDownloadUrl, self.temporaryFolder(), f'{filename}_{language}.ts')
@@ -615,8 +619,8 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
           locale = tree.getroot().attrib['language'].replace("_", "-")  # such as 'zh-CN'
           os.rename(tsFile,f'{self.temporaryFolder()}/{filename}_{locale}.ts')
         except Exception as e:
-          logging.debug(f"Failed to download translation from: {fullDownloadUrl} -- {str(e)}")
-          self.log("  Download failed. This component may not have been translated to the selected language.")
+          logging.debug(_("Failed to download translation from: {url} -- {text}").format(url=fullDownloadUrl, text=str(e)))
+          self.log("  " + _("Download failed. This component may not have been translated to the selected language."))
 
   def downloadTsFilesFromGithub(self, githubRepositoryUrl):
     """Download .ts files from a Github repository.
@@ -680,10 +684,10 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
 
   def convertTsFilesToQmFiles(self):
     if not self.translationFilesFolder:
-      raise ValueError("Translation files folder is not specified.")
+      raise ValueError(_("Translation files folder is not specified."))
 
     if (not self.lreleasePath) or (not os.path.exists(self.lreleasePath)):
-      raise ValueError("lrelease tool path is not specified.")
+      raise ValueError(_("lrelease tool path is not specified."))
 
     logging.info(f"Processing translation files in folder {self.translationFilesFolder}")
     import glob
@@ -703,7 +707,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
 
   def installQmFiles(self):
     if not self.translationFilesFolder:
-      raise ValueError("Translation files folder is not specified.")
+      raise ValueError(_("Translation files folder is not specified."))
 
     import shutil
     from pathlib import Path
@@ -721,14 +725,15 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
       numberOfInstalledFiles += 1
 
     if numberOfInstalledFiles == 0:
-      raise ValueError(f"No translation (qm) files were found at {self.translationFilesFolder}")
+      raise ValueError(_("No translation (qm) files were found at {location}").format(location=self.translationFilesFolder))
 
-    self.log(f"Update successfully completed.\nInstalled {numberOfInstalledFiles} translation files in {applicationTranslationFolder}.")
+    self.log(_("Update successfully completed.\nInstalled {count} translation files in {location}.").format(
+      count=numberOfInstalledFiles, location=applicationTranslationFolder))
 
   def installFontFiles(self):
 
     if not hasattr(slicer.app.applicationLogic(), 'GetFontsDirectory'):
-      self.log(f"This Slicer version does not support custom viewer fonts.")
+      self.log(_("This Slicer version does not support custom viewer fonts."))
       return
 
     applicationFontsFolder = slicer.app.applicationLogic().GetFontsDirectory()
@@ -751,7 +756,8 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     slicer.app.userSettings().setValue('Views/FontFile/SansSerif', 'NotoSansTC-Regular.otf')
     slicer.app.userSettings().setValue('Views/FontFile/Serif', 'NotoSerifTC-Regular.otf')
 
-    self.log(f"Installed {numberOfInstalledFiles} font files in {applicationFontsFolder}.")
+    self.log(_("Installed {count} font files in {location}.").format(
+      count=numberOfInstalledFiles, location=applicationFontsFolder))
 
   def enableInternationalization(self, enabled=True):
     slicer.app.userSettings().setValue('Internationalization/Enabled', enabled)
