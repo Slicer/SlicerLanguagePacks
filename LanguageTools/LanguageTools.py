@@ -425,8 +425,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       else:
         self.logic.downloadTsFilesFromGithub(self.ui.githubRepositoryUrlEdit.text)
 
-      self.logic.patchTsFiles()
-
       self.logic.convertTsFilesToQmFiles()
       self.logic.installQmFiles()
 
@@ -620,7 +618,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
           os.rename(tsFile,f'{self.temporaryFolder()}/{filename}_{locale}.ts')
         except Exception as e:
           logging.debug(_("Failed to download translation from: {url} -- {text}").format(url=fullDownloadUrl, text=str(e)))
-          self.log("  " + _("Download failed. This component may not have been translated to the selected language."))
+          self.log("  " + _("Skipped. This component/language was not found on Weblate."))
 
   def downloadTsFilesFromGithub(self, githubRepositoryUrl):
     """Download .ts files from a Github repository.
@@ -641,46 +639,6 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
 
     # /temp.../SlicerLanguageTranslations-main/translations
     self.translationFilesFolder = f'{tempFolder}/{self.gitRepositoryName}-{self.slicerVersion}/translations'
-
-  def patchTsFiles(self):
-    """Patch known issues in .ts files.
-    """
-    import glob
-    import shutil
-    import xml.etree.cElementTree as ET
-
-    try:
-      slicerRevision = int(slicer.app.revision)
-    except ValueError:
-      # local build, set revision to invalid
-      slicerRevision = -1
-
-    # Modality codes (CT, MR, XA, ...) must not be localized in Slicer<5.3
-    # (that do not contain https://github.com/commontk/CTK/commit/cd194fff1360e2da114b6b55ce963f089c6f46f2)
-    # because it makes the DICOM module crash.
-    # CTK~vtkModalityWidget_LANG.ts contains translation for modality codes that are the same as the original non-translated text.
-    # CTK~vtkModalityWidget_LANG.ts will override strings defined in CTK_LANG.ts because it is loaded later
-    # (based on both temporal and alphabetical sorting).
-    if slicerRevision > 0 and slicerRevision <= 31714:  # Slicer-5.3.0-2023-04-11
-      # Get list of locales
-      locales = set()
-      tsFiles = glob.glob(f"{self.translationFilesFolder}/*.ts")
-      slicer.tsFiles = tsFiles
-      for tsFile in tsFiles:
-        for file in tsFiles:
-          tree = ET.ElementTree(file=file)
-          locale = tree.getroot().attrib['language'].replace('_', '-')  # such as 'zh-CN'
-          locales.add(locale)
-      # Read patch file template that contains translations that will overwrite modality codes
-      # in all languages.
-      moduleDir = os.path.dirname(slicer.util.modulePath('LanguageTools'))
-      modalityWidgetPatchedTsFile = os.path.join(moduleDir, 'Resources', 'CTK~vtkModalityWidget_LANG.ts')
-      with open(modalityWidgetPatchedTsFile, 'r') as file:
-        modalityWidgetPatchedTsFileStr = file.read()
-      # Write patch file for each locale
-      for locale in locales:
-        with open(f"{self.translationFilesFolder}/CTK~vtkModalityWidget_{locale}.ts", "w") as tsFile:
-          tsFile.write(modalityWidgetPatchedTsFileStr.replace('"LANG"', f'"{locale}"'))
 
   def convertTsFilesToQmFiles(self):
     if not self.translationFilesFolder:
