@@ -218,8 +218,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.logic.logCallback = self.log
     self.textFinder.logic = self.logic
 
-    self.refreshWeblateLanguageList()
-
     # Workaround for Slicer-5.0 (no Qt plugin was available for ctkLanguageComboBox)
     if self.ui.languageSelector.__class__ != ctk.ctkLanguageComboBox:
       layout = self.ui.languageSelectorLayout
