@@ -367,7 +367,10 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
     self.refreshLanguageList()
     wasBlocked = self.ui.languageSelector.blockSignals(True)
-    self.ui.languageSelector.currentLanguage = settings.value("language")
+    # Ensure older settings with an empty and invalid "language" entry are ignored by
+    # explicitly checking for an empty value.
+    if settings.contains("language") and settings.value("language") != "":
+      self.ui.languageSelector.currentLanguage = settings.value("language")
     self.ui.languageSelector.blockSignals(wasBlocked)
 
     self.logic.customLreleasePath = self.ui.lreleasePathLineEdit.currentPath
