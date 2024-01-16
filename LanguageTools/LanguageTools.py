@@ -218,17 +218,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.logic.logCallback = self.log
     self.textFinder.logic = self.logic
 
-    # Workaround for Slicer-5.0 (no Qt plugin was available for ctkLanguageComboBox)
-    if self.ui.languageSelector.__class__ != ctk.ctkLanguageComboBox:
-      layout = self.ui.languageSelectorLayout
-      layout.removeWidget(self.ui.languageSelector)
-      self.ui.languageSelector.hide()
-      languageSelector = ctk.ctkLanguageComboBox()
-      languageSelector.setSizePolicy(self.ui.languageSelector.sizePolicy)
-      languageSelector.toolTip = self.ui.languageSelector.toolTip
-      layout.addWidget(languageSelector)
-      self.ui.languageSelector = languageSelector
-
     self.ui.languageSelector.countryFlagsVisible = False
     self.ui.languageSelector.defaultLanguage = "en"
     self.ui.languageSelector.directories = slicer.app.translationFolders()
