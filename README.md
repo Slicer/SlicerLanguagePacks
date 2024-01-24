@@ -8,7 +8,9 @@
 <img src="https://hosted.weblate.org/widgets/3d-slicer/-/horizontal-auto.svg" alt="Oversettelsesstatus" />
 </a>
 
-Help translate the project on [Hosted Weblate](https://hosted.weblate.org/engage/3d-slicer/). How to translate? Check out the documentation links below.
+Help translate the project on [Hosted Weblate](https://hosted.weblate.org/engage/3d-slicer/). How to translate? Check out the links in Documentation section below.
+
+If you have any questions or want to get to know the group that translates 3D Slicer to different languages, you can sign up to the 3D Slicer forum and join the [Internationalization group](https://discourse.slicer.org/g/internationalization). You can see recent discussions about internationalization by watching the [Internationalization tag](https://discourse.slicer.org/tag/internationalization).
 
 ## Documentation
 
