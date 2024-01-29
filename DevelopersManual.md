@@ -188,6 +188,14 @@ someMessage = _("{missing_file_count} of {total_file_count} selected files liste
                     missing_file_count=missingFileCount, total_file_count=allFileCount))
 ```
 
+We need to avoid the f-strings, as because the part in {} is executable Python code, and we do not want people to be able to use that to inject incorrect behaviour via the translation files.
+
+```python
+# This code is wrong, because translators could inject arbitrary Python code
+# that the application would execute. 
+someText = _(f"{missingFileCount} of {allFileCount} selected files listed in the database cannot be found on disk.")
+```
+
 ## Identifying translatable strings
 
 In the translation process, only strings that are displayed at the user interface level should be considered. Thus, strings refering to module names, file contents, file extensions, developer communications such as log messages (e.g. `PrintSelf` or `qCritical` outputs ) or any developer-related content, should be considered as non translatable.
