@@ -159,7 +159,14 @@ Use the `vtkMRMLTr(context, sourceText)` macro for translating text that will be
 
     std::string fileType = vtkMRMLTr("vtkMRMLLinearTransformSequenceStorageNode", "Linear transform sequence");
 
-Placeholders (strings that are replaced by values at runtime) are currently not supported.
+Qt-style placeholders (%1, %2, %3, ..., %9) can be used. For example:
+
+    std::string displayableText = vtkMRMLI18N::Format(
+      vtkMRMLTr("vtkMRMLVolumeArchetypeStorageNode", "Cannot read '%1' file as a volume of type '%2'."),
+      filename.c_str(),
+      volumeType.c_str());
+
+Use `%%` instead of a single `%` to prevent replacement. For example `"some %%3 thing"` will result in `"some %3 thing"` (and will not be replaced by the third replacement string argument).
 
 ## Preparing Python source files for translation
 
