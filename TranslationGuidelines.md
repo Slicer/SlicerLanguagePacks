@@ -51,12 +51,38 @@ The `source string location` tag on Weblate can help you go one level further an
 
 *(the reason the line numbers do not match in this specific example is that the code has been updated in between when the translation files were uploaded and now)*
 
-## 3. Translation of difficult terms
+## 3. Translation of text
+
+### Placeholders and special characters
+
+Source text is mostly plain text, but there are some special characters and conventions that common Qt and Python translation tools use. A short summary:
+
+- Placeholders are used for text that is replaced by specific names or numbers when the application is used. Placeholders can appear as `%1`, `%2`, ... (Qt-style) or as `{some_name}`, `{some_number}` (Python-style) in the source text. Placeholders must not be translated but kept unchanged in the translated text.
+- Keyboard shortcuts are designated by the `&` prefix within a string (Qt-style). For example `&New file` will make the letter `N` a keyboard shortcut. Keyboard shortcuts are recommended to be preserved. Since single `&` character designates a keyboard shortcut, `&&` must be used to place ampersand character in the text.
+
+Examples:
+
+- Source text: `The {name} module could not be registered`
+  - Good translation: `A {name} modult nen lehetett regisztralni`
+  - Bad translation: `A {nev} modult nen lehetett regisztralni` (`name` placeholder was modified to `nev`)
+- Source text: `Node %1 is exported successfully to %2`
+  - Good translation: `%1 elemet sikeresen mentettuk %2 helyre`
+  - Good translation: `Elmentettuk %2 helyre %1 elemet` (order of placholders can be changed in the translated text)
+  - Bad translation: `%1 elemet sikeresen mentettuk` (`%2` placeholder is missing)
+- Source text: `Create &New File`
+  - Good translation: `Keszitsen &Uj Fajlt`
+  - Bad translation: `Keszitsen Uj Fajlt` (works, but keyboard shortcut is no longer available for this button or menu item)
+- Source text: `Help && Acknowledgement`
+  - Good translation: `Segitseg && Koszonetnyilvanitas`
+  - Good translation: `Segitseg es Koszonetnyilvanitas` (not necessary to use ampersand if it is not commonly used in the target language)
+  - Bad translation: `Segitseg & Koszonetnyilvanitas` (single ampersand will be interpreted as a keyboard shortcut)
+
+### Translation of difficult terms
 
 On the complex interface of 3D Slicer, certain terms can have very context-specific meanings that are likely to lose their accuracy if not translated carefully. Locating the string on the interface or using the element it designates can help understanding better the exact definition of the term and therefore translating it as accurately as possible.
 Another way to ensure the highest quality of translation is to take advantage of the community based approach that our internationalization process is based on.
 
-### The `Suggest` button
+#### The `Suggest` button
 When translating a string on Weblate, you have the option to submit your translation and move to the next item, submit your translation and stay on the same page or to submit your translation as a suggestion.
 
 ![](Docs/TranslationGuidelines/suggest1.png) 
@@ -71,7 +97,7 @@ The suggestion can then be approved or edited or discarded by yourself or anothe
 
 This option is useful in case you are unsure of the translation you submitted and you would like to take the time to understand the term better before confirming it or you would like to get a second opinion from other users.
 
-### The comments section
+#### The comments section
 Weblate also offers the possibility to leave a comment on a string’s translation page. This allows you to engage with other contributors in your language and start a conversation about the understanding each of you have of the term and eventually agree on a common meaning and translation.
 
 ![](Docs/TranslationGuidelines/comments1.png) 
@@ -83,7 +109,7 @@ e.g.: while an assigned proofreader would have to be notified of all the discuss
 
 You can change your notification settings [here](https://hosted.weblate.org/accounts/profile/#notifications).
 
-### Untranslatable strings
+#### Untranslatable strings
 Any string starting containing `vtk` or  `MRML` should not be translated and should be reported as bugs in Slicer bug reports. 
 
 **Example:**
