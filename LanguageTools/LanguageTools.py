@@ -709,7 +709,14 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
 
   def translationUrlFromText(self, text, exactMatch=False):
     (component, filename) = self.weblateComponents[0]
-    url=qt.QUrl(f"{self.weblateEditTranslationUrl}/{component}/{self.preferredLanguage}/")
+    if self.preferredLanguage:
+      language = self.preferredLanguage
+      section = ""
+    else:
+      language = "en-US"
+      section = "#translations"
+
+    url=qt.QUrl(f"{self.weblateEditTranslationUrl}/{component}/{language}/{section}")
     q = qt.QUrlQuery()
     if exactMatch:
       q.addQueryItem("q", f'source:="{text}" or target:="{text}"')

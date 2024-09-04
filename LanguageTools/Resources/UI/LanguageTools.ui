@@ -301,7 +301,7 @@
       <string>Find text</string>
      </property>
      <property name="collapsed">
-      <bool>true</bool>
+      <bool>false</bool>
      </property>
      <property name="collapsedHeight">
       <number>6</number>
@@ -335,6 +335,9 @@
        <widget class="QLineEdit" name="textFinderLanguageEdit">
         <property name="text">
          <string notr="true">fr-FR</string>
+        </property>
+        <property name="placeholderText">
+         <string>en-US</string>
         </property>
        </widget>
       </item>
