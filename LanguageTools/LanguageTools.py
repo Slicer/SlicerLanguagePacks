@@ -494,8 +494,8 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     # Get component statistics from Weblate server if specifically requested or there is no cached server response yet
     if forceUpdateFromServer or not settings.value(languagesSettingsKey):
       import requests
-      # Example URL: https://hosted.weblate.org/api/components/3d-slicer/3d-slicer/statistics/?format=json
-      result = requests.get(f'https://hosted.weblate.org/api/components/3d-slicer/{component}/statistics/', {'format': 'json'})
+      # Example URL: https://hosted.weblate.org/api/components/3d-slicer/3d-slicer/statistics/?format=json&page_size=1000
+      result = requests.get(f"https://hosted.weblate.org/api/components/3d-slicer/{component}/statistics/", {"format": "json", "page_size": 1000})
       if not result.ok:
         raise RuntimeError(_("Failed to query list of languages from Weblate ({status_code}:{reason})").format(status_code=result.status_code, reason=result.reason))
       translations = result.json()['results']
@@ -512,6 +512,9 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
           # At least a few translated terms are required for a language to show up
           continue
         languages.append({'name': translation['name'], 'code': translation['code'], 'translated_percent': translation['translated_percent']})
+        # Make languages easier to find by sorting them based on name of the language
+        languages = sorted(languages, key=lambda language: language['name'])
+
       # Save in settings
       settings.setValue(languagesSettingsKey, json.dumps(languages))
     else:
