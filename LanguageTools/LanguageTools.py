@@ -153,7 +153,7 @@ class TextFinder(qt.QWidget):
       links += "</ul>"
 
       result = slicer.util._messageDisplay(logging.INFO,
-        "<html>" + _("Click on the text to find it on the translation website:\n\n{links}").format(links=links) + "</html>",
+        "<html>" + _("Click on the text to find it on the translation website [{language}]:\n\n{links}").format(language=self.logic.preferredLanguage, links=links) + "</html>",
         qt.QMessageBox.Close,
         windowTitle="Translation lookup",
         icon=qt.QMessageBox.Question,
@@ -237,6 +237,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.ui.enableTextFindercheckBox.connect("toggled(bool)", self.enableTextFinder)
 
     self.ui.languageSelector.connect("currentLanguageNameChanged(const QString&)", self.updateSettingsFromGUI)
+    self.ui.languageSelector.connect("currentLanguageNameChanged(const QString&)", self.onCurrentLanguageChanged)
 
     # Buttons
     self.ui.updateButton.connect('clicked(bool)', self.onUpdateButton)
@@ -244,6 +245,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
     # Make sure parameter node is initialized (needed for module reload)
     self.updateGUIFromSettings()
+    self.onCurrentLanguageChanged()
 
   def selectedWeblateLanguages(self):
     languages = []
@@ -347,8 +349,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       self.ui.weblateDownloadUrlEdit.text = settings.value("WeblateDownloadUrl", "https://hosted.weblate.org/download/3d-slicer")
       self.ui.githubRepositoryUrlEdit.text = settings.value("GitRepository", "https://github.com/Slicer/SlicerLanguageTranslations")
 
-      self.ui.textFinderLanguageEdit.text = settings.value("FindTextLanguage", "fr-FR")
-
     finally:
       settings.endGroup()
 
@@ -378,8 +378,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       settings.setValue("UseLatestTsFile", self.ui.latestTsFileOnlyCheckBox.checked)
       settings.setValue("WeblateDownloadUrl", self.ui.weblateDownloadUrlEdit.text)
       settings.setValue("LreleaseFilePath", self.ui.lreleasePathLineEdit.currentPath)
-
-      settings.setValue("FindTextLanguage", self.ui.textFinderLanguageEdit.text)
 
       languages = self.selectedWeblateLanguages()
       settings.setValue("UpdateLanguages", ','.join(languages))
@@ -425,16 +423,16 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
     self.refreshLanguageList()
 
+  def onCurrentLanguageChanged(self):
+    self.logic.preferredLanguage = self.ui.languageSelector.currentLanguage
+
   def onRestartButton(self):
     slicer.util.restart()
 
   def enableTextFinder(self, enable):
     if enable:
       self.updateSettingsFromGUI()
-      self.logic.preferredLanguage = self.ui.textFinderLanguageEdit.text
     self.textFinder.enableShortcut(enable)
-    # Only allow changing language if finder is disabled
-    self.ui.textFinderLanguageEdit.enabled = not enable
 
   def log(self, message):
     self.ui.statusTextEdit.append(message)
@@ -465,7 +463,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self.translationFilesFolder = None
     self.weblateComponents = self.getWeblateComponents()
     self.weblateEditTranslationUrl = "https://hosted.weblate.org/translate/3d-slicer"
-    self.preferredLanguage = "fr-FR"
+    self.preferredLanguage = "en-US"
     self.gitRepositoryName = "SlicerLanguageTranslations"
     self.logCallback = None
 
@@ -712,7 +710,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
 
   def translationUrlFromText(self, text, exactMatch=False):
     (component, filename) = self.weblateComponents[0]
-    if self.preferredLanguage:
+    if self.preferredLanguage and self.preferredLanguage != "en-US" and self.preferredLanguage != "en_US":
       language = self.preferredLanguage
       section = ""
     else:
