@@ -315,12 +315,36 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QCheckBox" name="enableTextFindercheckBox">
-        <property name="toolTip">
-         <string>If enabled, then the shortcut opens the text finder, which can be used to extract text from the application user interface and open it in the translation website.</string>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QCheckBox" name="enableTextFindercheckBox">
+          <property name="toolTip">
+           <string>If enabled, then the shortcut opens the text finder, which can be used to extract text from the application user interface and open it in the translation website.</string>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="textFinderShortcutLabel">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
         <property name="text">
-         <string> (shortcut: Ctrl+6)</string>
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Keyboard shortcut:</string>
         </property>
        </widget>
       </item>
@@ -364,5 +388,38 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>enableTextFindercheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>label_3</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>156</x>
+     <y>494</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>110</x>
+     <y>516</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>enableTextFindercheckBox</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>textFinderShortcutLabel</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>212</x>
+     <y>496</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>513</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
