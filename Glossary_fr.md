@@ -18,7 +18,7 @@ Les termes utilisés dans divers domaines de l'informatique médicale et bioméd
 
 **Index des extensions** : Un référentiel qui contient la description de chaque extension à partir duquel le catalogue des extensions est construit.
 
-Étendue : Plage de coordonnées entières le long de 3 axes. Défini en VTK par 6 valeurs, pour les axes IJK : I_min, I_max, J_min, J_max, K_min, K_max. Les valeurs minimales et maximales sont inclusives, donc la taille d'un tableau est (I_max - I_min + 1) x (J_max - J_min + 1) x (K_max - K_min + 1).
+**Étendue** : Plage de coordonnées entières le long de 3 axes. Défini en VTK par 6 valeurs, pour les axes IJK : I_min, I_max, J_min, J_max, K_min, K_max. Les valeurs minimales et maximales sont inclusives, donc la taille d'un tableau est (I_max - I_min + 1) x (J_max - J_min + 1) x (K_max - K_min + 1).
 
 **Repère fiducial** : Représente un point dans l'espace 3D. Le terme provient de la chirurgie guidée par l'image, où des "marqueurs fiduciaires" sont utilisés pour marquer les positions des points.
 
