@@ -97,12 +97,6 @@ Vous pouvez également les marquer avec le drapeau `read-only` (pour en savoir p
 
 ![ ](TranslationGuidelines_fr_Images/13_chaine_intaduisible3.PNG)
 
-### Suggestions automatiques
-
-Vous pouvez également compter sur les suggestions automatiques pour vous aider à traduire certains termes. Weblate vous évite d'ouvrir un nouvel onglet pour lancer cette recherche en affichant une liste de traductions suggérées par Google Translate et d'autres moteurs de traduction.
-
-![ ](TranslationGuidelines_fr_Images/17_suggestionAutoPNG.PNG)
-
 ## 4. Validation de la traduction
 
 Il existe plusieurs façons d'indiquer qu'une traduction doit être révisée. Les plus couramment utilisées par nos contributeurs sont la case à cocher `à vérifier` et la fonction `suggérer`.
