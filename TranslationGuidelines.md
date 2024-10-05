@@ -38,16 +38,16 @@ It may be advisable to start translation of strings with the main application us
 ### Nearby strings
 As mentioned above, you may have multiple occurrences of a term in the same module’s interface. In that case, it can be useful to rely on the elements surrounding the one you are translating. Weblate pairs each string with a list of strings that are directly before or after the element in the GUI code.
 
-![](Docs/TranslationGuidelines/nearbyStrings.png)
-![](Docs/TranslationGuidelines/nearbyStrings2.png)
+![](Docs/nearbyStrings.png)
+![](Docs/TranslationGuideline/nearbyStrings2.png)
 
 ### "Source string location"
 The `source string location` tag on Weblate can help you go one level further and find exactly **which line of code contains the string** you are currently translating. It can be found in the `String Information` box on the lower right.
 
-![](Docs/TranslationGuidelines/stringlocation1.png)
+![](Docs/stringlocation1.png)
 
-![](Docs/TranslationGuidelines/stringlocation2.png)
-![](Docs/TranslationGuidelines/stringlocation3.png)
+![](Docs/stringlocation2.png)
+![](Docs/stringlocation3.png)
 
 *(the reason the line numbers do not match in this specific example is that the code has been updated in between when the translation files were uploaded and now)*
 
@@ -85,27 +85,27 @@ Another way to ensure the highest quality of translation is to take advantage of
 #### The `Suggest` button
 When translating a string on Weblate, you have the option to submit your translation and move to the next item, submit your translation and stay on the same page or to submit your translation as a suggestion.
 
-![](Docs/TranslationGuidelines/suggest1.png) 
+![](Docs/suggest1.png) 
 
  When you choose to do the latter, the difference between your translation and the current one are highlighted in green and the parts they replace are striked through and highlighted in red as illustrated below.
  
-![](Docs/TranslationGuidelines/suggest2.png) 
+![](Docs/suggest2.png) 
 
 The suggestion can then be approved or edited or discarded by yourself or another user or an assigned proofreader.
 
-![](Docs/TranslationGuidelines/suggest3.png) 
+![](Docs/suggest3.png) 
 
 This option is useful in case you are unsure of the translation you submitted and you would like to take the time to understand the term better before confirming it or you would like to get a second opinion from other users.
 
 #### The comments section
 Weblate also offers the possibility to leave a comment on a string’s translation page. This allows you to engage with other contributors in your language and start a conversation about the understanding each of you have of the term and eventually agree on a common meaning and translation.
 
-![](Docs/TranslationGuidelines/comments1.png) 
+![](Docs/comments1.png) 
 
 To make sure you stay engaged in the discussions related to the project, you can update your settings to be notified when a new comment is posted; and in case the notifications become overwhelming, you can always adjust them to fit you.
 e.g.: while an assigned proofreader would have to be notified of all the discussion updates, you can choose to set up Weblate to notify you only for comments related to translations you have submitted or the ones in which you are mentioned.
 
-![](Docs/TranslationGuidelines/comments2.png) 
+![](Docs/comments2.png) 
 
 You can change your notification settings [here](https://hosted.weblate.org/accounts/profile/#notifications).
 
@@ -114,20 +114,20 @@ Any string starting containing `vtk` or  `MRML` should not be translated and sho
 
 **Example:**
 
-![](Docs/TranslationGuidelines/untranslatable1.png)
+![](Docs/untranslatable1.png)
 
 You may also tag them with the `read-only` flag (read more about Weblate flags [here](https://docs.weblate.org/en/latest/admin/checks.html#customizing-behavior-using-flags))
 
-![](Docs/TranslationGuidelines/untranslatable2.png)
-![](Docs/TranslationGuidelines/untranslatable3.png)
+![](Docs/untranslatable2.png)
+![](Docs/untranslatable3.png)
 
 ## 4. Validation of translation
 
 There are several ways to indicate that a translation needs to be reviewed. The most commonly used by our contributors are the `needs editing` checkbox and the `suggest` feature.  
 
-![](Docs/TranslationGuidelines/validation1.png)
+![](Docs/validation1.png)
 
-![](Docs/TranslationGuidelines/validation2.png)
+![](Docs/validation2.png)
 
 ## 5. Style
 
