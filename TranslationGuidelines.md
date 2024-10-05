@@ -27,9 +27,9 @@ A specific string can have many different occurrences on the Slicer GUI, sometim
 ### The "key" indicator
 In the upper right corner of the translation on Weblate, you will notice the word `Key` in bold, followed by a string. That string can help you know approximately (sometimes exactly)  in which module or window of the GUI, the term you are translating is located, as illustrated below.
 
-![](Docs/TranslationGuidelines/key1.png)
+![](Docs/key1.png)
 
-![](Docs/TranslationGuidelines/key2.png)
+![](Docs/key2.png)
 
 ### Search for untranslated strings
 
