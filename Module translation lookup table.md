@@ -1,4 +1,4 @@
-3D Slicer Module Translation Lookup Table aims to serve as an entry point for new contributors to Slicer translations.
+**3D Slicer Module Translation Lookup Table** aims to serve as an entry point for new contributors to Slicer translations.
 The web-based platform hosting Slicer translations, Weblate, classifies the strings under categories identified by a "**key**". This classification follows 3D Slicer source code file distribution into modules. Simply put, each link to a Weblate key (the column on the far right in the Module Translation Lookup Table) will direct you to Weblate's translation interface of the first string of the list of strings contained in the module you picked.
 
 **NOTE**: The links in this table will redirect you to the interface og the french Translation by default. To switch and add/edit the translation in your preferred language, you can use the "other languages" feature available on the interface as shown below.
