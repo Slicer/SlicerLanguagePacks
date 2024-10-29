@@ -85,7 +85,7 @@ class MyClass
 ```
 Faire cela fournira à la classe la fonction `tr()` qui peut être utilisée directement pour traduire les chaînes associées à la classe, et permettra à `lupdate` de trouver les chaînes traduisibles dans le code source.
 
-**REMARQUE :** Si, pour une raison quelconque, le nom de la classe ne doit pas être exposé à d'autres développeurs ou traducteurs (classes privées, ...), nous recommandons de préfixer les appels à `tr()` avec le nom de la classe publique associée comme suit : `PublicClassName::tr("texte à traduire")`
+> **REMARQUE :** Si, pour une raison quelconque, le nom de la classe ne doit pas être exposé à d'autres développeurs ou traducteurs (classes privées, ...), nous recommandons de préfixer les appels à `tr()` avec le nom de la classe publique associée comme suit : `PublicClassName::tr("texte à traduire")`
 
 ### Traduction de chaînes multilignes
 
