@@ -127,20 +127,20 @@ Pour utiliser la fonctionnalité `Find text` de l'extension `Language Packs`, su
   - `1` : L'utilisateur sélectionne `Enable text finder` dans la section Rechercher du texte et sélectionne la langue française.
 
   ![ ](TranslationGuidelines_fr_Images/F1.png)
-  <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/ebf4e7c7-1ec8-467b-a663-ab254a7a9b63">
+
   
   
   - `2` : Accédez au module Slicer et appuyez sur `Ctrl+6` ou `Ctrl+Maj+6` pour `Windows` et `Command+6` pour `Mac` pour activer l’option . `Activer Chercheur de texte`.
 
   ![ ](TranslationGuidelines_fr_Images/F2.png)
-  <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/2031485f-5fcf-49d1-8f44-27665d13c578">
+ 
   
   
   - `3` : L'utilisateur clique sur `Télécharger des examples de données` pour identifier l'emplacement du texte sur Weblate.
   - `4` : L'utilisateur sélectionne `exact match`.
 
  ![ ](TranslationGuidelines_fr_Images/F3.png)
-  <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/5cf94bbb-cad2-4e06-912f-c7cda7bfd83a">
+ 
 
  - `5` : Le lien vous amènera à l'emplacement des `strings` dans le `Slicer Weblate repository`.
  
