@@ -2,7 +2,7 @@
 
 ### Setup
 
-- [Download](https://download.slicer.org) and install a recent 3D Slicer Preview Release (released 2023-05-17 or later)
+- [Download](https://download.slicer.org) and install a recent 3D Slicer Preview Release (2024-11-23 or later)
 - Install the SlicerLanguagePacks extension. 
   - `1` : Open the `extension manager`
   - `2` : Type LanguagePacks in the `search bar`
