@@ -29,7 +29,7 @@ In the upper right corner of the translation on Weblate, you will notice the wor
 
 ![](Docs/key1.png)
 
-![](Docs/key2.png)
+![](Docs/key2.PNG)
 
 ### Search for untranslated strings
 
@@ -164,7 +164,7 @@ To find good translation for generic computing terms, you can use [Microsoft's t
   
   ![](Docs/EnableT.png)
   
-  - `2` :  Navigate to Slicer Welcome module and press `Ctrl+6` or `Ctrl+Shift+6` to activate the `Enable text finder` option.
+  - `2` :  Navigate to Slicer module and press `Ctrl+6` or `Ctrl+Shift+6` for `Windows` and `Command+6` for `Mac` to activate the `Enable text finder` option.
   
   ![](Docs/ActivateET.PNG)
   
