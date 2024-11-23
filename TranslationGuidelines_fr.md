@@ -107,7 +107,7 @@ Il existe plusieurs façons d'indiquer qu'une traduction doit être révisée. L
 
 ## 5. Style
 
-In French, use sentence case, i.e., do not capitalize every word of a sentence. This applies everywhere, including button text, window title, etc. Rationale: Title case is not common in French. macOS operating system (which uses title case heavily in English) and Microsoft Office software use sentence case in French localized versions.
+En français, utilisez la casse de phrase, c'est-à-dire ne mettez pas en majuscule chaque mot d'une phrase. Cela s'applique partout, y compris le texte des boutons, le titre des fenêtres, etc. Raisonnement : la casse de titre n'est pas courante en français. Le système d'exploitation macOS (qui utilise beaucoup la casse de titre en anglais) et les logiciels Microsoft Office utilisent la casse de phrase dans les versions localisées en français.
 
 Le document de localization de Microsoft en français est disponible sur [ce lien.](https://github.com/Slicer/SlicerLanguagePacks/releases/download/TranslationResources/fra-fra-Style.Guide.pdf)
 
@@ -125,18 +125,21 @@ Notez que `l'explication` n'est disponible qu'en anglais.
 Pour utiliser la fonctionnalité `Find text` de l'extension `Language Packs`, suivez le flux de travail suivant :
 
   - `1` : L'utilisateur sélectionne `Enable text finder` dans la section Rechercher du texte et sélectionne la langue française.
-  
+
+  ![ ](TranslationGuidelines_fr_Images/F1.png)
   <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/ebf4e7c7-1ec8-467b-a663-ab254a7a9b63">
   
   
-  - `2` : L'utilisateur accède au module d'accueil de Slicer et appuie sur `Ctrl+6` ou sur `Ctrl+shift+6` pour activer l'option `Enable text finder`.
-  
+  - `2` : Accédez au module Slicer et appuyez sur `Ctrl+6` ou `Ctrl+Maj+6` pour `Windows` et `Command+6` pour `Mac` pour activer l’option . `Activer Chercheur de texte`.
+
+  ![ ](TranslationGuidelines_fr_Images/F2.png)
   <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/2031485f-5fcf-49d1-8f44-27665d13c578">
   
   
   - `3` : L'utilisateur clique sur `Télécharger des examples de données` pour identifier l'emplacement du texte sur Weblate.
   - `4` : L'utilisateur sélectionne `exact match`.
- 
+
+ ![ ](TranslationGuidelines_fr_Images/F3.png)
   <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/5cf94bbb-cad2-4e06-912f-c7cda7bfd83a">
 
  - `5` : Le lien vous amènera à l'emplacement des `strings` dans le `Slicer Weblate repository`.
