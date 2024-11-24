@@ -160,11 +160,11 @@ To find good translation for generic computing terms, you can use [Microsoft's t
  
  To use the `Find text` feature follow the following workflow :
  
-  - `1` : Select `Enable text finder` in the Find text section of the Language Packs extension and select the French language.
+  - `1` : Select `Enable text finder` in the Find text section of the Language Packs extension.
   
   ![](Docs/EnableT.png)
   
-  - `2` :  Navigate to Slicer module and press `Ctrl+6` or `Ctrl+Shift+6` for `Windows` and `Command+6` for `Mac` to activate the `Enable text finder` option.
+  - `2` :  To activate the `Enable text finder` option, select a Slicer module and press `Ctrl+6` or `Ctrl+Shift+6` for `Windows`, and `Command+6` for `Mac` on any string of the user interface.
   
   ![](Docs/ActivateET.PNG)
   
