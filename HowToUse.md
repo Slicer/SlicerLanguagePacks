@@ -29,4 +29,4 @@
 ![](Docs/SetLanguage.png)
 
 
-A video tutorial of the different steps is available [here](https://www.youtube.com/watch?v=pANAmbhl36o&t=10s).
+A video tutorial of the different steps is available [here](https://www.youtube.com/watch?v=8Omd_qQTJOk).
