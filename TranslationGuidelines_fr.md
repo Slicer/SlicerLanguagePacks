@@ -120,9 +120,9 @@ Le panneau `Glossaire` ne contiendra aucune information dans le cas d'un terme o
 Notez que `l'explication` n'est disponible qu'en anglais.
 
 ## 7. Find Text
-Pour utiliser la fonctionnalité `Find text` de l'extension `Language Packs`, suivez le flux de travail suivant :
+Pour utiliser la fonctionnalité `Chercheur de texte` de l'extension `Language Packs`, suivez le flux de travail suivant :
 
-  - `1` : L'utilisateur sélectionne `Enable text finder` dans la section Rechercher du texte et sélectionne la langue française.
+  - `1` : L'utilisateur sélectionne `Activer Chercheur de texte` dans la section Rechercher du texte et sélectionne la langue française.
 
   ![ ](TranslationGuidelines_fr_Images/F1.png)
 
@@ -130,7 +130,7 @@ Pour utiliser la fonctionnalité `Find text` de l'extension `Language Packs`, su
   
   - `2` : Accédez au module Slicer et appuyez sur `Ctrl+6` ou `Ctrl+Maj+6` pour `Windows` et `Command+6` pour `Mac` pour activer l’option . `Activer Chercheur de texte`.
 
-  ![ ](TranslationGuidelines_fr_Images/F2.png)
+  ![ ](TranslationGuidelines_fr_Images/F2.PNG)
  
   
   
