@@ -107,9 +107,7 @@ Il existe plusieurs façons d'indiquer qu'une traduction doit être révisée. L
 
 ## 5. Style
 
-En français, utilisez la casse de phrase, c'est-à-dire ne mettez pas en majuscule chaque mot d'une phrase. Cela s'applique partout, y compris le texte des boutons, le titre des fenêtres, etc. Raisonnement : la casse de titre n'est pas courante en français. Le système d'exploitation macOS (qui utilise beaucoup la casse de titre en anglais) et les logiciels Microsoft Office utilisent la casse de phrase dans les versions localisées en français.
-
-Le document de localization de Microsoft en français est disponible sur [ce lien.](https://github.com/Slicer/SlicerLanguagePacks/releases/download/TranslationResources/fra-fra-Style.Guide.pdf)
+Pour un style cohérent, il est important que tous les traducteurs d'une langue spécifique utilisent les mêmes directives. Un guide de style détaillé pour la plupart des langues est disponible sur le [site de Microsoft](https://www.microsoft.com/en-us/language/StyleGuides). Si les traducteurs acceptent d'utiliser un guide de style, ils n'ont alors qu'à fournir un lien de téléchargement vers ce guide de style et à documenter toutes les différences qu'ils souhaitent apporter à ces directives.
 
 ## 6. Termes du glossaire
 
