@@ -146,4 +146,4 @@ Pour utiliser la fonctionnalité `Find text` de l'extension `Language Packs`, su
  
  <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/a9cae130-1506-4e58-a0f0-099975e16d90">
 
-Pour plus d'explication, vous pouvez regarder une vidéo pratique [ici](https://youtu.be/BjOwI3B_IdE)
+Pour plus d'explication, vous pouvez regarder une vidéo pratique [ici](https://youtu.be/83mj9nL36gE)
