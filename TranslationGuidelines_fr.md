@@ -130,7 +130,7 @@ Pour utiliser la fonctionnalité `Chercheur de texte` de l'extension `Language P
   
   - `2` : Accédez au module Slicer et appuyez sur `Ctrl+6` ou `Ctrl+Maj+6` pour `Windows` et `Command+6` pour `Mac` pour activer l’option . `Activer Chercheur de texte`.
 
-  ![ ](TranslationGuidelines_fr_Images/F2.PNG)
+  ![ ](TranslationGuidelines_fr_Images/F4.PNG)
  
   
   
