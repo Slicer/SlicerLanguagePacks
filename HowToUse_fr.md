@@ -24,7 +24,7 @@
 - `3` : Sélectionnez une ou plusieurs des langues téléchargées et installées dans `languages`.
 - `4` : Compilez les fichiers de traduction et les installez dans l'application en cliquant sur le bouton `Update translation files`.
 
-<img width="900" alt="ConfigLanguagesPacks" src="https://github.com/user-attachments/assets/bfcc299d-8605-4322-a4dd-66f2b47093ef">
+<img width="900" alt="ConfigLanguagesPacks" src="https://github.com/user-attachments/assets/ed57b6bd-60ff-4e9e-8025-21e44c9a412f">
 
 
 ### Définir la langue de l'application
@@ -32,6 +32,13 @@
 - `1` : Définissez la langue de l'application dans `Application language`.
 - `2` : Cliquez sur le bouton `Restart the application` pour redémarrer l'application et commencer à utiliser les nouveaux fichiers de traduction dans l'interface utilisateur.
 
-<img width="900" alt="UseLanguagesPacks" src="https://github.com/user-attachments/assets/7f0dd521-d931-43a4-b0b1-f18bc25067b4">
+<img width="900" alt="UseLanguagesPacks" src="https://github.com/user-attachments/assets/7c13492c-cd4c-47fb-97f6-b793d84472b1">
 
-Pour plus de compréhension, vous pouvez regarder la vidéo du procédé [ici](https://youtu.be/XE5R5Q5LcOo).
+### Interface de Slicer en français
+
+Une fois la langue configurée en français, voici à quoi ressemble l'interface de Slicer. Vous pouvez désormais utiliser l'application avec toutes les options traduites pour une navigation plus fluide.
+
+<img width="900" alt="UseLanguagesPacks" src="https://github.com/user-attachments/assets/9eacb7c3-d6e6-4674-8163-b9ec1e192139">
+
+
+Pour plus de compréhension, vous pouvez regarder la vidéo du procédé [ici](https://youtu.be/rv9sh6JtY0A).
