@@ -23,11 +23,11 @@ If you have any questions or want to get to know the group that translates 3D Sl
 
 ### French
 
-Extension 3D Slicer pour la création, l'édition et le stockage de traductions pour le noyau et les extensions de Slicer.
+Extension de 3D Slicer dédiée à la création, l'édition et le stockage de traductions pour le noyau et les extensions de Slicer.
 
-Aidez à traduire le projet sur [Hosted Weblate](https://hosted.weblate.org/engage/3d-slicer/). Comment traduire ? Consultez les liens de documentation ci-dessous.
+Aidez à traduire le projet sur [Slicer Weblate](https://hosted.weblate.org/engage/3d-slicer/). Comment contribuer à la traduction ? Consultez les liens vers la documentation du module ci-dessous.
 
-  - [Comment utiliser](HowToUse_fr.md)
+  - [Guide d'utilisation](HowToUse_fr.md)
   - [Directives de traduction](TranslationGuidelines_fr.md)
   - [Sujets avancés](AdvancedUse_fr.md)
   - [Glossaire](Glossary_fr.md)
