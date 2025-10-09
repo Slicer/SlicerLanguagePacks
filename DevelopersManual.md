@@ -268,7 +268,7 @@ Whenever a pull request is received that adds translation for a new extension:
 
 - Review and merge the pull request
 - Create a new component on weblate, using the extension name.
-  - Go to https://hosted.weblate.org/projects/3d-slicer/
+  - Go to https://hosted.weblate.org/projects/3d-slicer/#components
   - Click on the `+` button above the list of components
   - Fill the form:
     - Component name: extension name
