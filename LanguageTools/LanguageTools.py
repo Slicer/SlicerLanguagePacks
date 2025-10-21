@@ -685,6 +685,11 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
       return
 
     applicationFontsFolder = slicer.app.applicationLogic().GetFontsDirectory()
+    # Workaround for Slicer bug #8793
+    # Make sure path is absolute, otherwise, add Slicer home directory as prefix
+    if not os.path.isabs(applicationFontsFolder):
+      homeDir = slicer.app.applicationLogic().GetHomeDirectory()
+      applicationFontsFolder = os.path.join(homeDir, applicationFontsFolder)
     # Make sure the application Fonts folder exists
     os.makedirs(applicationFontsFolder, exist_ok=True)
 
