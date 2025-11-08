@@ -619,7 +619,8 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     for (component, filename) in self.weblateComponents:
       for language in languages:
         self.log(_('Download translations for {component}/{language}...').format(component=component, language=language))
-        fullDownloadUrl = f'{self.weblateUrl}/api/translations/{self.weblateProjectName}/{component}/{language}/file/'
+        language_slug = language.replace("-", "_")  # Weblate uses '_' as separator in language codes
+        fullDownloadUrl = f'{self.weblateUrl}/api/translations/{self.weblateProjectName}/{component}/{language_slug}/file/'
         try:
           response = requests.get(fullDownloadUrl, headers=self.weblateAuthenticationHeader())
           if not response.ok:
