@@ -272,6 +272,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
       # Get list of available languages
       self.ui.languagesComboBox.clear()
+      self.updateLogicParametersFromGUI()
       weblateLanguages = self.logic.weblateLanguages("3d-slicer", forceUpdateFromServer)
       for weblateLanguage in weblateLanguages:
         self.ui.languagesComboBox.addItem(f"{weblateLanguage['name']} ({weblateLanguage['code']})", weblateLanguage['code'])
@@ -325,8 +326,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.ui.languagesComboBox.enabled = (translationSource == "weblate")
 
   def updateGUIFromSettings(self):
-    self.refreshWeblateLanguageList()
-
     settings = slicer.app.userSettings()
     try:
       settings.beginGroup("Internationalization/LanguageTools")
@@ -337,9 +336,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       self.ui.localTsFolderRadioButton.checked = (translationSource == "localTsFolder")
       self.setTranslationSource(translationSource)
 
-      languages = settings.value("UpdateLanguages", "fr-FR").split(",")
-      self.setSelectedWeblateLanguages(languages)
-
       self.ui.localTsFolderPathLineEdit.currentPath = settings.value("localTsFolderPath", "")
       self.ui.latestTsFileOnlyCheckBox.checked = settings.value("UseLatestTsFile", True)
 
@@ -348,8 +344,15 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       # Previously, default was "master" but now it is "main"
       if self.ui.slicerVersionEdit.text == "master":
           self.ui.slicerVersionEdit.text = "main"
-      self.ui.weblateDownloadUrlEdit.text = settings.value("WeblateDownloadUrl", "https://hosted.weblate.org/download/3d-slicer")
       self.ui.githubRepositoryUrlEdit.text = settings.value("GitRepository", "https://github.com/Slicer/SlicerLanguageTranslations")
+      self.ui.weblateApiKeyEdit.text = settings.value("WeblateApiKey", "")
+
+      # Weblate URL, API key, etc. must be set before refreshing language list
+      self.refreshWeblateLanguageList()
+
+      # Language list must be refreshed before setting selected languages
+      languages = settings.value("UpdateLanguages", "fr-FR").split(",")
+      self.setSelectedWeblateLanguages(languages)
 
     finally:
       settings.endGroup()
@@ -359,7 +362,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.ui.languageSelector.currentLanguage = settings.value("language")
     self.ui.languageSelector.blockSignals(wasBlocked)
 
-    self.logic.customLreleasePath = self.ui.lreleasePathLineEdit.currentPath
     if not self.logic.lreleasePath:
       self.ui.settingsCollapsibleButton.collapsed = False
 
@@ -378,8 +380,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       settings.setValue("SlicerVersion", self.ui.slicerVersionEdit.text)
       settings.setValue("localTsFolderPath", self.ui.localTsFolderPathLineEdit.currentPath)
       settings.setValue("UseLatestTsFile", self.ui.latestTsFileOnlyCheckBox.checked)
-      settings.setValue("WeblateDownloadUrl", self.ui.weblateDownloadUrlEdit.text)
       settings.setValue("LreleaseFilePath", self.ui.lreleasePathLineEdit.currentPath)
+      settings.setValue("WeblateApiKey", self.ui.weblateApiKeyEdit.text)
 
       languages = self.selectedWeblateLanguages()
       settings.setValue("UpdateLanguages", ','.join(languages))
@@ -392,6 +394,17 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
     self.ui.localTsFolderPathLineEdit.addCurrentPathToHistory()
 
+  def updateLogicParametersFromGUI(self):
+    """Immediately propagate critical GUI parameter changes to the logic object.
+    Args ignored; provided for Qt signal compatibility.
+    """
+    if not self.logic:
+      return
+    self.logic.slicerVersion = self.ui.slicerVersionEdit.text
+    self.logic.customLreleasePath = self.ui.lreleasePathLineEdit.currentPath
+    if hasattr(self.ui, 'weblateApiKeyEdit'):
+      self.logic.weblateApiKey = self.ui.weblateApiKeyEdit.text
+
   def onUpdateButton(self):
     """
     Run processing when user clicks "Apply" button.
@@ -399,16 +412,13 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     with slicer.util.tryWithErrorDisplay(_("Update failed."), waitCursor=True):
       self.ui.statusTextEdit.clear()
       self.updateSettingsFromGUI()
-
-      self.logic.slicerVersion = self.ui.slicerVersionEdit.text
-      self.logic.customLreleasePath = self.ui.lreleasePathLineEdit.currentPath
-
+      self.updateLogicParametersFromGUI()
       self.logic.removeTemporaryFolder()
 
       if self.ui.localTsFolderRadioButton.checked:
         self.logic.copyTsFilesFromFolder(self.ui.localTsFolderPathLineEdit.currentPath, self.ui.latestTsFileOnlyCheckBox.checked)
       elif self.ui.weblateSourceRadioButton.checked:
-        self.logic.downloadTsFilesFromWeblate(self.ui.weblateDownloadUrlEdit.text, self.selectedWeblateLanguages())
+        self.logic.downloadTsFilesFromWeblate(self.selectedWeblateLanguages())
       else:
         self.logic.downloadTsFilesFromGithub(self.ui.githubRepositoryUrlEdit.text)
 
@@ -463,8 +473,12 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self.customLreleasePath = None
     self._temporaryFolder = None
     self.translationFilesFolder = None
+    self.weblateUrl = "https://hosted.weblate.org"
+    self.weblateProjectName = "3d-slicer"
+    self.weblateApiKey = None
+    # Public API key with read-only access (accesses "Downloader" team, see https://hosted.weblate.org/access/3d-slicer/#api)
+    self.defaultWeblateApiKey = "wlp_MApV2byADt0RCGeDtp1iTmNODPw82uSVc3w0"
     self.weblateComponents = self.getWeblateComponents()
-    self.weblateEditTranslationUrl = "https://hosted.weblate.org/translate/3d-slicer"
     self.preferredLanguage = "en-US"
     self.gitRepositoryName = "SlicerLanguageTranslations"
     self.logCallback = None
@@ -482,6 +496,13 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     if self.logCallback:
       self.logCallback(message)
 
+  def weblateAuthenticationHeader(self):
+    headers = {}
+    apiKey = self.weblateApiKey if self.weblateApiKey else self.defaultWeblateApiKey
+    if apiKey:
+      headers['Authorization'] = f'Token {apiKey}'
+    return headers
+
   def weblateLanguages(self, component, forceUpdateFromServer=False):
     """Query list of languages 3d-slicer project has been translated to on Weblate.
     Only contacts the server if never contacted the server before or if update from server is specifically requested.
@@ -495,7 +516,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     if forceUpdateFromServer or not settings.value(languagesSettingsKey):
       import requests
       # Example URL: https://hosted.weblate.org/api/components/3d-slicer/3d-slicer/statistics/?format=json&page_size=1000
-      result = requests.get(f"https://hosted.weblate.org/api/components/3d-slicer/{component}/statistics/", {"format": "json", "page_size": 1000})
+      result = requests.get(f"{self.weblateUrl}/api/components/{self.weblateProjectName}/{component}/statistics/", {"format": "json", "page_size": 1000}, headers=self.weblateAuthenticationHeader())
       if not result.ok:
         raise RuntimeError(_("Failed to query list of languages from Weblate ({status_code}:{reason})").format(status_code=result.status_code, reason=result.reason))
       translations = result.json()['results']
@@ -528,7 +549,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     The returned list looks like this: [("3d-slicer", "Slicer"), ("ctk", "CTK")]
     """
     import requests
-    result = requests.get('https://hosted.weblate.org/api/projects/3d-slicer/components/', {'format': 'json'})
+    result = requests.get(f'{self.weblateUrl}/api/projects/{self.weblateProjectName}/components/', {'format': 'json'}, headers=self.weblateAuthenticationHeader())
     if not result.ok:
       raise RuntimeError(_("Failed to query list of components from Weblate ({status_code}:{reason})").format(status_code=result.status_code, reason=result.reason))
     components = result.json()['results']
@@ -583,7 +604,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
       baseName = os.path.basename(file).split('_')[0]
       shutil.copy(file, f"{self.translationFilesFolder}/{baseName}_{locale}.ts")
 
-  def downloadTsFilesFromWeblate(self, downloadUrl, languages):
+  def downloadTsFilesFromWeblate(self, languages):
     """Download .ts files from Weblate.
     This method requires a temporary folder that does not contain previous downloaded or extracted files.
     """
@@ -591,24 +612,35 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     tempFolder = self.temporaryFolder()
     self.translationFilesFolder = tempFolder
 
-    # Download file
-    import SampleData
-    dataLogic = SampleData.SampleDataLogic()
+    # Download files via Weblate REST API
+    import requests
 
     import xml.etree.cElementTree as ET
     for (component, filename) in self.weblateComponents:
       for language in languages:
         self.log(_('Download translations for {component}/{language}...').format(component=component, language=language))
-        fullDownloadUrl = f'{downloadUrl}/{component}/{language}'
+        fullDownloadUrl = f'{self.weblateUrl}/api/translations/{self.weblateProjectName}/{component}/{language}/file/'
         try:
-          tsFile = dataLogic.downloadFile(fullDownloadUrl, self.temporaryFolder(), f'{filename}_{language}.ts')
+          response = requests.get(fullDownloadUrl, headers=self.weblateAuthenticationHeader())
+          if not response.ok:
+            raise RuntimeError(f"HTTP {response.status_code}: {response.reason}")
+          tsFile = os.path.join(self.temporaryFolder(), f'{filename}_{language}.ts')
+          with open(tsFile, 'wb') as f:
+            f.write(response.content)
+        except Exception as e:
+          logging.debug("Failed to download translation from: {url} -- {text}".format(url=fullDownloadUrl, text=str(e)))
+          self.log("  " + _("Skipped. This component/language was not found on Weblate."))
+          continue
+        try:
           # Rename the file to ensure language code in filename matches language code defined in the file content
           tree = ET.ElementTree(file=tsFile)
           locale = tree.getroot().attrib['language'].replace("_", "-")  # such as 'zh-CN'
           os.rename(tsFile,f'{self.temporaryFolder()}/{filename}_{locale}.ts')
         except Exception as e:
-          logging.debug(_("Failed to download translation from: {url} -- {text}").format(url=fullDownloadUrl, text=str(e)))
-          self.log("  " + _("Skipped. This component/language was not found on Weblate."))
+          logging.debug("Failed to process downloaded translation file: {file} -- {text}".format(file=tsFile, text=str(e)))
+          self.log("  " + _("Skipped. The downloaded file is invalid."))
+          continue
+
 
   def downloadTsFilesFromGithub(self, githubRepositoryUrl):
     """Download .ts files from a Github repository.
@@ -724,7 +756,7 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
       language = "en-US"
       section = "#translations"
 
-    url=qt.QUrl(f"{self.weblateEditTranslationUrl}/{component}/{language}/{section}")
+    url=qt.QUrl(f"{self.weblateUrl}/translate/{self.weblateProjectName}/{component}/{language}/{section}")
     q = qt.QUrlQuery()
     if exactMatch:
       q.addQueryItem("q", f'source:="{text}" or target:="{text}"')
