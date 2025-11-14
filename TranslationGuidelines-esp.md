@@ -18,7 +18,7 @@ Es recomendable que use una cuenta de Github para acceder a Weblate. Esto le per
 
 Si accedió usando Github, será redirigido a la página de Weblate en donde se le pedirá la confirmación de autorización de Weblate para acceder a la cuenta de Github.  
 
-[Aquí](https://github.com/Slicer/SlicerLanguagePacks/blob/main/HowToUse.md) hay un enlace a un tutorial sobre cómo instalar y configurar el paquete de idiomas de Slicer para habilitar otros idiomas en la aplicación.
+[Aquí](https://github.com/SoniaPujolLab/SlicerLanguagePacks/blob/main/HowToUse.md) hay un enlace a un tutorial sobre cómo instalar y configurar el paquete de idiomas de Slicer para habilitar otros idiomas en la aplicación.
 
 
 **Nota:** Asegúrese de repetir los pasos `Actualizar archivos de traducción` y `Reiniciar la aplicación de vez en cuando` para disponer de las traducciones más recientes y completas, ya que es posible que se hayan traducido nuevos términos desde la última vez que utilizó Slicer.

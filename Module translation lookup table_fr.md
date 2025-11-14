@@ -3,9 +3,9 @@ La plateforme Web hébergeant les traductions de Slicer (**Weblate**) classe les
 
 **NOTE**: Les liens dans ce tableau vous redirigeront par défaut vers l'interface de traduction en français. Pour basculer et ajouter/modifier la traduction dans votre langue préférée, vous pouvez utiliser la fonctionnalité "other languages" disponible sur l'interface, comme illustré ci-dessous.
 
-![image](https://github.com/Slicer/SlicerLanguagePacks/assets/67284524/09ffc708-e7bd-41b6-a916-64007648deae)
+![image](https://github.com/SoniaPujolLab/SlicerLanguagePacks/assets/67284524/09ffc708-e7bd-41b6-a916-64007648deae)
 
-Vous pouvez également utiliser la version du tableau au format Excel  (Module_translation_lookup_table_Attila.xlsx accessible [ici](https://github.com/Slicer/SlicerLanguagePacks/releases/tag/TranslationResources)) qui vous permet de sélectionner la langue cible et met à jour les liens en conséquence afin qu'ils vous redirigent vers l'interface de traduction correspondante.
+Vous pouvez également utiliser la version du tableau au format Excel  (Module_translation_lookup_table_Attila.xlsx accessible [ici](https://github.com/SoniaPujolLab/SlicerLanguagePacks/releases/tag/TranslationResources)) qui vous permet de sélectionner la langue cible et met à jour les liens en conséquence afin qu'ils vous redirigent vers l'interface de traduction correspondante.
 
 | Nom du Module | sous-catégorie | Niveau de difficulté | liens vers Weblate|
 | ------------- | ------------- | ------------- | ------------- |

@@ -3,9 +3,9 @@ A plataforma baseada na Web que hospeda as traduções do Slicer, Weblate, class
 
 **NOTA**: Os links nesta tabela o redirecionarão para a interface da tradução em francês por padrão. Para alternar e adicionar/editar a tradução no idioma de sua preferência, você pode usar o recurso "outros idiomas" disponível na interface, conforme mostrado abaixo.
 
-![image](https://github.com/Slicer/SlicerLanguagePacks/assets/67284524/09ffc708-e7bd-41b6-a916-64007648deae)
+![image](https://github.com/SoniaPujolLab/SlicerLanguagePacks/assets/67284524/09ffc708-e7bd-41b6-a916-64007648deae)
 
-Agora você também pode usar a versão do arquivo Excel dessa tabela (Module_translation_lookup_table_Attila.xlsx acessível [aqui](https://github.com/Slicer/SlicerLanguagePacks/releases/tag/TranslationResources)) que permite selecionar o idioma de destino e atualiza os links de acordo para que eles redirecionem você para a interface de tradução correspondente.
+Agora você também pode usar a versão do arquivo Excel dessa tabela (Module_translation_lookup_table_Attila.xlsx acessível [aqui](https://github.com/SoniaPujolLab/SlicerLanguagePacks/releases/tag/TranslationResources)) que permite selecionar o idioma de destino e atualiza os links de acordo para que eles redirecionem você para a interface de tradução correspondente.
 
 | Nome do módulo 3D Slicer | Subcategoria | Nível de dificuldade de tradução | Link para a chave do 3D Slicer Weblate|
 | ------------- | ------------- | ------------- | ------------- |

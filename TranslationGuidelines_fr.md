@@ -14,7 +14,7 @@ Il est préférable d'utiliser votre compte GitHub pour accéder à Weblate. Cel
 
 Si vous vous inscrivez en utilisant GitHub, vous serez redirigé vers une page GitHub où il vous sera demandé de confirmer l'octroi à Weblate d'un accès à votre compte GitHub. 
 
-[Voici](https://github.com/Slicer/SlicerLanguagePacks/blob/main/HowToUse_fr.md) un lien vers un tutoriel sur la façon d'installer et de configurer le Slicer Language Pack pour activer d'autres langues dans l'application.
+[Voici](https://github.com/SoniaPujolLab/SlicerLanguagePacks/blob/main/HowToUse_fr.md) un lien vers un tutoriel sur la façon d'installer et de configurer le Slicer Language Pack pour activer d'autres langues dans l'application.
 
 **Remarque** : veillez à répéter les étapes: `Mettre à jour les fichiers de traduction`  et `redémarrer l'application` de temps à autre pour disposer des traductions les plus récentes et les plus complètes, car de nouveaux termes peuvent avoir été traduits depuis votre dernière utilisation de Slicer.
 
@@ -142,6 +142,6 @@ Pour utiliser la fonctionnalité `Chercheur de texte` de l'extension `Language P
 
  - `5` : Le lien vous amènera à l'emplacement des `strings` dans le `Slicer Weblate repository`.
  
- <img width="960" alt="image" src="https://github.com/Slicer/SlicerLanguagePacks/assets/105887351/a9cae130-1506-4e58-a0f0-099975e16d90">
+ <img width="960" alt="image" src="https://github.com/SoniaPujolLab/SlicerLanguagePacks/assets/105887351/a9cae130-1506-4e58-a0f0-099975e16d90">
 
 Pour plus d'explication, vous pouvez regarder une vidéo pratique [ici](https://youtu.be/83mj9nL36gE)

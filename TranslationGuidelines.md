@@ -16,7 +16,7 @@ It is preferable to use your GitHub account to access Weblate. This will allow W
 
 If you sign in using GitHub, you will be redirected to a GitHub page where you will be asked to confirm granting Weblate access to your GitHub account. 
 
-[Here](https://github.com/Slicer/SlicerLanguagePacks/blob/main/HowToUse.md) is a link to a tutorial on how to install and set up the Slicer Language Pack to enable other languages in the app.
+[Here](https://github.com/SoniaPujolLab/SlicerLanguagePacks/blob/main/HowToUse.md) is a link to a tutorial on how to install and set up the Slicer Language Pack to enable other languages in the app.
 
 **Note:** Be sure to repeat the `Update translation files` and `Restart the application` steps every now and then to have the latest and most complete translations, as new terms may have been translated since you last used Slicer.
 

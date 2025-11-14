@@ -3,9 +3,9 @@ The web-based platform hosting Slicer translations, Weblate, classifies the stri
 
 **NOTE**: The links in this table will redirect you to the interface og the french Translation by default. To switch and add/edit the translation in your preferred language, you can use the "other languages" feature available on the interface as shown below.
 
-![image](https://github.com/Slicer/SlicerLanguagePacks/assets/67284524/09ffc708-e7bd-41b6-a916-64007648deae)
+![image](https://github.com/SoniaPujolLab/SlicerLanguagePacks/assets/67284524/09ffc708-e7bd-41b6-a916-64007648deae)
 
-You can now also use the Excel file version of this table (Module_translation_lookup_table_Attila.xlsx accessible [here](https://github.com/Slicer/SlicerLanguagePacks/releases/tag/TranslationResources)) that allows you to select the target langguage and updates the links accordingly so they redirect you the corresponding translation interface.
+You can now also use the Excel file version of this table (Module_translation_lookup_table_Attila.xlsx accessible [here](https://github.com/SoniaPujolLab/SlicerLanguagePacks/releases/tag/TranslationResources)) that allows you to select the target langguage and updates the links accordingly so they redirect you the corresponding translation interface.
 
 | 3D Slicer Module Name | Subcategory | Level of Translation Difficulty | Link to 3D Slicer Weblate Key|
 | ------------- | ------------- | ------------- | ------------- |

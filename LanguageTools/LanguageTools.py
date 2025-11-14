@@ -24,7 +24,7 @@ class LanguageTools(ScriptedLoadableModule):
     self.parent.contributors = ["Andras Lasso (PerkLab)"]
     self.parent.helpText = _("""
 This module can build translation files and install them locally. It is useful for creating and testing translations.
-See more information in the <a href="https://github.com/Slicer/SlicerLanguagePacks">extension's documentation</a>.
+See more information in the <a href="https://github.com/SoniaPujolLab/SlicerLanguagePacks">extension's documentation</a>.
 """)
     self.parent.acknowledgementText = _("""
 Developed of this module was partially funded by <a href="https://chanzuckerberg.com/eoss/proposals/3d-slicer-in-my-language-internationalization-and-usability-improvements/">CZI EOSS grant</a>.

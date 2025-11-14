@@ -16,7 +16,7 @@ Se você criar uma conta usando seu e-mail e um nome de usuário, receberá um e
 
 Se você fizer login usando o GitHub, será redirecionado para uma página do GitHub, onde será solicitado que você confirme a concessão de acesso do Weblate à sua conta do GitHub. 
 
-[Aqui](https://github.com/Slicer/SlicerLanguagePacks/blob/main/HowToUse_pt-br.md) há um link para um tutorial sobre como instalar e configurar o Slicer Language Pack para habilitar outros idiomas no aplicativo.
+[Aqui](https://github.com/SoniaPujolLab/SlicerLanguagePacks/blob/main/HowToUse_pt-br.md) há um link para um tutorial sobre como instalar e configurar o Slicer Language Pack para habilitar outros idiomas no aplicativo.
 
 **Nota:** Não se esqueça de repetir as etapas `Update translation files` e `Restart the application` de vez em quando para ter as traduções mais recentes e completas, pois novos termos podem ter sido traduzidos desde a última vez que você usou o Slicer.
 
