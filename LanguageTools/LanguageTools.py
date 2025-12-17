@@ -30,6 +30,20 @@ See more information in the <a href="https://github.com/SoniaPujolLab/SlicerLang
 Developed of this module was partially funded by <a href="https://chanzuckerberg.com/eoss/proposals/3d-slicer-in-my-language-internationalization-and-usability-improvements/">CZI EOSS grant</a>.
 """)
 
+    # Automatically activating RTL support for languages that need it
+
+    current_language = slicer.app.settings().value('language', 'en')
+    locale = qt.QLocale(current_language)
+
+    if locale.textDirection() == qt.Qt.RightToLeft:
+      from rtl.RTLSupport import RTLManager
+      try:
+        rtlm = RTLManager()
+        rtlm.enableRTL();
+        print(f"RTL support successfully enabled for '{current_language}'")
+      except Exception as e:
+        print(f"Failed to enable RTL supprt for '{current_language}' : \n\n {str(e)}")
+
 #
 # LanguageToolsWidget
 #
