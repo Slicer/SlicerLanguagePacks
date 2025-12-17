@@ -29,20 +29,43 @@ See more information in the <a href="https://github.com/SoniaPujolLab/SlicerLang
     self.parent.acknowledgementText = _("""
 Developed of this module was partially funded by <a href="https://chanzuckerberg.com/eoss/proposals/3d-slicer-in-my-language-internationalization-and-usability-improvements/">CZI EOSS grant</a>.
 """)
+    self.setupRTL()
 
-    # Automatically activating RTL support for languages that need it
 
+  def setupRTL(self):
+    """
+    Enable or disable RTL support based on user settings.
+    """
     current_language = slicer.app.settings().value('language', 'en')
-    locale = qt.QLocale(current_language)
+    current_text_direction = slicer.app.settings().value('Internationalization/LanguageTools/RtlDirection', 'auto')
 
-    if locale.textDirection() == qt.Qt.RightToLeft:
-      from rtl.RTLSupport import RTLManager
-      try:
-        rtlm = RTLManager()
-        rtlm.enableRTL();
-        print(f"RTL support successfully enabled for '{current_language}'")
-      except Exception as e:
-        print(f"Failed to enable RTL supprt for '{current_language}' : \n\n {str(e)}")
+    if current_text_direction == "ltr":
+      print(f"RTL support explicitly disabled for '{current_language}'")
+    elif current_text_direction in ["rtl", "auto"]:
+      locale = qt.QLocale(current_language)
+      if (current_text_direction == "rtl") or (locale.textDirection() == qt.Qt.RightToLeft):
+        from rtl.RTLSupport import RTLManager
+        try:
+          rtlm = RTLManager()
+          rtlm.enableRTL();
+          print(f"RTL support successfully enabled for '{current_language}'")
+        except Exception as e:
+          print(f"Failed to enable RTL supprt for '{current_language}' : \n\n {str(e)}")
+      else:
+        print(f"RTL support not needed for '{current_language}'")
+
+
+
+    # locale = qt.QLocale(current_language)
+
+    # if locale.textDirection() == qt.Qt.RightToLeft:
+    #   from rtl.RTLSupport import RTLManager
+    #   try:
+    #     rtlm = RTLManager()
+    #     rtlm.enableRTL();
+    #     print(f"RTL support successfully enabled for '{current_language}'")
+    #   except Exception as e:
+    #     print(f"Failed to enable RTL supprt for '{current_language}' : \n\n {str(e)}")
 
 #
 # LanguageToolsWidget
@@ -240,6 +263,11 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
     self.ui.translationFoldersTextBrowser.setPlainText(';'.join(slicer.app.translationFolders()))
 
+    # RTL options
+    self.ui.rtlSelector.addItem(_("Auto-detect"), "auto");
+    self.ui.rtlSelector.addItem(_("Left to Right"), "ltr");
+    self.ui.rtlSelector.addItem(_("Right to Left"), "rtl");
+
     # Connections
 
     # These connections ensure that whenever user changes some settings on the GUI, that is saved in the MRML scene
@@ -254,6 +282,8 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
 
     self.ui.languageSelector.connect("currentLanguageNameChanged(const QString&)", self.updateSettingsFromGUI)
     self.ui.languageSelector.connect("currentLanguageNameChanged(const QString&)", self.onCurrentLanguageChanged)
+
+    self.ui.rtlSelector.connect("currentIndexChanged(int)", self.updateSettingsFromGUI)
 
     # Buttons
     self.ui.updateButton.connect('clicked(bool)', self.onUpdateButton)
@@ -361,6 +391,10 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       self.ui.githubRepositoryUrlEdit.text = settings.value("GitRepository", "https://github.com/Slicer/SlicerLanguageTranslations")
       self.ui.weblateApiKeyEdit.text = settings.value("WeblateApiKey", "")
 
+      # RTL direction
+      rtlIndex = self.ui.rtlSelector.findData(settings.value("RtlDirection", "auto"))
+      self.ui.rtlSelector.setCurrentIndex(rtlIndex)
+
       # Weblate URL, API key, etc. must be set before refreshing language list
       self.refreshWeblateLanguageList()
 
@@ -396,6 +430,7 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
       settings.setValue("UseLatestTsFile", self.ui.latestTsFileOnlyCheckBox.checked)
       settings.setValue("LreleaseFilePath", self.ui.lreleasePathLineEdit.currentPath)
       settings.setValue("WeblateApiKey", self.ui.weblateApiKeyEdit.text)
+      settings.setValue("RtlDirection", self.ui.rtlSelector.currentData)
 
       languages = self.selectedWeblateLanguages()
       settings.setValue("UpdateLanguages", ','.join(languages))
