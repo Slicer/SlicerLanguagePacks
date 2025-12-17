@@ -7,226 +7,9 @@ from slicer.i18n import translate
 from slicer.ScriptedLoadableModule import *
 from slicer.util import VTKObservationMixin
 
-
-#
-# RTLSupport
-#
-
-class RTLCenteredButton(qt.QPushButton):
-    """A custom QPushButton with centered text in RTL mode"""
-    def __init__(self, parent=None):
-        super().__init__(parent)
-        self.setupUI()
-        
-    def setupUI(self):
-        # Set RTL direction
-        self.setLayoutDirection(qt.Qt.RightToLeft)
-        
-        # Apply custom style for centered text and icon
-        self.setStyleSheet("""
-            /* Base button style - extra compact */
-            QPushButton, QToolButton, RTLCenteredButton {
-                text-align: center !important;
-                padding: 1px 6px 1px 6px !important;
-                margin: 0px 1px 0px 1px !important;
-                border: 1px solid transparent !important;
-                border-radius: 2px !important;
-                background-color: transparent !important;
-                font-size: 0.85em !important;
-            }
-            QPushButton:focus, QToolButton:focus, RTLCenteredButton:focus {
-                outline: none !important;
-            }
-            QPushButton::icon, QToolButton::icon, RTLCenteredButton::icon {
-                padding: 0px 5px 0px 0px !important;
-            }
-        """)
-
-def checkAndApplyRTL():
-    """Check current language and apply RTL if needed"""
-    if not hasattr(slicer.app, 'settings'):
-        return
-    language = slicer.app.settings().value('language', '')
-    if language in ['ar', 'ar_EG', 'ar_SA']:
-        # Use a timer to ensure the UI is fully initialized
-        qt.QTimer.singleShot(100, applyRTLSupport)
-
-def applyRTLSupport():
-    """Apply RTL support to the application when Arabic is selected"""
-    if not hasattr(slicer.app, 'settings'):
-        return
-        
-    language = slicer.app.settings().value('language', '')
-    isRTL = language in ['ar', 'ar_EG', 'ar_SA']  # Include both 'ar' and specific variants
-    
-    # Get application instance
-    app = qt.QApplication.instance()
-    
-    # Set application-wide layout direction
-    app.setLayoutDirection(qt.Qt.RightToLeft if isRTL else qt.Qt.LeftToRight)
-    
-    # Apply RTL stylesheet to all widgets
-    if isRTL:
-        rtlStyle = """
-            /* Global RTL overrides */
-            * {
-                direction: rtl !important;
-                text-align: right !important;
-                layout-direction: rtl !important;
-            }
-            
-            /* Main containers */
-            QMainWindow, QDialog, QWidget, QDockWidget, QGroupBox, QFrame, QScrollArea {
-                direction: rtl !important;
-                layout-direction: rtl !important;
-            }
-            
-            /* Menus and toolbars */
-            QMenuBar, QMenu, QToolBar, QStatusBar, QTabBar, QTabWidget, QDockWidget, QGroupBox {
-                layout-direction: rtl !important;
-                direction: rtl !important;
-            }
-            QTabBar::tab {
-                padding: 4px 15px !important;
-            }
-            QPushButton, QToolButton, QCheckBox, QRadioButton, QLabel, QLineEdit, QComboBox, QSpinBox, QDoubleSpinBox {
-                padding: 2px 5px !important;
-                text-align: right !important;
-            }
-            QMenu::item, QMenuBar::item {
-                padding: 8px 15px !important;
-                text-align: right !important;
-                direction: rtl !important;
-            }
-            
-            /* Input widgets */
-            QLineEdit, QTextEdit, QPlainTextEdit, QComboBox, QSpinBox, QDoubleSpinBox, QDateTimeEdit {
-                text-align: right !important;
-                direction: rtl !important;
-                padding: 2px 5px !important;
-            }
-            
-            /* Buttons - extra compact */
-            QPushButton, QToolButton, QCheckBox, QRadioButton {
-                text-align: center !important;
-                direction: rtl !important;
-                padding: 1px 4px 1px 4px !important;
-                margin: 0px 1px 0px 1px !important;
-                min-width: 40px !important;
-                min-height: 18px !important;
-                font-size: 0.85em !important;
-            }
-            
-            /* Make toolbar buttons more compact */
-            QToolBar QToolButton {
-                padding: 0px 2px 0px 2px !important;
-                margin: 0px !important;
-                min-width: 20px !important;
-                min-height: 20px !important;
-            }
-            
-            /* Lists and tables */
-            QTreeView, QListView, QTableView, QListWidget, QTreeWidget, QTableWidget {
-                text-align: right !important;
-                direction: rtl !important;
-            }
-            
-            /* Headers */
-            QHeaderView::section {
-                text-align: right !important;
-                padding: 4px 8px !important;
-                direction: rtl !important;
-            }
-            
-            /* Tabs */
-            QTabBar::tab {
-                padding: 4px 12px !important;
-                margin: 1px !important;
-            }
-            
-            /* Labels */
-            QLabel {
-                text-align: right !important;
-                direction: rtl !important;
-            }
-            
-            /* Group boxes */
-            QGroupBox::title {
-                subcontrol-origin: margin;
-                right: 10px;
-                padding-right: 5px;
-                padding-left: 5px;
-            }
-        """
-        app.setStyleSheet(rtlStyle)
-    else:
-        app.setStyleSheet("")
-    
-    # Force update of all widgets
-    def updateWidget(widget):
-        try:
-            # Set layout direction
-            widget.setLayoutDirection(qt.Qt.RightToLeft if isRTL else qt.Qt.LeftToRight)
-            
-            # Special handling for specific widget types
-            if hasattr(widget, 'setTextDirection'):
-                widget.setTextDirection(qt.Qt.RightToLeft if isRTL else qt.Qt.LeftToRight)
-            
-            # Force style refresh
-            widget.style().unpolish(widget)
-            widget.style().polish(widget)
-            
-            # Update the widget
-            widget.update()
-            
-            # Special handling for QTabBar to reverse tab order
-            if isinstance(widget, qt.QTabBar):
-                for i in range(widget.count()):
-                    widget.setTabText(i, widget.tabText(i))  # Force text update
-            
-            # Special handling for QComboBox
-            if isinstance(widget, qt.QComboBox):
-                widget.updateGeometry()
-            
-        except Exception as e:
-            pass  # Skip any widgets that don't support these operations
-    
-    # Process all widgets
-    for widget in qt.QApplication.allWidgets():
-        updateWidget(widget)
-    
-    # Force update the main window and its children
-    mainWindow = slicer.util.mainWindow()
-    if mainWindow:
-        mainWindow.setLayoutDirection(qt.Qt.RightToLeft if isRTL else qt.Qt.LeftToRight)
-        
-        # Update all child widgets of main window
-        for child in mainWindow.findChildren(qt.QWidget):
-            updateWidget(child)
-        
-        # Force a complete repaint
-        mainWindow.update()
-        mainWindow.repaint()
-    
-    # Force application style refresh
-    app.setStyle(qt.QApplication.style().objectName())
-    app.processEvents()
-
-# def onLanguageChanged():
-#     """Called when application language is changed"""
-#     applyRTLSupport()
-    
-#     # Force a complete UI update
-#     mainWindow = slicer.util.mainWindow()
-#     if mainWindow:
-#         mainWindow.update()
-
 #
 # LanguageTools
 #
-
-# Apply RTL support when module is imported
-checkAndApplyRTL()
 
 class LanguageTools(ScriptedLoadableModule):
   """Uses ScriptedLoadableModule base class, available at:
@@ -667,8 +450,6 @@ class LanguageToolsWidget(ScriptedLoadableModuleWidget, VTKObservationMixin):
     self.ui.statusTextEdit.append(message)
     slicer.app.processEvents()
 
-
-
 #
 # LanguageToolsLogic
 #
@@ -701,13 +482,6 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self.preferredLanguage = "en-US"
     self.gitRepositoryName = "SlicerLanguageTranslations"
     self.logCallback = None
-    
-    # Connect to language change signal if available
-    if hasattr(slicer.app, 'settings') and hasattr(slicer.app.settings(), 'connect'):
-        try:
-            slicer.app.settings().connect('settingChanged(QString,QVariant)', self.onSettingChanged)
-        except:
-            pass
 
   @property
   def lreleasePath(self):
@@ -971,19 +745,8 @@ class LanguageToolsLogic(ScriptedLoadableModuleLogic):
     self.log(_("Installed {count} font files in {location}.").format(
       count=numberOfInstalledFiles, location=applicationFontsFolder))
 
-  def onSettingChanged(self, key, value):
-    """Called when an application setting is changed"""
-    if key == 'language':
-        # Apply RTL immediately and schedule another check after a short delay
-        applyRTLSupport()
-        qt.QTimer.singleShot(500, applyRTLSupport)  # Second check after UI updates
-        
   def enableInternationalization(self, enabled=True):
     slicer.app.userSettings().setValue('Internationalization/Enabled', enabled)
-    # Apply RTL support when internationalization is enabled
-    if enabled:
-      # Use a single-shot timer to ensure the UI is ready
-      qt.QTimer.singleShot(100, applyRTLSupport)
 
   def translationUrlFromText(self, text, exactMatch=False):
     (component, filename) = self.weblateComponents[0]
